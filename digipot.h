@@ -23,6 +23,11 @@ extern "C" {
         Connector IO;
     } DigiPot;
     
+
+    void DigiPot_ClockWrite(bool value);
+    void DigiPot_LatchWrite(bool value);
+    bool DigiPot_DataWrite(bool value);
+
     void InitDigiPot();
     
     DigiPot _DigiPot;

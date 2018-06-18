@@ -2,19 +2,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "29 hub.h
 [s S325 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 8 `i ]
 [n S325 . ActionButton PushedButton Channel Sound Values ]
-"27 hardware.h
-[s S322 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S322 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3357 `(uc ~T0 @X0 0 tf ]
+[v F3360 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S322 `*F3357 1 `*F3360 1 ]
+[n S322 . Read Write ]
+"39
 [s S323 `S322 1 `S322 1 `S322 1 ]
 [n S323 . ClockPin DataPin LatchPin ]
 "38 hub.h
 [s S326 `uc * -> 6 `i -> 8 `i `uc * -> 6 `i -> 8 `i `uc 1 `uc 1 `S325 1 `S325 1 `S325 1 `uc 1 `uc 1 `uc 1 `us 1 `uc 1 `uc 1 `uc 1 `S323 1 ]
 [n S326 . Switch SwitchOld ReadComplete iRead PrimaryBuffer SecondaryBuffer BackupBuffer ReadyToWrite ReadyToRead Paused MaxChannel MaxSound CurrentChannel CurrentSound IO ]
-[v F3444 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
-[v F3447 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
+[v F3456 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
+[v F3459 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
 "66 display.h
-[s S327 `uc 1 `uc 1 `F3444 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `F3447 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `*uc 1 `*uc 1 `uc -> 2 `i `uc -> 2 `i `uc -> 8 `i `uc 1 `uc 1 `uc -> 2 `i `S323 1 ]
+[s S327 `uc 1 `uc 1 `F3456 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `F3459 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `*uc 1 `*uc 1 `uc -> 2 `i `uc -> 2 `i `uc -> 8 `i `uc 1 `uc 1 `uc -> 2 `i `S323 1 ]
 [n S327 . ReadyToRead ReadyToWrite Buffer1 Buffer2 PrimaryBuffer SecondaryBuffer DigitalValueRatio DigitalValueData ValueData iDisplay SavingMask PointMask IO ]
 "20 digipot.h
 [s S329 `uc 1 `uc 1 `S323 1 ]
@@ -31,21 +33,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 "28
 [s S333 `S332 -> 64 `i `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S333 . Buffer iBufferRead iBufferWrite iData Size ]
-"8832 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8832 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _TMR0IF `Vb ~T0 @X0 0 e@32658 ]
-"50 hardware.h
+"56 hardware.h
 [v _WriteData `(v ~T0 @X0 0 ef3`*uc`uc`S323 ]
-"86 display.h
+"90 display.h
 [v _Display_SwapBuffer `(v ~T0 @X0 0 ef ]
-"60 hub.h
+"64 hub.h
 [v _Hub_UpdateValues `(v ~T0 @X0 0 ef ]
-"61
+"65
 [v _Hub_CopyBuffer `(v ~T0 @X0 0 ef ]
-"8842 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8842 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _TMR1IF `Vb ~T0 @X0 0 e@31984 ]
 "28 sequencer.h
 [v _Sequencer_StopTimer `(v ~T0 @X0 0 ef ]
-"3545 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"3545 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [s S138 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S138 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
 "3554
@@ -85,13 +87,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RCSTAbits `VS155 ~T0 @X0 0 e@4011 ]
 "37 midi.h
 [v _Midi_ResetBuffer `(v ~T0 @X0 0 ef1`*S333 ]
-"7902 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"7902 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _CREN `Vb ~T0 @X0 0 e@32092 ]
 "38 midi.h
 [v _Midi_Write `(v ~T0 @X0 0 ef2`uc`*S333 ]
 "40 persistant.h
 [v _Persistant_LoadBuffer `(uc ~T0 @X0 0 ef1`*S325 ]
-"14 C:\Program Files (x86)\Microchip\xc8\v1.44\include\string.h
+"14 C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h
 [v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
 "38 persistant.h
 [v _Persistant_WriteInternalMemory `(uc ~T0 @X0 0 ef2`i`uc ]
@@ -100,21 +102,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ConfigureOscillator `(v ~T0 @X0 0 ef ]
 "24 user.h
 [v _InitApp `(v ~T0 @X0 0 ef ]
+"195 framework/usb/inc/usb_device.h
+[v _USBDeviceInit `(v ~T0 @X0 0 ef ]
+"299
+[v _USBDeviceTasks `(v ~T0 @X0 0 ef ]
+"175 main.c
+[c E3833 0 1 2 4 8 16 32 .. ]
+[n E3833 . DETACHED_STATE ATTACHED_STATE POWERED_STATE DEFAULT_STATE ADR_PENDING_STATE ADDRESS_STATE CONFIGURED_STATE  ]
+"2046 framework/usb/inc/usb_device.h
+[v _USBDeviceState `E3833 ~T0 @X0 0 e ]
+"946 framework/usb/inc/usb_device_cdc.h
+[v _cdc_trf_state `uc ~T0 @X0 0 e ]
+"653
+[v _getsUSBUSART `(uc ~T0 @X0 0 ef2`*uc`uc ]
 "39 persistant.h
 [v _Persistant_SaveBuffer `(uc ~T0 @X0 0 ef1`S325 ]
 "27 sequencer.h
 [v _Sequencer_StartTimer `(v ~T0 @X0 0 ef2`f`uc ]
 "39 midi.h
 [v _Midi_Read `(uc ~T0 @X0 0 ef2`*S332`*S333 ]
-"44 C:\Program Files (x86)\Microchip\xc8\v1.44\include\string.h
+"44 C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h
 [v _memcmp `(i ~T0 @X0 0 ef3`*Cv`*Cv`ui ]
-"85 display.h
+"89 display.h
 [v _Display_ProcessData `(v ~T0 @X0 0 ef4`uc`*uc`uc`uc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3246,37 +3261,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;user.h: 24: void InitApp(void);
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;hub.h: 28: typedef struct
 [; ;hub.h: 29: {
 [; ;hub.h: 30: bool ActionButton;
@@ -3303,15 +3320,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hub.h: 52: unsigned char CurrentSound;
 [; ;hub.h: 53: Connector IO;
 [; ;hub.h: 54: } Hub;
-[; ;hub.h: 56: void Hub_Init();
-[; ;hub.h: 57: void Hub_ReadSwitch();
-[; ;hub.h: 58: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
-[; ;hub.h: 59: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
-[; ;hub.h: 60: void Hub_UpdateValues();
-[; ;hub.h: 61: void Hub_CopyBuffer();
-"63 hub.h
+[; ;hub.h: 56: void Hub_ClockWrite(bool value);
+[; ;hub.h: 57: void Hub_LatchWrite(bool value);
+[; ;hub.h: 58: bool Hub_DataRead();
+[; ;hub.h: 60: void Hub_Init();
+[; ;hub.h: 61: void Hub_ReadSwitch();
+[; ;hub.h: 62: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
+[; ;hub.h: 63: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
+[; ;hub.h: 64: void Hub_UpdateValues();
+[; ;hub.h: 65: void Hub_CopyBuffer();
+"67 hub.h
 [v __Hub `S326 ~T0 @X0 1 e ]
-[; ;hub.h: 63: Hub _Hub;
+[; ;hub.h: 67: Hub _Hub;
 "46 display.h
 [v __Digits `uc ~T0 @X0 -> 0 `x e ]
 [i __Digits
@@ -3367,12 +3387,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 80: unsigned char PointMask[2];
 [; ;display.h: 81: Connector IO;
 [; ;display.h: 82: } Display;
-[; ;display.h: 84: void Display_Init();
-[; ;display.h: 85: void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
-[; ;display.h: 86: void Display_SwapBuffer();
-"88
+[; ;display.h: 84: void Display_ClockWrite(bool value);
+[; ;display.h: 85: void Display_LatchWrite(bool value);
+[; ;display.h: 86: bool Display_DataWrite(bool value);
+[; ;display.h: 88: void Display_Init();
+[; ;display.h: 89: void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
+[; ;display.h: 90: void Display_SwapBuffer();
+"92
 [v __Display `S327 ~T0 @X0 1 e ]
-[; ;display.h: 88: Display _Display;
+[; ;display.h: 92: Display _Display;
 [; ;zip.h: 21: typedef struct
 [; ;zip.h: 22: {
 [; ;zip.h: 23: DataBuffer *Buffer;
@@ -3386,10 +3409,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digipot.h: 22: unsigned char Counter;
 [; ;digipot.h: 23: Connector IO;
 [; ;digipot.h: 24: } DigiPot;
-[; ;digipot.h: 26: void InitDigiPot();
-"28 digipot.h
+[; ;digipot.h: 27: void DigiPot_ClockWrite(bool value);
+[; ;digipot.h: 28: void DigiPot_LatchWrite(bool value);
+[; ;digipot.h: 29: bool DigiPot_DataWrite(bool value);
+[; ;digipot.h: 31: void InitDigiPot();
+"33 digipot.h
 [v __DigiPot `S329 ~T0 @X0 1 e ]
-[; ;digipot.h: 28: DigiPot _DigiPot;
+[; ;digipot.h: 33: DigiPot _DigiPot;
 [; ;persistant.h: 22: typedef struct
 [; ;persistant.h: 23: {
 [; ;persistant.h: 24: unsigned char Channel;
@@ -3449,32 +3475,415 @@ Version 3.2 HI-TECH Software Intermediate Code
 "42
 [v __MidiOutput `S333 ~T0 @X0 1 e ]
 [; ;midi.h: 42: Midi _MidiOutput;
-[; ;math.h: 30: extern double fabs(double);
-[; ;math.h: 31: extern double floor(double);
-[; ;math.h: 32: extern double ceil(double);
-[; ;math.h: 33: extern double modf(double, double *);
-[; ;math.h: 34: extern double sqrt(double);
-[; ;math.h: 35: extern double atof(const char *);
-[; ;math.h: 36: extern double sin(double) ;
-[; ;math.h: 37: extern double cos(double) ;
-[; ;math.h: 38: extern double tan(double) ;
-[; ;math.h: 39: extern double asin(double) ;
-[; ;math.h: 40: extern double acos(double) ;
-[; ;math.h: 41: extern double atan(double);
-[; ;math.h: 42: extern double atan2(double, double) ;
-[; ;math.h: 43: extern double log(double);
-[; ;math.h: 44: extern double log10(double);
-[; ;math.h: 45: extern double pow(double, double) ;
-[; ;math.h: 46: extern double exp(double) ;
-[; ;math.h: 47: extern double sinh(double) ;
-[; ;math.h: 48: extern double cosh(double) ;
-[; ;math.h: 49: extern double tanh(double);
-[; ;math.h: 50: extern double eval_poly(double, const double *, int);
-[; ;math.h: 51: extern double frexp(double, int *);
-[; ;math.h: 52: extern double ldexp(double, int);
-[; ;math.h: 53: extern double fmod(double, double);
-[; ;math.h: 54: extern double trunc(double);
-[; ;math.h: 55: extern double round(double);
+[; ;usb_common.h: 132: typedef union
+[; ;usb_common.h: 133: {
+[; ;usb_common.h: 134: uint8_t bitmap;
+[; ;usb_common.h: 135: struct
+[; ;usb_common.h: 136: {
+[; ;usb_common.h: 137: uint8_t ep_num: 4;
+[; ;usb_common.h: 138: uint8_t zero_pkt: 1;
+[; ;usb_common.h: 139: uint8_t dts: 1;
+[; ;usb_common.h: 140: uint8_t force_dts: 1;
+[; ;usb_common.h: 141: uint8_t direction: 1;
+[; ;usb_common.h: 142: }field;
+[; ;usb_common.h: 144: } TRANSFER_FLAGS;
+[; ;usb_common.h: 206: typedef enum
+[; ;usb_common.h: 207: {
+[; ;usb_common.h: 209: EVENT_NONE = 0,
+[; ;usb_common.h: 211: EVENT_DEVICE_STACK_BASE = 1,
+[; ;usb_common.h: 213: EVENT_HOST_STACK_BASE = 100,
+[; ;usb_common.h: 216: EVENT_HUB_ATTACH,
+[; ;usb_common.h: 219: EVENT_STALL,
+[; ;usb_common.h: 222: EVENT_VBUS_SES_REQUEST,
+[; ;usb_common.h: 227: EVENT_VBUS_OVERCURRENT,
+[; ;usb_common.h: 233: EVENT_VBUS_REQUEST_POWER,
+[; ;usb_common.h: 238: EVENT_VBUS_RELEASE_POWER,
+[; ;usb_common.h: 247: EVENT_VBUS_POWER_AVAILABLE,
+[; ;usb_common.h: 251: EVENT_UNSUPPORTED_DEVICE,
+[; ;usb_common.h: 255: EVENT_CANNOT_ENUMERATE,
+[; ;usb_common.h: 259: EVENT_CLIENT_INIT_ERROR,
+[; ;usb_common.h: 265: EVENT_OUT_OF_MEMORY,
+[; ;usb_common.h: 268: EVENT_UNSPECIFIED_ERROR,
+[; ;usb_common.h: 272: EVENT_DETACH,
+[; ;usb_common.h: 277: EVENT_TRANSFER,
+[; ;usb_common.h: 281: EVENT_SOF,
+[; ;usb_common.h: 284: EVENT_RESUME,
+[; ;usb_common.h: 288: EVENT_SUSPEND,
+[; ;usb_common.h: 292: EVENT_RESET,
+[; ;usb_common.h: 298: EVENT_DATA_ISOC_READ,
+[; ;usb_common.h: 304: EVENT_DATA_ISOC_WRITE,
+[; ;usb_common.h: 314: EVENT_OVERRIDE_CLIENT_DRIVER_SELECTION,
+[; ;usb_common.h: 322: EVENT_1MS,
+[; ;usb_common.h: 328: EVENT_ALT_INTERFACE,
+[; ;usb_common.h: 335: EVENT_HOLD_BEFORE_CONFIGURATION,
+[; ;usb_common.h: 338: EVENT_GENERIC_BASE = 400,
+[; ;usb_common.h: 340: EVENT_MSD_BASE = 500,
+[; ;usb_common.h: 342: EVENT_HID_BASE = 600,
+[; ;usb_common.h: 344: EVENT_PRINTER_BASE = 700,
+[; ;usb_common.h: 346: EVENT_CDC_BASE = 800,
+[; ;usb_common.h: 348: EVENT_CHARGER_BASE = 900,
+[; ;usb_common.h: 350: EVENT_AUDIO_BASE = 1000,
+[; ;usb_common.h: 352: EVENT_USER_BASE = 10000,
+[; ;usb_common.h: 357: EVENT_BUS_ERROR = 32767
+[; ;usb_common.h: 359: } USB_EVENT;
+[; ;usb_common.h: 371: typedef struct _transfer_event_data
+[; ;usb_common.h: 372: {
+[; ;usb_common.h: 373: TRANSFER_FLAGS flags;
+[; ;usb_common.h: 374: uint32_t size;
+[; ;usb_common.h: 375: uint8_t pid;
+[; ;usb_common.h: 377: } USB_TRANSFER_EVENT_DATA;
+[; ;usb_common.h: 388: typedef struct _vbus_power_data
+[; ;usb_common.h: 389: {
+[; ;usb_common.h: 390: uint8_t port;
+[; ;usb_common.h: 391: uint8_t current;
+[; ;usb_common.h: 392: } USB_VBUS_POWER_EVENT_DATA;
+[; ;usb_common.h: 401: typedef struct _override_client_driver_data
+[; ;usb_common.h: 402: {
+[; ;usb_common.h: 403: uint16_t idVendor;
+[; ;usb_common.h: 404: uint16_t idProduct;
+[; ;usb_common.h: 405: uint8_t bDeviceClass;
+[; ;usb_common.h: 406: uint8_t bDeviceSubClass;
+[; ;usb_common.h: 407: uint8_t bDeviceProtocol;
+[; ;usb_common.h: 408: } USB_OVERRIDE_CLIENT_DRIVER_EVENT_DATA;
+[; ;usb_common.h: 463: typedef bool (*USB_EVENT_HANDLER) ( USB_EVENT event, void *data, unsigned int size );
+[; ;usb_ch9.h: 69: typedef struct  _USB_DEVICE_DESCRIPTOR
+[; ;usb_ch9.h: 70: {
+[; ;usb_ch9.h: 71: uint8_t bLength;
+[; ;usb_ch9.h: 72: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 73: uint16_t bcdUSB;
+[; ;usb_ch9.h: 74: uint8_t bDeviceClass;
+[; ;usb_ch9.h: 75: uint8_t bDeviceSubClass;
+[; ;usb_ch9.h: 76: uint8_t bDeviceProtocol;
+[; ;usb_ch9.h: 77: uint8_t bMaxPacketSize0;
+[; ;usb_ch9.h: 78: uint16_t idVendor;
+[; ;usb_ch9.h: 79: uint16_t idProduct;
+[; ;usb_ch9.h: 80: uint16_t bcdDevice;
+[; ;usb_ch9.h: 81: uint8_t iManufacturer;
+[; ;usb_ch9.h: 82: uint8_t iProduct;
+[; ;usb_ch9.h: 83: uint8_t iSerialNumber;
+[; ;usb_ch9.h: 84: uint8_t bNumConfigurations;
+[; ;usb_ch9.h: 85: } USB_DEVICE_DESCRIPTOR;
+[; ;usb_ch9.h: 93: typedef struct  _USB_CONFIGURATION_DESCRIPTOR
+[; ;usb_ch9.h: 94: {
+[; ;usb_ch9.h: 95: uint8_t bLength;
+[; ;usb_ch9.h: 96: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 97: uint16_t wTotalLength;
+[; ;usb_ch9.h: 98: uint8_t bNumInterfaces;
+[; ;usb_ch9.h: 99: uint8_t bConfigurationValue;
+[; ;usb_ch9.h: 100: uint8_t iConfiguration;
+[; ;usb_ch9.h: 101: uint8_t bmAttributes;
+[; ;usb_ch9.h: 102: uint8_t bMaxPower;
+[; ;usb_ch9.h: 103: } USB_CONFIGURATION_DESCRIPTOR;
+[; ;usb_ch9.h: 116: typedef struct  _USB_INTERFACE_DESCRIPTOR
+[; ;usb_ch9.h: 117: {
+[; ;usb_ch9.h: 118: uint8_t bLength;
+[; ;usb_ch9.h: 119: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 120: uint8_t bInterfaceNumber;
+[; ;usb_ch9.h: 121: uint8_t bAlternateSetting;
+[; ;usb_ch9.h: 122: uint8_t bNumEndpoints;
+[; ;usb_ch9.h: 123: uint8_t bInterfaceClass;
+[; ;usb_ch9.h: 124: uint8_t bInterfaceSubClass;
+[; ;usb_ch9.h: 125: uint8_t bInterfaceProtocol;
+[; ;usb_ch9.h: 126: uint8_t iInterface;
+[; ;usb_ch9.h: 127: } USB_INTERFACE_DESCRIPTOR;
+[; ;usb_ch9.h: 135: typedef struct  _USB_ENDPOINT_DESCRIPTOR
+[; ;usb_ch9.h: 136: {
+[; ;usb_ch9.h: 137: uint8_t bLength;
+[; ;usb_ch9.h: 138: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 139: uint8_t bEndpointAddress;
+[; ;usb_ch9.h: 140: uint8_t bmAttributes;
+[; ;usb_ch9.h: 141: uint16_t wMaxPacketSize;
+[; ;usb_ch9.h: 142: uint8_t bInterval;
+[; ;usb_ch9.h: 143: } USB_ENDPOINT_DESCRIPTOR;
+[; ;usb_ch9.h: 185: typedef struct
+[; ;usb_ch9.h: 186: {
+[; ;usb_ch9.h: 187: uint8_t index;
+[; ;usb_ch9.h: 188: uint8_t type;
+[; ;usb_ch9.h: 189: uint16_t language_id;
+[; ;usb_ch9.h: 191: } DESCRIPTOR_ID;
+[; ;usb_ch9.h: 200: typedef struct  _USB_OTG_DESCRIPTOR
+[; ;usb_ch9.h: 201: {
+[; ;usb_ch9.h: 202: uint8_t bLength;
+[; ;usb_ch9.h: 203: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 204: uint8_t bmAttributes;
+[; ;usb_ch9.h: 205: } USB_OTG_DESCRIPTOR;
+[; ;usb_ch9.h: 224: typedef struct  _USB_STRING_DSC
+[; ;usb_ch9.h: 225: {
+[; ;usb_ch9.h: 226: uint8_t bLength;
+[; ;usb_ch9.h: 227: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 229: } USB_STRING_DESCRIPTOR;
+[; ;usb_ch9.h: 243: typedef struct  _USB_DEVICE_QUALIFIER_DESCRIPTOR
+[; ;usb_ch9.h: 244: {
+[; ;usb_ch9.h: 245: uint8_t bLength;
+[; ;usb_ch9.h: 246: uint8_t bType;
+[; ;usb_ch9.h: 247: uint16_t bcdUSB;
+[; ;usb_ch9.h: 248: uint8_t bDeviceClass;
+[; ;usb_ch9.h: 249: uint8_t bDeviceSubClass;
+[; ;usb_ch9.h: 250: uint8_t bDeviceProtocol;
+[; ;usb_ch9.h: 251: uint8_t bMaxPacketSize0;
+[; ;usb_ch9.h: 252: uint8_t bNumConfigurations;
+[; ;usb_ch9.h: 253: uint8_t bReserved;
+[; ;usb_ch9.h: 255: } USB_DEVICE_QUALIFIER_DESCRIPTOR;
+[; ;usb_ch9.h: 266: typedef union 
+[; ;usb_ch9.h: 267: {
+[; ;usb_ch9.h: 269: struct 
+[; ;usb_ch9.h: 270: {
+[; ;usb_ch9.h: 271: uint8_t bmRequestType;
+[; ;usb_ch9.h: 272: uint8_t bRequest;
+[; ;usb_ch9.h: 273: uint16_t wValue;
+[; ;usb_ch9.h: 274: uint16_t wIndex;
+[; ;usb_ch9.h: 275: uint16_t wLength;
+[; ;usb_ch9.h: 276: };
+[; ;usb_ch9.h: 277: struct 
+[; ;usb_ch9.h: 278: {
+[; ;usb_ch9.h: 279: unsigned :8;
+[; ;usb_ch9.h: 280: unsigned :8;
+[; ;usb_ch9.h: 281: union
+[; ;usb_ch9.h: 282: {
+[; ;usb_ch9.h: 283: uint16_t Val;
+[; ;usb_ch9.h: 284: uint8_t v[2];
+[; ;usb_ch9.h: 285: struct
+[; ;usb_ch9.h: 286: {
+[; ;usb_ch9.h: 287: uint8_t LB;
+[; ;usb_ch9.h: 288: uint8_t HB;
+[; ;usb_ch9.h: 289: } byte;
+[; ;usb_ch9.h: 290: } W_Value;
+[; ;usb_ch9.h: 292: union
+[; ;usb_ch9.h: 293: {
+[; ;usb_ch9.h: 294: uint16_t Val;
+[; ;usb_ch9.h: 295: uint8_t v[2];
+[; ;usb_ch9.h: 296: struct
+[; ;usb_ch9.h: 297: {
+[; ;usb_ch9.h: 298: uint8_t LB;
+[; ;usb_ch9.h: 299: uint8_t HB;
+[; ;usb_ch9.h: 300: } byte;
+[; ;usb_ch9.h: 301: } W_Index;
+[; ;usb_ch9.h: 303: union
+[; ;usb_ch9.h: 304: {
+[; ;usb_ch9.h: 305: uint16_t Val;
+[; ;usb_ch9.h: 306: uint8_t v[2];
+[; ;usb_ch9.h: 307: struct
+[; ;usb_ch9.h: 308: {
+[; ;usb_ch9.h: 309: uint8_t LB;
+[; ;usb_ch9.h: 310: uint8_t HB;
+[; ;usb_ch9.h: 311: } byte;
+[; ;usb_ch9.h: 312: } W_Length;
+[; ;usb_ch9.h: 313: };
+[; ;usb_ch9.h: 314: struct 
+[; ;usb_ch9.h: 315: {
+[; ;usb_ch9.h: 316: unsigned Recipient:5;
+[; ;usb_ch9.h: 317: unsigned RequestType:2;
+[; ;usb_ch9.h: 318: unsigned DataDir:1;
+[; ;usb_ch9.h: 319: unsigned :8;
+[; ;usb_ch9.h: 320: uint8_t bFeature;
+[; ;usb_ch9.h: 321: unsigned :8;
+[; ;usb_ch9.h: 322: unsigned :8;
+[; ;usb_ch9.h: 323: unsigned :8;
+[; ;usb_ch9.h: 324: unsigned :8;
+[; ;usb_ch9.h: 325: unsigned :8;
+[; ;usb_ch9.h: 326: };
+[; ;usb_ch9.h: 327: struct 
+[; ;usb_ch9.h: 328: {
+[; ;usb_ch9.h: 329: union
+[; ;usb_ch9.h: 330: {
+[; ;usb_ch9.h: 331: uint8_t bmRequestType;
+[; ;usb_ch9.h: 332: struct
+[; ;usb_ch9.h: 333: {
+[; ;usb_ch9.h: 334: uint8_t recipient: 5;
+[; ;usb_ch9.h: 335: uint8_t type: 2;
+[; ;usb_ch9.h: 336: uint8_t direction: 1;
+[; ;usb_ch9.h: 337: };
+[; ;usb_ch9.h: 338: }requestInfo;
+[; ;usb_ch9.h: 339: };
+[; ;usb_ch9.h: 340: struct 
+[; ;usb_ch9.h: 341: {
+[; ;usb_ch9.h: 342: unsigned :8;
+[; ;usb_ch9.h: 343: unsigned :8;
+[; ;usb_ch9.h: 344: uint8_t bDscIndex;
+[; ;usb_ch9.h: 345: uint8_t bDescriptorType;
+[; ;usb_ch9.h: 346: uint16_t wLangID;
+[; ;usb_ch9.h: 347: unsigned :8;
+[; ;usb_ch9.h: 348: unsigned :8;
+[; ;usb_ch9.h: 349: };
+[; ;usb_ch9.h: 350: struct 
+[; ;usb_ch9.h: 351: {
+[; ;usb_ch9.h: 352: unsigned :8;
+[; ;usb_ch9.h: 353: unsigned :8;
+[; ;usb_ch9.h: 354: uint8_t bDevADR;
+[; ;usb_ch9.h: 355: uint8_t bDevADRH;
+[; ;usb_ch9.h: 356: unsigned :8;
+[; ;usb_ch9.h: 357: unsigned :8;
+[; ;usb_ch9.h: 358: unsigned :8;
+[; ;usb_ch9.h: 359: unsigned :8;
+[; ;usb_ch9.h: 360: };
+[; ;usb_ch9.h: 361: struct 
+[; ;usb_ch9.h: 362: {
+[; ;usb_ch9.h: 363: unsigned :8;
+[; ;usb_ch9.h: 364: unsigned :8;
+[; ;usb_ch9.h: 365: uint8_t bConfigurationValue;
+[; ;usb_ch9.h: 366: uint8_t bCfgRSD;
+[; ;usb_ch9.h: 367: unsigned :8;
+[; ;usb_ch9.h: 368: unsigned :8;
+[; ;usb_ch9.h: 369: unsigned :8;
+[; ;usb_ch9.h: 370: unsigned :8;
+[; ;usb_ch9.h: 371: };
+[; ;usb_ch9.h: 372: struct 
+[; ;usb_ch9.h: 373: {
+[; ;usb_ch9.h: 374: unsigned :8;
+[; ;usb_ch9.h: 375: unsigned :8;
+[; ;usb_ch9.h: 376: uint8_t bAltID;
+[; ;usb_ch9.h: 377: uint8_t bAltID_H;
+[; ;usb_ch9.h: 378: uint8_t bIntfID;
+[; ;usb_ch9.h: 379: uint8_t bIntfID_H;
+[; ;usb_ch9.h: 380: unsigned :8;
+[; ;usb_ch9.h: 381: unsigned :8;
+[; ;usb_ch9.h: 382: };
+[; ;usb_ch9.h: 383: struct 
+[; ;usb_ch9.h: 384: {
+[; ;usb_ch9.h: 385: unsigned :8;
+[; ;usb_ch9.h: 386: unsigned :8;
+[; ;usb_ch9.h: 387: unsigned :8;
+[; ;usb_ch9.h: 388: unsigned :8;
+[; ;usb_ch9.h: 389: uint8_t bEPID;
+[; ;usb_ch9.h: 390: uint8_t bEPID_H;
+[; ;usb_ch9.h: 391: unsigned :8;
+[; ;usb_ch9.h: 392: unsigned :8;
+[; ;usb_ch9.h: 393: };
+[; ;usb_ch9.h: 394: struct 
+[; ;usb_ch9.h: 395: {
+[; ;usb_ch9.h: 396: unsigned :8;
+[; ;usb_ch9.h: 397: unsigned :8;
+[; ;usb_ch9.h: 398: unsigned :8;
+[; ;usb_ch9.h: 399: unsigned :8;
+[; ;usb_ch9.h: 400: unsigned EPNum:4;
+[; ;usb_ch9.h: 401: unsigned :3;
+[; ;usb_ch9.h: 402: unsigned EPDir:1;
+[; ;usb_ch9.h: 403: unsigned :8;
+[; ;usb_ch9.h: 404: unsigned :8;
+[; ;usb_ch9.h: 405: unsigned :8;
+[; ;usb_ch9.h: 406: };
+[; ;usb_ch9.h: 410: } CTRL_TRF_SETUP, SETUP_PKT, *PSETUP_PKT;
+[; ;usb_device.h: 73: typedef enum
+[; ;usb_device.h: 74: {
+[; ;usb_device.h: 78: DETACHED_STATE
+[; ;usb_device.h: 79: = 0x00 ,
+[; ;usb_device.h: 82: ATTACHED_STATE
+[; ;usb_device.h: 83: = 0x01 ,
+[; ;usb_device.h: 86: POWERED_STATE
+[; ;usb_device.h: 87: = 0x02 ,
+[; ;usb_device.h: 90: DEFAULT_STATE
+[; ;usb_device.h: 91: = 0x04 ,
+[; ;usb_device.h: 97: ADR_PENDING_STATE
+[; ;usb_device.h: 98: = 0x08 ,
+[; ;usb_device.h: 101: ADDRESS_STATE
+[; ;usb_device.h: 102: = 0x10 ,
+[; ;usb_device.h: 108: CONFIGURED_STATE
+[; ;usb_device.h: 109: = 0x20
+[; ;usb_device.h: 110: } USB_DEVICE_STATE;
+[; ;usb_device.h: 114: typedef enum
+[; ;usb_device.h: 115: {
+[; ;usb_device.h: 117: EVENT_CONFIGURED
+[; ;usb_device.h: 118: = EVENT_DEVICE_STACK_BASE ,
+[; ;usb_device.h: 121: EVENT_SET_DESCRIPTOR,
+[; ;usb_device.h: 127: EVENT_EP0_REQUEST,
+[; ;usb_device.h: 156: EVENT_ATTACH,
+[; ;usb_device.h: 161: EVENT_TRANSFER_TERMINATED
+[; ;usb_device.h: 163: } USB_DEVICE_STACK_EVENTS;
+[; ;usb_device.h: 195: void USBDeviceInit(void);
+[; ;usb_device.h: 299: void USBDeviceTasks(void);
+[; ;usb_device.h: 351: void USBEnableEndpoint(uint8_t ep, uint8_t options);
+[; ;usb_device.h: 444: void* USBTransferOnePacket(uint8_t ep,uint8_t dir,uint8_t* data,uint8_t len);
+[; ;usb_device.h: 469: void USBStallEndpoint(uint8_t ep, uint8_t dir);
+[; ;usb_device.h: 493: void USBCancelIO(uint8_t endpoint);
+[; ;usb_device.h: 590: void USBDeviceDetach(void);
+[; ;usb_device.h: 635: void USBDeviceAttach(void);
+[; ;usb_device.h: 674: void USBCtrlEPAllowStatusStage(void);
+[; ;usb_device.h: 704: void USBCtrlEPAllowDataStage(void);
+[; ;usb_device.h: 780: void USBDeferOUTDataStage(void);
+[; ;usb_device.h: 781: extern volatile bool USBDeferOUTDataStagePackets;
+[; ;usb_device.h: 850: void USBDeferStatusStage(void);
+[; ;usb_device.h: 851: extern volatile bool USBDeferStatusStagePacket;
+[; ;usb_device.h: 902: bool USBOUTDataStageDeferred(void);
+[; ;usb_device.h: 985: void USBDeferINDataStage(void);
+[; ;usb_device.h: 986: extern volatile bool USBDeferINDataStagePackets;
+[; ;usb_device.h: 1039: bool USBINDataStageDeferred(void);
+[; ;usb_device.h: 1109: bool USBGetRemoteWakeupStatus(void);
+[; ;usb_device.h: 1166: USB_DEVICE_STATE USBGetDeviceState(void);
+[; ;usb_device.h: 1222: bool USBGetSuspendState(void);
+[; ;usb_device.h: 1257: bool USBIsDeviceSuspended(void);
+[; ;usb_device.h: 1300: bool USBIsBusSuspended(void);
+[; ;usb_device.h: 1326: void USBSoftDetach(void);
+[; ;usb_device.h: 1364: bool USBHandleBusy(void* handle);
+[; ;usb_device.h: 1402: uint16_t USBHandleGetLength(void* handle);
+[; ;usb_device.h: 1434: uint16_t USBHandleGetAddr(void*);
+[; ;usb_device.h: 1534: void* USBGetNextHandle(uint8_t ep_num, uint8_t ep_dir);
+[; ;usb_device.h: 1567: void USBEP0Transmit(uint8_t options);
+[; ;usb_device.h: 1595: void USBEP0SendRAMPtr(uint8_t* src, uint16_t size, uint8_t Options);
+[; ;usb_device.h: 1627: void USBEP0SendROMPtr(uint8_t* src, uint16_t size, uint8_t Options);
+[; ;usb_device.h: 1655: void USBEP0Receive(uint8_t* dest, uint16_t size, void (*function));
+[; ;usb_device.h: 1690: void* USBTxOnePacket(uint8_t ep, uint8_t* data, uint16_t len);
+[; ;usb_device.h: 1727: void* USBRxOnePacket(uint8_t ep, uint8_t* data, uint16_t len);
+[; ;usb_device.h: 1759: bool USB_APPLICATION_EVENT_HANDLER(uint8_t address, USB_EVENT event, void *pdata, uint16_t size);
+[; ;usb_device.h: 1804: void USBIncrement1msInternalTimers(void);
+[; ;usb_device.h: 1863: uint32_t USBGet1msTickCount(void);
+[; ;usb_device.h: 1904: uint8_t USBGetTicksSinceSuspendEnd(void);
+[; ;usb_device.h: 1976: typedef union
+[; ;usb_device.h: 1977: {
+[; ;usb_device.h: 1978: uint16_t Val;
+[; ;usb_device.h: 1979: uint8_t v[2];
+[; ;usb_device.h: 1980: struct
+[; ;usb_device.h: 1981: {
+[; ;usb_device.h: 1982: uint8_t LB;
+[; ;usb_device.h: 1983: uint8_t HB;
+[; ;usb_device.h: 1984: } byte;
+[; ;usb_device.h: 1985: } uint16_t_VAL;
+[; ;usb_device.h: 1990: typedef struct 
+[; ;usb_device.h: 1991: {
+[; ;usb_device.h: 1992: union 
+[; ;usb_device.h: 1993: {
+[; ;usb_device.h: 1996: uint8_t *bRam;
+[; ;usb_device.h: 1997: const uint8_t *bRom;
+[; ;usb_device.h: 1998: uint16_t *wRam;
+[; ;usb_device.h: 1999: const uint16_t *wRom;
+[; ;usb_device.h: 2000: }pSrc;
+[; ;usb_device.h: 2001: union 
+[; ;usb_device.h: 2002: {
+[; ;usb_device.h: 2003: struct 
+[; ;usb_device.h: 2004: {
+[; ;usb_device.h: 2006: uint8_t ctrl_trf_mem :1;
+[; ;usb_device.h: 2007: uint8_t reserved :5;
+[; ;usb_device.h: 2010: uint8_t includeZero :1;
+[; ;usb_device.h: 2012: uint8_t busy :1;
+[; ;usb_device.h: 2013: }bits;
+[; ;usb_device.h: 2014: uint8_t Val;
+[; ;usb_device.h: 2015: }info;
+[; ;usb_device.h: 2016: uint16_t_VAL  wCount;
+[; ;usb_device.h: 2017: }IN_PIPE;
+[; ;usb_device.h: 2019: extern  IN_PIPE inPipes[];
+[; ;usb_device.h: 2021: typedef struct 
+[; ;usb_device.h: 2022: {
+[; ;usb_device.h: 2023: union 
+[; ;usb_device.h: 2024: {
+[; ;usb_device.h: 2027: uint8_t *bRam;
+[; ;usb_device.h: 2028: uint16_t *wRam;
+[; ;usb_device.h: 2029: }pDst;
+[; ;usb_device.h: 2030: union 
+[; ;usb_device.h: 2031: {
+[; ;usb_device.h: 2032: struct 
+[; ;usb_device.h: 2033: {
+[; ;usb_device.h: 2034: uint8_t reserved :7;
+[; ;usb_device.h: 2036: uint8_t busy :1;
+[; ;usb_device.h: 2037: }bits;
+[; ;usb_device.h: 2038: uint8_t Val;
+[; ;usb_device.h: 2039: }info;
+[; ;usb_device.h: 2040: uint16_t_VAL wCount;
+[; ;usb_device.h: 2041: void (*pFunc)(void);
+[; ;usb_device.h: 2042: }OUT_PIPE;
+[; ;usb_device.h: 2044: extern  bool RemoteWakeup;
+[; ;usb_device.h: 2045: extern  bool USBBusIsSuspended;
+[; ;usb_device.h: 2046: extern  USB_DEVICE_STATE USBDeviceState;
+[; ;usb_device.h: 2047: extern  uint8_t USBActiveConfiguration;
+[; ;usb_device.h: 2048: extern  uint8_t USBTicksSinceSuspendEnd;
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
 [; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
@@ -3502,733 +3911,1006 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 58: extern char * strichr(const char *, int);
 [; ;string.h: 59: extern char * strrchr(const char *, int);
 [; ;string.h: 60: extern char * strrichr(const char *, int);
-"39 main.c
+[; ;inc\usb_hal_pic18.h: 257: typedef union _BD_STAT
+[; ;inc\usb_hal_pic18.h: 258: {
+[; ;inc\usb_hal_pic18.h: 259: uint8_t Val;
+[; ;inc\usb_hal_pic18.h: 260: struct{
+[; ;inc\usb_hal_pic18.h: 262: unsigned BC8:1;
+[; ;inc\usb_hal_pic18.h: 263: unsigned BC9:1;
+[; ;inc\usb_hal_pic18.h: 264: unsigned BSTALL:1;
+[; ;inc\usb_hal_pic18.h: 265: unsigned DTSEN:1;
+[; ;inc\usb_hal_pic18.h: 266: unsigned INCDIS:1;
+[; ;inc\usb_hal_pic18.h: 267: unsigned KEN:1;
+[; ;inc\usb_hal_pic18.h: 268: unsigned DTS:1;
+[; ;inc\usb_hal_pic18.h: 269: unsigned UOWN:1;
+[; ;inc\usb_hal_pic18.h: 270: };
+[; ;inc\usb_hal_pic18.h: 271: struct{
+[; ;inc\usb_hal_pic18.h: 274: unsigned :2;
+[; ;inc\usb_hal_pic18.h: 275: unsigned PID0:1;
+[; ;inc\usb_hal_pic18.h: 276: unsigned PID1:1;
+[; ;inc\usb_hal_pic18.h: 277: unsigned PID2:1;
+[; ;inc\usb_hal_pic18.h: 278: unsigned PID3:1;
+[; ;inc\usb_hal_pic18.h: 279: unsigned :1;
+[; ;inc\usb_hal_pic18.h: 280: };
+[; ;inc\usb_hal_pic18.h: 281: struct{
+[; ;inc\usb_hal_pic18.h: 282: unsigned :2;
+[; ;inc\usb_hal_pic18.h: 283: unsigned PID:4;
+[; ;inc\usb_hal_pic18.h: 284: unsigned :2;
+[; ;inc\usb_hal_pic18.h: 285: };
+[; ;inc\usb_hal_pic18.h: 286: } BD_STAT;
+[; ;inc\usb_hal_pic18.h: 289: typedef union __BDT
+[; ;inc\usb_hal_pic18.h: 290: {
+[; ;inc\usb_hal_pic18.h: 291: struct
+[; ;inc\usb_hal_pic18.h: 292: {
+[; ;inc\usb_hal_pic18.h: 293: BD_STAT STAT;
+[; ;inc\usb_hal_pic18.h: 294: uint8_t CNT;
+[; ;inc\usb_hal_pic18.h: 295: uint8_t ADRL;
+[; ;inc\usb_hal_pic18.h: 296: uint8_t ADRH;
+[; ;inc\usb_hal_pic18.h: 297: };
+[; ;inc\usb_hal_pic18.h: 298: struct
+[; ;inc\usb_hal_pic18.h: 299: {
+[; ;inc\usb_hal_pic18.h: 300: unsigned :8;
+[; ;inc\usb_hal_pic18.h: 301: unsigned :8;
+[; ;inc\usb_hal_pic18.h: 302: uint16_t ADR;
+[; ;inc\usb_hal_pic18.h: 303: };
+[; ;inc\usb_hal_pic18.h: 304: uint32_t Val;
+[; ;inc\usb_hal_pic18.h: 305: uint8_t v[4];
+[; ;inc\usb_hal_pic18.h: 306: } BDT_ENTRY;
+[; ;inc\usb_hal_pic18.h: 309: typedef union __USTAT
+[; ;inc\usb_hal_pic18.h: 310: {
+[; ;inc\usb_hal_pic18.h: 311: struct
+[; ;inc\usb_hal_pic18.h: 312: {
+[; ;inc\usb_hal_pic18.h: 313: unsigned char filler1:1;
+[; ;inc\usb_hal_pic18.h: 314: unsigned char ping_pong:1;
+[; ;inc\usb_hal_pic18.h: 315: unsigned char direction:1;
+[; ;inc\usb_hal_pic18.h: 316: unsigned char endpoint_number:4;
+[; ;inc\usb_hal_pic18.h: 317: };
+[; ;inc\usb_hal_pic18.h: 318: uint8_t Val;
+[; ;inc\usb_hal_pic18.h: 319: } USTAT_FIELDS;
+[; ;inc\usb_hal_pic18.h: 327: typedef union _POINTER
+[; ;inc\usb_hal_pic18.h: 328: {
+[; ;inc\usb_hal_pic18.h: 329: struct
+[; ;inc\usb_hal_pic18.h: 330: {
+[; ;inc\usb_hal_pic18.h: 331: uint8_t bLow;
+[; ;inc\usb_hal_pic18.h: 332: uint8_t bHigh;
+[; ;inc\usb_hal_pic18.h: 334: };
+[; ;inc\usb_hal_pic18.h: 335: uint16_t _word;
+[; ;inc\usb_hal_pic18.h: 339: uint8_t* bRam;
+[; ;inc\usb_hal_pic18.h: 341: uint16_t* wRam;
+[; ;inc\usb_hal_pic18.h: 344: const uint8_t* bRom;
+[; ;inc\usb_hal_pic18.h: 345: const uint16_t* wRom;
+[; ;inc\usb_hal_pic18.h: 350: } POINTER;
+[; ;inc\usb_hal_pic18.h: 597: extern  uint8_t USBActiveConfiguration;
+[; ;inc\usb_hal_pic18.h: 598: extern  IN_PIPE inPipes[1];
+[; ;inc\usb_hal_pic18.h: 599: extern  OUT_PIPE outPipes[1];
+[; ;inc\usb_hal_pic18.h: 602: extern volatile BDT_ENTRY* pBDTEntryOut[2+1];
+[; ;inc\usb_hal_pic18.h: 603: extern volatile BDT_ENTRY* pBDTEntryIn[2+1];
+[; ;inc\usb_hal.h: 167: void OTGCORE_SetDeviceAddr( uint8_t addr );
+[; ;inc\usb_hal.h: 203: void USBHALControlUsbResistors( uint8_t flags );
+[; ;inc\usb_hal.h: 237: bool USBHALSessionIsValid( void );
+[; ;inc\usb_hal.h: 263: bool USBHALControlBusPower( uint8_t cmd );
+[; ;inc\usb_hal.h: 293: unsigned long USBHALGetLastError( void );
+[; ;inc\usb_hal.h: 326: void USBHALHandleBusEvent ( void );
+[; ;inc\usb_hal.h: 367: bool OTGCORE_StallPipe( TRANSFER_FLAGS pipe );
+[; ;inc\usb_hal.h: 404: bool OTGCORE_UnstallPipe( TRANSFER_FLAGS pipe );
+[; ;inc\usb_hal.h: 438: uint16_t OTGCORE_GetStalledEndpoints ( void );
+[; ;inc\usb_hal.h: 475: bool USBHALFlushPipe( TRANSFER_FLAGS pipe );
+[; ;inc\usb_hal.h: 535: bool USBHALTransferData ( TRANSFER_FLAGS flags,
+[; ;inc\usb_hal.h: 536: void *buffer,
+[; ;inc\usb_hal.h: 537: unsigned int size );
+[; ;inc\usb_hal.h: 575: bool USBHALSetEpConfiguration ( uint8_t ep_num, uint16_t max_pkt_size, uint16_t flags );
+[; ;inc\usb_hal.h: 603: bool USBHALInitialize ( unsigned long flags );
+[; ;usb_device_cdc.h: 536: void CDCInitEP(void);
+[; ;usb_device_cdc.h: 562: void USBCheckCDCRequest(void);
+[; ;usb_device_cdc.h: 580: void CDCNotificationHandler(void);
+[; ;usb_device_cdc.h: 606: bool USBCDCEventHandler(USB_EVENT event, void *pdata, uint16_t size);
+[; ;usb_device_cdc.h: 653: uint8_t getsUSBUSART(uint8_t *buffer, uint8_t len);
+[; ;usb_device_cdc.h: 695: void putUSBUSART(uint8_t *data, uint8_t Length);
+[; ;usb_device_cdc.h: 736: void putsUSBUSART(char *data);
+[; ;usb_device_cdc.h: 779: void putrsUSBUSART(const const char *data);
+[; ;usb_device_cdc.h: 831: void CDCTxService(void);
+[; ;usb_device_cdc.h: 839: typedef union _LINE_CODING
+[; ;usb_device_cdc.h: 840: {
+[; ;usb_device_cdc.h: 841: struct
+[; ;usb_device_cdc.h: 842: {
+[; ;usb_device_cdc.h: 843: uint8_t _byte[0x07];
+[; ;usb_device_cdc.h: 844: };
+[; ;usb_device_cdc.h: 845: struct
+[; ;usb_device_cdc.h: 846: {
+[; ;usb_device_cdc.h: 847: uint32_t dwDTERate;
+[; ;usb_device_cdc.h: 848: uint8_t bCharFormat;
+[; ;usb_device_cdc.h: 849: uint8_t bParityType;
+[; ;usb_device_cdc.h: 850: uint8_t bDataBits;
+[; ;usb_device_cdc.h: 851: };
+[; ;usb_device_cdc.h: 852: } LINE_CODING;
+[; ;usb_device_cdc.h: 854: typedef union _CONTROL_SIGNAL_BITMAP
+[; ;usb_device_cdc.h: 855: {
+[; ;usb_device_cdc.h: 856: uint8_t _byte;
+[; ;usb_device_cdc.h: 857: struct
+[; ;usb_device_cdc.h: 858: {
+[; ;usb_device_cdc.h: 859: unsigned DTE_PRESENT:1;
+[; ;usb_device_cdc.h: 860: unsigned CARRIER_CONTROL:1;
+[; ;usb_device_cdc.h: 861: };
+[; ;usb_device_cdc.h: 862: } CONTROL_SIGNAL_BITMAP;
+[; ;usb_device_cdc.h: 868: typedef struct  _USB_CDC_HEADER_FN_DSC
+[; ;usb_device_cdc.h: 869: {
+[; ;usb_device_cdc.h: 870: uint8_t bFNLength;
+[; ;usb_device_cdc.h: 871: uint8_t bDscType;
+[; ;usb_device_cdc.h: 872: uint8_t bDscSubType;
+[; ;usb_device_cdc.h: 873: uint16_t bcdCDC;
+[; ;usb_device_cdc.h: 874: } USB_CDC_HEADER_FN_DSC;
+[; ;usb_device_cdc.h: 877: typedef struct  _USB_CDC_ACM_FN_DSC
+[; ;usb_device_cdc.h: 878: {
+[; ;usb_device_cdc.h: 879: uint8_t bFNLength;
+[; ;usb_device_cdc.h: 880: uint8_t bDscType;
+[; ;usb_device_cdc.h: 881: uint8_t bDscSubType;
+[; ;usb_device_cdc.h: 882: uint8_t bmCapabilities;
+[; ;usb_device_cdc.h: 883: } USB_CDC_ACM_FN_DSC;
+[; ;usb_device_cdc.h: 886: typedef struct  _USB_CDC_UNION_FN_DSC
+[; ;usb_device_cdc.h: 887: {
+[; ;usb_device_cdc.h: 888: uint8_t bFNLength;
+[; ;usb_device_cdc.h: 889: uint8_t bDscType;
+[; ;usb_device_cdc.h: 890: uint8_t bDscSubType;
+[; ;usb_device_cdc.h: 891: uint8_t bMasterIntf;
+[; ;usb_device_cdc.h: 892: uint8_t bSaveIntf0;
+[; ;usb_device_cdc.h: 893: } USB_CDC_UNION_FN_DSC;
+[; ;usb_device_cdc.h: 896: typedef struct  _USB_CDC_CALL_MGT_FN_DSC
+[; ;usb_device_cdc.h: 897: {
+[; ;usb_device_cdc.h: 898: uint8_t bFNLength;
+[; ;usb_device_cdc.h: 899: uint8_t bDscType;
+[; ;usb_device_cdc.h: 900: uint8_t bDscSubType;
+[; ;usb_device_cdc.h: 901: uint8_t bmCapabilities;
+[; ;usb_device_cdc.h: 902: uint8_t bDataInterface;
+[; ;usb_device_cdc.h: 903: } USB_CDC_CALL_MGT_FN_DSC;
+[; ;usb_device_cdc.h: 905: typedef union  _CDC_NOTICE
+[; ;usb_device_cdc.h: 906: {
+[; ;usb_device_cdc.h: 907: LINE_CODING GetLineCoding;
+[; ;usb_device_cdc.h: 908: LINE_CODING SetLineCoding;
+[; ;usb_device_cdc.h: 909: unsigned char packet[10];
+[; ;usb_device_cdc.h: 910: } CDC_NOTICE, *PCDC_NOTICE;
+[; ;usb_device_cdc.h: 913: typedef union
+[; ;usb_device_cdc.h: 914: {
+[; ;usb_device_cdc.h: 915: uint8_t byte;
+[; ;usb_device_cdc.h: 916: struct
+[; ;usb_device_cdc.h: 917: {
+[; ;usb_device_cdc.h: 918: uint8_t DCD :1;
+[; ;usb_device_cdc.h: 919: uint8_t DSR :1;
+[; ;usb_device_cdc.h: 920: uint8_t BreakState :1;
+[; ;usb_device_cdc.h: 921: uint8_t RingDetect :1;
+[; ;usb_device_cdc.h: 922: uint8_t FramingError :1;
+[; ;usb_device_cdc.h: 923: uint8_t ParityError :1;
+[; ;usb_device_cdc.h: 924: uint8_t Overrun :1;
+[; ;usb_device_cdc.h: 925: uint8_t Reserved :1;
+[; ;usb_device_cdc.h: 926: }bits;
+[; ;usb_device_cdc.h: 927: }BM_SERIAL_STATE;
+[; ;usb_device_cdc.h: 930: typedef struct
+[; ;usb_device_cdc.h: 931: {
+[; ;usb_device_cdc.h: 932: uint8_t bmRequestType;
+[; ;usb_device_cdc.h: 933: uint8_t bNotification;
+[; ;usb_device_cdc.h: 934: uint16_t wValue;
+[; ;usb_device_cdc.h: 935: uint16_t wIndex;
+[; ;usb_device_cdc.h: 936: uint16_t wLength;
+[; ;usb_device_cdc.h: 937: BM_SERIAL_STATE SerialState;
+[; ;usb_device_cdc.h: 938: uint8_t Reserved;
+[; ;usb_device_cdc.h: 939: }SERIAL_STATE_NOTIFICATION;
+[; ;usb_device_cdc.h: 943: extern uint8_t cdc_rx_len;
+[; ;usb_device_cdc.h: 944: extern void* lastTransmission;
+[; ;usb_device_cdc.h: 946: extern uint8_t cdc_trf_state;
+[; ;usb_device_cdc.h: 947: extern POINTER pCDCSrc;
+[; ;usb_device_cdc.h: 948: extern uint8_t cdc_tx_len;
+[; ;usb_device_cdc.h: 949: extern uint8_t cdc_mem_type;
+[; ;usb_device_cdc.h: 951: extern CDC_NOTICE cdc_notice;
+[; ;usb_device_cdc.h: 952: extern LINE_CODING line_coding;
+[; ;usb_device_cdc.h: 954: extern volatile CTRL_TRF_SETUP SetupPkt;
+[; ;usb_device_cdc.h: 955: extern const uint8_t configDescriptor1[];
+[; ;math.h: 30: extern double fabs(double);
+[; ;math.h: 31: extern double floor(double);
+[; ;math.h: 32: extern double ceil(double);
+[; ;math.h: 33: extern double modf(double, double *);
+[; ;math.h: 34: extern double sqrt(double);
+[; ;math.h: 35: extern double atof(const char *);
+[; ;math.h: 36: extern double sin(double) ;
+[; ;math.h: 37: extern double cos(double) ;
+[; ;math.h: 38: extern double tan(double) ;
+[; ;math.h: 39: extern double asin(double) ;
+[; ;math.h: 40: extern double acos(double) ;
+[; ;math.h: 41: extern double atan(double);
+[; ;math.h: 42: extern double atan2(double, double) ;
+[; ;math.h: 43: extern double log(double);
+[; ;math.h: 44: extern double log10(double);
+[; ;math.h: 45: extern double pow(double, double) ;
+[; ;math.h: 46: extern double exp(double) ;
+[; ;math.h: 47: extern double sinh(double) ;
+[; ;math.h: 48: extern double cosh(double) ;
+[; ;math.h: 49: extern double tanh(double);
+[; ;math.h: 50: extern double eval_poly(double, const double *, int);
+[; ;math.h: 51: extern double frexp(double, int *);
+[; ;math.h: 52: extern double ldexp(double, int);
+[; ;math.h: 53: extern double fmod(double, double);
+[; ;math.h: 54: extern double trunc(double);
+[; ;math.h: 55: extern double round(double);
+"42 main.c
 [v __Modified `uc ~T0 @X0 1 e ]
 [i __Modified
 -> -> 0 `i `uc
 ]
-[; ;main.c: 39: bool _Modified = 0;
-"40
+[; ;main.c: 42: bool _Modified = 0;
+"43
 [v __Saving `uc ~T0 @X0 1 e ]
 [i __Saving
 -> -> 0 `i `uc
 ]
-[; ;main.c: 40: bool _Saving = 0;
-"41
+[; ;main.c: 43: bool _Saving = 0;
+"44
 [v _Sequencer_TimerEvent `(v ~T0 @X0 1 ef ]
-"42
+"45
 {
-[; ;main.c: 41: void Sequencer_TimerEvent()
-[; ;main.c: 42: {
+[; ;main.c: 44: void Sequencer_TimerEvent()
+[; ;main.c: 45: {
 [e :U _Sequencer_TimerEvent ]
 [f ]
-[; ;main.c: 43: if (_Saving)
-"43
-[e $ ! != -> __Saving `i -> -> -> 0 `i `uc `i 335  ]
-[; ;main.c: 44: _Display.SavingMask = ~_Display.SavingMask;
-"44
-[e = . __Display 10 -> ~ -> . __Display 10 `i `uc ]
-[e :U 335 ]
-[; ;main.c: 45: if (_Modified && (2 > 1))
-"45
-[e $ ! && != -> __Modified `i -> -> -> 0 `i `uc `i > -> 2 `i -> 1 `i 336  ]
-[; ;main.c: 46: _Display.PointMask[1] = ~_Display.PointMask[1];
+[; ;main.c: 46: if (_Saving)
 "46
-[e = *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux -> ~ -> *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux `i `uc ]
-[e :U 336 ]
-[; ;main.c: 47: }
+[e $ ! != -> __Saving `i -> -> -> 0 `i `uc `i 401  ]
+[; ;main.c: 47: _Display.SavingMask = ~_Display.SavingMask;
 "47
-[e :UE 334 ]
-}
+[e = . __Display 10 -> ~ -> . __Display 10 `i `uc ]
+[e :U 401 ]
+[; ;main.c: 48: if (_Modified && (2 > 1))
+"48
+[e $ ! && != -> __Modified `i -> -> -> 0 `i `uc `i > -> 2 `i -> 1 `i 402  ]
+[; ;main.c: 49: _Display.PointMask[1] = ~_Display.PointMask[1];
 "49
+[e = *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux -> ~ -> *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux `i `uc ]
+[e :U 402 ]
+[; ;main.c: 50: }
+"50
+[e :UE 400 ]
+}
+"52
 [v _iUpdate `uc ~T0 @X0 1 e ]
 [i _iUpdate
 -> -> 0 `i `uc
 ]
-[; ;main.c: 49: unsigned char iUpdate = 0;
+[; ;main.c: 52: unsigned char iUpdate = 0;
 [v $root$_Interrupt `(v ~T0 @X0 0 e ]
-[v F3698 `(v ~T0 @X0 1 tf ]
-"50
-[v _Interrupt `IF3698 ~T0 @X0 1 e ]
-"51
+[v F4338 `(v ~T0 @X0 1 tf ]
+"53
+[v _Interrupt `IF4338 ~T0 @X0 1 e ]
+"54
 {
-[; ;main.c: 50: void interrupt Interrupt(void)
-[; ;main.c: 51: {
+[; ;main.c: 53: void interrupt Interrupt(void)
+[; ;main.c: 54: {
 [e :U _Interrupt ]
 [f ]
-[; ;main.c: 52: if (TMR0IF)
-"52
-[e $ ! _TMR0IF 338  ]
-[; ;main.c: 53: {
-"53
-{
-[; ;main.c: 54: TMR0IF = 0;
-"54
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;main.c: 56: WriteData(_Display.PrimaryBuffer + _Display.iDisplay * (2 + 8), 2 + 8, _Display.IO);
+[; ;main.c: 55: if (TMR0IF)
+"55
+[e $ ! _TMR0IF 404  ]
+[; ;main.c: 56: {
 "56
-[e ( _WriteData (3 , , + . __Display 4 * -> * -> . __Display 9 `i + -> 2 `i -> 8 `i `x -> -> # *U . __Display 4 `i `x -> + -> 2 `i -> 8 `i `uc . __Display 12 ]
-[; ;main.c: 58: _Display.iDisplay++;
-"58
-[e ++ . __Display 9 -> -> 1 `i `uc ]
-[; ;main.c: 59: if (_Display.iDisplay >= (char)(((0x01 << 6) - 1 * 1.0f) / (7 * 1.0f)))
+{
+[; ;main.c: 57: TMR0IF = 0;
+"57
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;main.c: 59: WriteData(_Display.PrimaryBuffer + _Display.iDisplay * (2 + 8), 2 + 8, _Display.IO);
 "59
-[e $ ! >= -> . __Display 9 `i -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `i 339  ]
-[; ;main.c: 60: {
-"60
+[e ( _WriteData (3 , , + . __Display 4 * -> * -> . __Display 9 `i + -> 2 `i -> 8 `i `x -> -> # *U . __Display 4 `i `x -> + -> 2 `i -> 8 `i `uc . __Display 12 ]
+[; ;main.c: 61: _Display.iDisplay++;
+"61
+[e ++ . __Display 9 -> -> 1 `i `uc ]
+[; ;main.c: 62: if (_Display.iDisplay >= (char)(((0x01 << 6) - 1 * 1.0f) / (7 * 1.0f)))
+"62
+[e $ ! >= -> . __Display 9 `i -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `i 405  ]
+[; ;main.c: 63: {
+"63
 {
-[; ;main.c: 64: if (_Display.ReadyToRead)
-"64
-[e $ ! != -> . __Display 0 `i -> -> -> 0 `i `uc `i 340  ]
-[; ;main.c: 65: Display_SwapBuffer();
-"65
-[e ( _Display_SwapBuffer ..  ]
-[e :U 340 ]
-[; ;main.c: 66: _Display.iDisplay = 0;
-"66
-[e = . __Display 9 -> -> 0 `i `uc ]
+[; ;main.c: 67: if (_Display.ReadyToRead)
 "67
-}
-[e :U 339 ]
-[; ;main.c: 67: }
-[; ;main.c: 69: if (_Hub.ReadyToRead)
+[e $ ! != -> . __Display 0 `i -> -> -> 0 `i `uc `i 406  ]
+[; ;main.c: 68: Display_SwapBuffer();
+"68
+[e ( _Display_SwapBuffer ..  ]
+[e :U 406 ]
+[; ;main.c: 69: _Display.iDisplay = 0;
 "69
-[e $ ! != -> . __Hub 8 `i -> -> -> 0 `i `uc `i 341  ]
-[; ;main.c: 70: {
+[e = . __Display 9 -> -> 0 `i `uc ]
 "70
-{
-[; ;main.c: 71: Hub_UpdateValues();
-"71
-[e ( _Hub_UpdateValues ..  ]
-[; ;main.c: 72: _Hub.Paused = 0;
+}
+[e :U 405 ]
+[; ;main.c: 70: }
+[; ;main.c: 72: if (_Hub.ReadyToRead)
 "72
-[e = . __Hub 9 -> -> 0 `i `uc ]
+[e $ ! != -> . __Hub 8 `i -> -> -> 0 `i `uc `i 407  ]
+[; ;main.c: 73: {
 "73
-}
-[; ;main.c: 73: }
-[e $U 342  ]
+{
+[; ;main.c: 74: Hub_UpdateValues();
 "74
-[e :U 341 ]
-[; ;main.c: 74: else
-[; ;main.c: 75: _Hub.Paused = 1;
+[e ( _Hub_UpdateValues ..  ]
+[; ;main.c: 75: _Hub.Paused = 0;
 "75
-[e = . __Hub 9 -> -> 1 `i `uc ]
-[e :U 342 ]
-[; ;main.c: 77: if (_Hub.ReadyToWrite)
+[e = . __Hub 9 -> -> 0 `i `uc ]
+"76
+}
+[; ;main.c: 76: }
+[e $U 408  ]
 "77
-[e $ ! != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 343  ]
-[; ;main.c: 78: Hub_CopyBuffer();
+[e :U 407 ]
+[; ;main.c: 77: else
+[; ;main.c: 78: _Hub.Paused = 1;
 "78
-[e ( _Hub_CopyBuffer ..  ]
-[e :U 343 ]
-[; ;main.c: 80: _DigiPot.Counter++;
+[e = . __Hub 9 -> -> 1 `i `uc ]
+[e :U 408 ]
+[; ;main.c: 80: if (_Hub.ReadyToWrite)
 "80
-[e ++ . __DigiPot 1 -> -> 1 `i `uc ]
+[e $ ! != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 409  ]
+[; ;main.c: 81: Hub_CopyBuffer();
 "81
-}
-[; ;main.c: 81: }
-[e $U 344  ]
-"82
-[e :U 338 ]
-[; ;main.c: 82: else if (TMR1IF)
-[e $ ! _TMR1IF 345  ]
-[; ;main.c: 83: {
+[e ( _Hub_CopyBuffer ..  ]
+[e :U 409 ]
+[; ;main.c: 83: _DigiPot.Counter++;
 "83
-{
-[; ;main.c: 84: TMR1IF = 0;
+[e ++ . __DigiPot 1 -> -> 1 `i `uc ]
 "84
-[e = _TMR1IF -> -> 0 `i `b ]
-[; ;main.c: 85: _Timer.Counter++;
+}
+[; ;main.c: 84: }
+[e $U 410  ]
 "85
-[e ++ . __Timer 3 -> 1 `i ]
-[; ;main.c: 86: if (_Timer.Counter >= _Timer.Ticks)
+[e :U 404 ]
+[; ;main.c: 85: else if (TMR1IF)
+[e $ ! _TMR1IF 411  ]
+[; ;main.c: 86: {
 "86
-[e $ ! >= . __Timer 3 . __Timer 2 346  ]
-[; ;main.c: 87: {
+{
+[; ;main.c: 87: TMR1IF = 0;
 "87
-{
-[; ;main.c: 88: _Timer.Counter = 0;
+[e = _TMR1IF -> -> 0 `i `b ]
+[; ;main.c: 88: _Timer.Counter++;
 "88
-[e = . __Timer 3 -> 0 `i ]
-[; ;main.c: 89: _Timer.Elapsed = 1;
+[e ++ . __Timer 3 -> 1 `i ]
+[; ;main.c: 89: if (_Timer.Counter >= _Timer.Ticks)
 "89
-[e = . __Timer 0 -> -> 1 `i `uc ]
-[; ;main.c: 90: Sequencer_TimerEvent();
+[e $ ! >= . __Timer 3 . __Timer 2 412  ]
+[; ;main.c: 90: {
 "90
-[e ( _Sequencer_TimerEvent ..  ]
-[; ;main.c: 91: if (_Timer.Loop)
+{
+[; ;main.c: 91: _Timer.Counter = 0;
 "91
-[e $ ! != -> . __Timer 1 `i -> -> -> 0 `i `uc `i 347  ]
-[; ;main.c: 92: _Timer.Elapsed = 0;
+[e = . __Timer 3 -> 0 `i ]
+[; ;main.c: 92: _Timer.Elapsed = 1;
 "92
-[e = . __Timer 0 -> -> 0 `i `uc ]
-[e $U 348  ]
+[e = . __Timer 0 -> -> 1 `i `uc ]
+[; ;main.c: 93: Sequencer_TimerEvent();
 "93
-[e :U 347 ]
-[; ;main.c: 93: else
-[; ;main.c: 94: Sequencer_StopTimer();
+[e ( _Sequencer_TimerEvent ..  ]
+[; ;main.c: 94: if (_Timer.Loop)
 "94
-[e ( _Sequencer_StopTimer ..  ]
-[e :U 348 ]
+[e $ ! != -> . __Timer 1 `i -> -> -> 0 `i `uc `i 413  ]
+[; ;main.c: 95: _Timer.Elapsed = 0;
 "95
-}
-[e :U 346 ]
+[e = . __Timer 0 -> -> 0 `i `uc ]
+[e $U 414  ]
 "96
-}
-[; ;main.c: 95: }
-[; ;main.c: 96: }
-[e $U 349  ]
+[e :U 413 ]
+[; ;main.c: 96: else
+[; ;main.c: 97: Sequencer_StopTimer();
 "97
-[e :U 345 ]
-[; ;main.c: 97: else if (PIR1bits.RCIF)
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 350  ]
-[; ;main.c: 98: {
+[e ( _Sequencer_StopTimer ..  ]
+[e :U 414 ]
 "98
-{
-[; ;main.c: 100: LATB4 = 0;
+}
+[e :U 412 ]
+"99
+}
+[; ;main.c: 98: }
+[; ;main.c: 99: }
+[e $U 415  ]
 "100
-[e = _LATB4 -> -> 0 `i `b ]
+[e :U 411 ]
+[; ;main.c: 100: else if (PIR1bits.RCIF)
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 416  ]
+[; ;main.c: 101: {
 "101
-[v _LData `uc ~T0 @X0 1 a ]
-[; ;main.c: 101: unsigned char LData = 0x00;
-[e = _LData -> -> 0 `i `uc ]
-[; ;main.c: 102: while (PIR1bits.RCIF)
-"102
-[e $U 351  ]
-[e :U 352 ]
-[; ;main.c: 103: {
-"103
 {
-[; ;main.c: 104: LData = RCREG;
+[; ;main.c: 103: LATB4 = 0;
+"103
+[e = _LATB4 -> -> 0 `i `b ]
 "104
-[e = _LData _RCREG ]
-[; ;main.c: 105: if (RCSTAbits.FERR || RCSTAbits.OERR)
+[v _LData `uc ~T0 @X0 1 a ]
+[; ;main.c: 104: unsigned char LData = 0x00;
+[e = _LData -> -> 0 `i `uc ]
+[; ;main.c: 105: while (PIR1bits.RCIF)
 "105
-[e $ ! || != -> . . _RCSTAbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _RCSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 354  ]
+[e $U 417  ]
+[e :U 418 ]
 [; ;main.c: 106: {
 "106
 {
-[; ;main.c: 107: Midi_ResetBuffer(&_MidiInput);
+[; ;main.c: 107: LData = RCREG;
 "107
-[e ( _Midi_ResetBuffer (1 &U __MidiInput ]
-[; ;main.c: 108: CREN = 0;
+[e = _LData _RCREG ]
+[; ;main.c: 108: if (RCSTAbits.FERR || RCSTAbits.OERR)
 "108
-[e = _CREN -> -> 0 `i `b ]
-[; ;main.c: 109: CREN = 1;
+[e $ ! || != -> . . _RCSTAbits 0 2 `i -> -> -> 0 `i `Vuc `i != -> . . _RCSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i 420  ]
+[; ;main.c: 109: {
 "109
-[e = _CREN -> -> 1 `i `b ]
+{
+[; ;main.c: 110: Midi_ResetBuffer(&_MidiInput);
 "110
-}
-[; ;main.c: 110: }
-[e $U 355  ]
+[e ( _Midi_ResetBuffer (1 &U __MidiInput ]
+[; ;main.c: 111: CREN = 0;
 "111
-[e :U 354 ]
-[; ;main.c: 111: else
-[; ;main.c: 112: Midi_Write(LData, &_MidiInput);
+[e = _CREN -> -> 0 `i `b ]
+[; ;main.c: 112: CREN = 1;
 "112
-[e ( _Midi_Write (2 , _LData &U __MidiInput ]
-[e :U 355 ]
+[e = _CREN -> -> 1 `i `b ]
 "113
 }
-[e :U 351 ]
-"102
-[e $ != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 352  ]
-[e :U 353 ]
-"114
-}
-[e :U 350 ]
-"115
-[e :U 349 ]
-[e :U 344 ]
 [; ;main.c: 113: }
-[; ;main.c: 114: }
-[; ;main.c: 115: }
-[e :UE 337 ]
+[e $U 421  ]
+"114
+[e :U 420 ]
+[; ;main.c: 114: else
+[; ;main.c: 115: Midi_Write(LData, &_MidiInput);
+"115
+[e ( _Midi_Write (2 , _LData &U __MidiInput ]
+[e :U 421 ]
+"116
 }
+[e :U 417 ]
+"105
+[e $ != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 418  ]
+[e :U 419 ]
 "117
+}
+[e :U 416 ]
+"118
+[e :U 415 ]
+[e :U 410 ]
+[; ;main.c: 116: }
+[; ;main.c: 117: }
+[; ;main.c: 118: }
+[e :UE 403 ]
+}
+"120
 [v _Load `(v ~T0 @X0 1 ef1`uc ]
-"118
+"121
 {
-[; ;main.c: 117: void Load(unsigned char AChannel)
-[; ;main.c: 118: {
+[; ;main.c: 120: void Load(unsigned char AChannel)
+[; ;main.c: 121: {
 [e :U _Load ]
-"117
+"120
 [v _AChannel `uc ~T0 @X0 1 r1 ]
-"118
+"121
 [f ]
-[; ;main.c: 119: _Hub.PrimaryBuffer.Channel = AChannel;
-"119
-[e = . . __Hub 4 2 _AChannel ]
-[; ;main.c: 122: Persistant_LoadBuffer(&_Hub.PrimaryBuffer);
+[; ;main.c: 122: _Hub.PrimaryBuffer.Channel = AChannel;
 "122
-[e ( _Persistant_LoadBuffer (1 &U . __Hub 4 ]
-[; ;main.c: 123: Hub_CopyBuffer();
-"123
-[e ( _Hub_CopyBuffer ..  ]
-[; ;main.c: 124: _Config.Channel = AChannel / 2;
-"124
-[e = . __Config 0 -> / -> _AChannel `i -> 2 `i `uc ]
+[e = . . __Hub 4 2 _AChannel ]
+[; ;main.c: 125: Persistant_LoadBuffer(&_Hub.PrimaryBuffer);
 "125
-[v _LBuffer `uc ~T0 @X0 -> # __Config `ui a ]
-[; ;main.c: 125: unsigned char LBuffer[sizeof(_Config)];
-[; ;main.c: 126: memcpy(LBuffer, &_Config, sizeof(_Config));
+[e ( _Persistant_LoadBuffer (1 &U . __Hub 4 ]
+[; ;main.c: 126: Hub_CopyBuffer();
 "126
+[e ( _Hub_CopyBuffer ..  ]
+[; ;main.c: 127: _Config.Channel = AChannel / 2;
+"127
+[e = . __Config 0 -> / -> _AChannel `i -> 2 `i `uc ]
+"128
+[v _LBuffer `uc ~T0 @X0 -> # __Config `ui a ]
+[; ;main.c: 128: unsigned char LBuffer[sizeof(_Config)];
+[; ;main.c: 129: memcpy(LBuffer, &_Config, sizeof(_Config));
+"129
 [e ( _memcpy (3 , , -> &U _LBuffer `*v -> &U __Config `*Cv -> # __Config `ui ]
-[; ;main.c: 127: for(int i = 0; i < sizeof(_Config); i++)
-"127
+[; ;main.c: 130: for(int i = 0; i < sizeof(_Config); i++)
+"130
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < -> _i `ui -> # __Config `ui 357  ]
-[e $U 358  ]
-"128
-[e :U 357 ]
-[; ;main.c: 128: Persistant_WriteInternalMemory(i, LBuffer);
+[e $ < -> _i `ui -> # __Config `ui 423  ]
+[e $U 424  ]
+"131
+[e :U 423 ]
+[; ;main.c: 131: Persistant_WriteInternalMemory(i, LBuffer);
 [e ( _Persistant_WriteInternalMemory (2 , _i -> &U _LBuffer `uc ]
-"127
-[e ++ _i -> 1 `i ]
-[e $ < -> _i `ui -> # __Config `ui 357  ]
-[e :U 358 ]
-"128
-}
-[; ;main.c: 130: for (int i = 0; i < 2; i++)
 "130
+[e ++ _i -> 1 `i ]
+[e $ < -> _i `ui -> # __Config `ui 423  ]
+[e :U 424 ]
+"131
+}
+[; ;main.c: 133: for (int i = 0; i < 2; i++)
+"133
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 2 `i 360  ]
-[e $U 361  ]
-"131
-[e :U 360 ]
-[; ;main.c: 131: _Display.PointMask[i] = 0x08;
+[e $ < _i -> 2 `i 426  ]
+[e $U 427  ]
+"134
+[e :U 426 ]
+[; ;main.c: 134: _Display.PointMask[i] = 0x08;
 [e = *U + &U . __Display 11 * -> -> _i `ui `ux -> -> # *U &U . __Display 11 `ui `ux -> -> 8 `i `uc ]
-"130
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 2 `i 360  ]
-[e :U 361 ]
-"131
-}
-[; ;main.c: 132: _Modified = 0;
-"132
-[e = __Modified -> -> 0 `i `uc ]
-[; ;main.c: 133: }
 "133
-[e :UE 356 ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 2 `i 426  ]
+[e :U 427 ]
+"134
 }
+[; ;main.c: 135: _Modified = 0;
 "135
-[v _PauseHub `(v ~T0 @X0 1 ef ]
+[e = __Modified -> -> 0 `i `uc ]
+[; ;main.c: 136: }
 "136
+[e :UE 422 ]
+}
+"138
+[v _PauseHub `(v ~T0 @X0 1 ef ]
+"139
 {
-[; ;main.c: 135: void PauseHub()
-[; ;main.c: 136: {
+[; ;main.c: 138: void PauseHub()
+[; ;main.c: 139: {
 [e :U _PauseHub ]
 [f ]
-[; ;main.c: 138: _Hub.ReadyToRead = 0;
-"138
+[; ;main.c: 141: _Hub.ReadyToRead = 0;
+"141
 [e = . __Hub 8 -> -> 0 `i `uc ]
-[; ;main.c: 139: while(!_Hub.Paused) { }
-"139
-[e $U 364  ]
-[e :U 365 ]
-{
-}
-[e :U 364 ]
-[e $ ! != -> . __Hub 9 `i -> -> -> 0 `i `uc `i 365  ]
-[e :U 366 ]
-[; ;main.c: 140: }
-"140
-[e :UE 363 ]
-}
+[; ;main.c: 142: while(!_Hub.Paused) { }
 "142
-[v _RunHub `(v ~T0 @X0 1 ef ]
-"143
+[e $U 430  ]
+[e :U 431 ]
 {
-[; ;main.c: 142: void RunHub()
-[; ;main.c: 143: {
+}
+[e :U 430 ]
+[e $ ! != -> . __Hub 9 `i -> -> -> 0 `i `uc `i 431  ]
+[e :U 432 ]
+[; ;main.c: 143: }
+"143
+[e :UE 429 ]
+}
+"145
+[v _RunHub `(v ~T0 @X0 1 ef ]
+"146
+{
+[; ;main.c: 145: void RunHub()
+[; ;main.c: 146: {
 [e :U _RunHub ]
 [f ]
-[; ;main.c: 145: _Hub.ReadyToWrite = 1;
-"145
-[e = . __Hub 7 -> -> 1 `i `uc ]
-[; ;main.c: 146: while(_Hub.ReadyToWrite) { }
-"146
-[e $U 368  ]
-[e :U 369 ]
-{
-}
-[e :U 368 ]
-[e $ != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 369  ]
-[e :U 370 ]
-[; ;main.c: 147: _Hub.ReadyToRead = 1;
-"147
-[e = . __Hub 8 -> -> 1 `i `uc ]
-[; ;main.c: 148: }
+[; ;main.c: 148: _Hub.ReadyToWrite = 1;
 "148
-[e :UE 367 ]
-}
-[v $root$_main `(v ~T0 @X0 0 e ]
-"150
-[v _main `(v ~T0 @X0 1 ef ]
-"151
+[e = . __Hub 7 -> -> 1 `i `uc ]
+[; ;main.c: 149: while(_Hub.ReadyToWrite) { }
+"149
+[e $U 434  ]
+[e :U 435 ]
 {
-[; ;main.c: 150: void main(void)
-[; ;main.c: 151: {
+}
+[e :U 434 ]
+[e $ != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 435  ]
+[e :U 436 ]
+[; ;main.c: 150: _Hub.ReadyToRead = 1;
+"150
+[e = . __Hub 8 -> -> 1 `i `uc ]
+[; ;main.c: 151: }
+"151
+[e :UE 433 ]
+}
+"153
+[v __USBBufferIn `uc ~T0 @X0 -> -> 1 `i `ux s ]
+[; ;main.c: 153: static uint8_t _USBBufferIn[1];
+"154
+[v __USBBufferOut `uc ~T0 @X0 -> -> 1 `i `ux s ]
+[; ;main.c: 154: static uint8_t _USBBufferOut[1];
+[v $root$_main `(v ~T0 @X0 0 e ]
+"155
+[v _main `(v ~T0 @X0 1 ef ]
+"156
+{
+[; ;main.c: 155: void main(void)
+[; ;main.c: 156: {
 [e :U _main ]
 [f ]
-[; ;main.c: 153: ConfigureOscillator();
-"153
+[; ;main.c: 158: ConfigureOscillator();
+"158
 [e ( _ConfigureOscillator ..  ]
-[; ;main.c: 156: InitApp();
-"156
-[e ( _InitApp ..  ]
-"160
-[v _LEncSwitchPushed `uc ~T0 @X0 1 a ]
-[; ;main.c: 160: bool LEncSwitchPushed = 0;
-[e = _LEncSwitchPushed -> -> 0 `i `uc ]
+[; ;main.c: 161: InitApp();
 "161
-[v _LChannelSwitch `uc ~T0 @X0 1 a ]
-"162
-[v _LChannelSwitchOld `uc ~T0 @X0 1 a ]
-[; ;main.c: 161: bool LChannelSwitch;
-[; ;main.c: 162: bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
-[e = _LChannelSwitchOld . . __Hub 5 0 ]
-[; ;main.c: 163: while(1)
+[e ( _InitApp ..  ]
+[; ;main.c: 163: USBDeviceInit();
 "163
-[e :U 373 ]
-[; ;main.c: 164: {
-"164
-{
-[; ;main.c: 165: _Hub.ReadyToWrite = 1;
-"165
-[e = . __Hub 7 -> -> 1 `i `uc ]
-[; ;main.c: 166: while(_Hub.ReadyToWrite) { }
+[e ( _USBDeviceInit ..  ]
+[; ;main.c: 164: ;
 "166
-[e $U 375  ]
-[e :U 376 ]
-{
-}
-[e :U 375 ]
-[e $ != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 376  ]
-[e :U 377 ]
-[; ;main.c: 168: LChannelSwitch = _Hub.SecondaryBuffer.ActionButton;
-"168
-[e = _LChannelSwitch . . __Hub 5 0 ]
-[; ;main.c: 170: if (LChannelSwitch != LChannelSwitchOld)
-"170
-[e $ ! != -> _LChannelSwitch `i -> _LChannelSwitchOld `i 378  ]
-[; ;main.c: 171: {
-"171
-{
-[; ;main.c: 172: switch (LChannelSwitch)
-"172
-[e $U 380  ]
-[; ;main.c: 173: {
-"173
-{
-[; ;main.c: 174: case 0:
-"174
-[e :U 381 ]
-[; ;main.c: 175: Sequencer_StopTimer();
-"175
-[e ( _Sequencer_StopTimer ..  ]
-[; ;main.c: 176: if (_Saving)
-"176
-[e $ ! != -> __Saving `i -> -> -> 0 `i `uc `i 382  ]
-[; ;main.c: 177: {
-"177
-{
-[; ;main.c: 179: Persistant_SaveBuffer(_Hub.SecondaryBuffer);
-"179
-[e ( _Persistant_SaveBuffer (1 . __Hub 5 ]
-[; ;main.c: 182: _Modified = 0;
-"182
-[e = __Modified -> -> 0 `i `uc ]
-[; ;main.c: 183: _Saving = 0;
-"183
-[e = __Saving -> -> 0 `i `uc ]
-[; ;main.c: 184: _Display.SavingMask = 0xFF;
-"184
-[e = . __Display 10 -> -> 255 `i `uc ]
-"185
-}
-[; ;main.c: 185: }
-[e $U 383  ]
-"186
-[e :U 382 ]
-[; ;main.c: 186: else
-[; ;main.c: 187: {
-"187
-{
-[; ;main.c: 189: LEncSwitchPushed = 1;
-"189
-[e = _LEncSwitchPushed -> -> 1 `i `uc ]
-[; ;main.c: 190: Sequencer_StartTimer(2.0f, 0);
-"190
-[e ( _Sequencer_StartTimer (2 , -> .2.0 `f -> -> 0 `i `uc ]
-"191
-}
-[e :U 383 ]
-[; ;main.c: 191: }
-[; ;main.c: 192: break;
-"192
-[e $U 379  ]
-[; ;main.c: 193: case 1:
-"193
-[e :U 384 ]
-[; ;main.c: 194: LEncSwitchPushed = 0;
-"194
+[v _LEncSwitchPushed `uc ~T0 @X0 1 a ]
+[; ;main.c: 166: bool LEncSwitchPushed = 0;
 [e = _LEncSwitchPushed -> -> 0 `i `uc ]
-[; ;main.c: 195: if (!_Saving && !_Timer.Elapsed)
-"195
-[e $ ! && ! != -> __Saving `i -> -> -> 0 `i `uc `i ! != -> . __Timer 0 `i -> -> -> 0 `i `uc `i 385  ]
-[; ;main.c: 196: {
-"196
+"167
+[v _LChannelSwitch `uc ~T0 @X0 1 a ]
+"168
+[v _LChannelSwitchOld `uc ~T0 @X0 1 a ]
+[; ;main.c: 167: bool LChannelSwitch;
+[; ;main.c: 168: bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
+[e = _LChannelSwitchOld . . __Hub 5 0 ]
+[; ;main.c: 169: while(1)
+"169
+[e :U 439 ]
+[; ;main.c: 170: {
+"170
 {
-[; ;main.c: 198: Sequencer_StopTimer();
-"198
-[e ( _Sequencer_StopTimer ..  ]
-[; ;main.c: 199: PauseHub();
-"199
-[e ( _PauseHub ..  ]
-[; ;main.c: 200: Load(_Hub.PrimaryBuffer.Channel);
-"200
-[e ( _Load (1 . . __Hub 4 2 ]
-[; ;main.c: 201: RunHub();
-"201
-[e ( _RunHub ..  ]
-"202
-}
-[e :U 385 ]
-[; ;main.c: 202: }
-[; ;main.c: 203: break;
-"203
-[e $U 379  ]
-"204
-}
-[; ;main.c: 204: }
-[e $U 379  ]
+[; ;main.c: 172: USBDeviceTasks();
 "172
-[e :U 380 ]
-[e [\ _LChannelSwitch , $ -> -> 0 `i `uc 381
- , $ -> -> 1 `i `uc 384
- 379 ]
-"204
-[e :U 379 ]
-"205
-}
-[; ;main.c: 205: }
-[e $U 386  ]
-"206
-[e :U 378 ]
-[; ;main.c: 206: else
-[; ;main.c: 207: {
-"207
+[e ( _USBDeviceTasks ..  ]
+[; ;main.c: 175: if( USBDeviceState >= CONFIGURED_STATE )
+"175
+[e $ ! >= -> _USBDeviceState `i -> . `E3833 6 `i 441  ]
+[; ;main.c: 176: {
+"176
 {
-[; ;main.c: 209: if (LEncSwitchPushed && _Timer.Elapsed && !_Saving)
-"209
-[e $ ! && && != -> _LEncSwitchPushed `i -> -> -> 0 `i `uc `i != -> . __Timer 0 `i -> -> -> 0 `i `uc `i ! != -> __Saving `i -> -> -> 0 `i `uc `i 387  ]
-[; ;main.c: 210: {
-"210
+[; ;main.c: 177: if( (cdc_trf_state == 0) == 1)
+"177
+[e $ ! == -> == -> _cdc_trf_state `i -> 0 `i `i -> 1 `i 442  ]
+[; ;main.c: 178: {
+"178
 {
-[; ;main.c: 211: Sequencer_StopTimer();
-"211
-[e ( _Sequencer_StopTimer ..  ]
-[; ;main.c: 212: _Saving = 1;
-"212
-[e = __Saving -> -> 1 `i `uc ]
-[; ;main.c: 213: Sequencer_StartTimer(0.3f, 1);
-"213
-[e ( _Sequencer_StartTimer (2 , -> .0.3 `f -> -> 1 `i `uc ]
-"214
-}
-[e :U 387 ]
-"215
-}
-[e :U 386 ]
-"217
-[v _LMidiData `S332 ~T0 @X0 1 a ]
-[; ;main.c: 214: }
-[; ;main.c: 215: }
-[; ;main.c: 217: MidiData LMidiData;
-[; ;main.c: 218: if (Midi_Read(&LMidiData, &_MidiInput))
-"218
-[e $ ! != -> ( _Midi_Read (2 , &U _LMidiData &U __MidiInput `i -> -> -> 0 `i `uc `i 388  ]
-[; ;main.c: 219: {
-"219
+[; ;main.c: 179: if (getsUSBUSART(_USBBufferIn, 1) > 0)
+"179
+[e $ ! > -> ( _getsUSBUSART (2 , &U __USBBufferIn -> -> 1 `i `uc `i -> 0 `i 443  ]
+[; ;main.c: 180: {
+"180
 {
-[; ;main.c: 220: PauseHub();
-"220
+[; ;main.c: 181: PauseHub();
+"181
 [e ( _PauseHub ..  ]
-[; ;main.c: 221: switch(LMidiData.Code)
+[; ;main.c: 182: Midi_Write(_USBBufferIn, &_MidiInput);
+"182
+[e ( _Midi_Write (2 , -> &U __USBBufferIn `uc &U __MidiInput ]
+[; ;main.c: 183: Load(_USBBufferIn[0] * 2);
+"183
+[e ( _Load (1 -> * -> *U + &U __USBBufferIn * -> -> -> 0 `i `ui `ux -> -> # *U &U __USBBufferIn `ui `ux `i -> 2 `i `uc ]
+[; ;main.c: 186: RunHub();
+"186
+[e ( _RunHub ..  ]
+"187
+}
+[e :U 443 ]
+"188
+}
+[e :U 442 ]
+"189
+}
+[e :U 441 ]
+[; ;main.c: 187: }
+[; ;main.c: 188: }
+[; ;main.c: 189: }
+[; ;main.c: 191: _Hub.ReadyToWrite = 1;
+"191
+[e = . __Hub 7 -> -> 1 `i `uc ]
+[; ;main.c: 192: while(_Hub.ReadyToWrite) { }
+"192
+[e $U 444  ]
+[e :U 445 ]
+{
+}
+[e :U 444 ]
+[e $ != -> . __Hub 7 `i -> -> -> 0 `i `uc `i 445  ]
+[e :U 446 ]
+[; ;main.c: 194: LChannelSwitch = _Hub.SecondaryBuffer.ActionButton;
+"194
+[e = _LChannelSwitch . . __Hub 5 0 ]
+[; ;main.c: 196: if (LChannelSwitch != LChannelSwitchOld)
+"196
+[e $ ! != -> _LChannelSwitch `i -> _LChannelSwitchOld `i 447  ]
+[; ;main.c: 197: {
+"197
+{
+[; ;main.c: 198: switch (LChannelSwitch)
+"198
+[e $U 449  ]
+[; ;main.c: 199: {
+"199
+{
+[; ;main.c: 200: case 0:
+"200
+[e :U 450 ]
+[; ;main.c: 201: Sequencer_StopTimer();
+"201
+[e ( _Sequencer_StopTimer ..  ]
+[; ;main.c: 202: if (_Saving)
+"202
+[e $ ! != -> __Saving `i -> -> -> 0 `i `uc `i 451  ]
+[; ;main.c: 203: {
+"203
+{
+[; ;main.c: 205: Persistant_SaveBuffer(_Hub.SecondaryBuffer);
+"205
+[e ( _Persistant_SaveBuffer (1 . __Hub 5 ]
+[; ;main.c: 208: _Modified = 0;
+"208
+[e = __Modified -> -> 0 `i `uc ]
+[; ;main.c: 209: _Saving = 0;
+"209
+[e = __Saving -> -> 0 `i `uc ]
+[; ;main.c: 210: _Display.SavingMask = 0xFF;
+"210
+[e = . __Display 10 -> -> 255 `i `uc ]
+"211
+}
+[; ;main.c: 211: }
+[e $U 452  ]
+"212
+[e :U 451 ]
+[; ;main.c: 212: else
+[; ;main.c: 213: {
+"213
+{
+[; ;main.c: 215: LEncSwitchPushed = 1;
+"215
+[e = _LEncSwitchPushed -> -> 1 `i `uc ]
+[; ;main.c: 216: Sequencer_StartTimer(2.0f, 0);
+"216
+[e ( _Sequencer_StartTimer (2 , -> .2.0 `f -> -> 0 `i `uc ]
+"217
+}
+[e :U 452 ]
+[; ;main.c: 217: }
+[; ;main.c: 218: break;
+"218
+[e $U 448  ]
+[; ;main.c: 219: case 1:
+"219
+[e :U 453 ]
+[; ;main.c: 220: LEncSwitchPushed = 0;
+"220
+[e = _LEncSwitchPushed -> -> 0 `i `uc ]
+[; ;main.c: 221: if (!_Saving && !_Timer.Elapsed)
 "221
-[e $U 390  ]
+[e $ ! && ! != -> __Saving `i -> -> -> 0 `i `uc `i ! != -> . __Timer 0 `i -> -> -> 0 `i `uc `i 454  ]
 [; ;main.c: 222: {
 "222
 {
-[; ;main.c: 223: case 0xC0:
-"223
-[e :U 391 ]
-[; ;main.c: 224: Load(LMidiData.Data[0]);
+[; ;main.c: 224: Sequencer_StopTimer();
 "224
-[e ( _Load (1 *U + &U . _LMidiData 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux ]
-[; ;main.c: 225: break;
-"225
-[e $U 389  ]
-[; ;main.c: 226: case 0xB0:
-"226
-[e :U 392 ]
-[; ;main.c: 227: {
-"227
-{
-"228
-[v _LValue `uc ~T0 @X0 1 a ]
-[; ;main.c: 228: unsigned char LValue = LMidiData.Data[1] / 2;
-[e = _LValue -> / -> *U + &U . _LMidiData 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux `i -> 2 `i `uc ]
-[; ;main.c: 229: switch(LMidiData.Data[0])
-"229
-[e $U 394  ]
-[; ;main.c: 230: {
-"230
-{
-[; ;main.c: 231: case 0x07:
-"231
-[e :U 395 ]
-[; ;main.c: 232: _Hub.PrimaryBuffer.Values[4] = LValue;
-"232
-[e = *U + &U . . __Hub 4 4 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
-[; ;main.c: 233: break;
-"233
-[e $U 393  ]
-[; ;main.c: 234: case 0x4B:
-"234
-[e :U 396 ]
-[; ;main.c: 235: _Hub.PrimaryBuffer.Values[0] = LValue;
-"235
-[e = *U + &U . . __Hub 4 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
-[; ;main.c: 236: break;
-"236
-[e $U 393  ]
-[; ;main.c: 237: case 0x4C:
-"237
-[e :U 397 ]
-[; ;main.c: 238: _Hub.PrimaryBuffer.Values[1] = LValue;
-"238
-[e = *U + &U . . __Hub 4 4 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
-[; ;main.c: 239: break;
-"239
-[e $U 393  ]
-[; ;main.c: 240: case 0x4D:
-"240
-[e :U 398 ]
-[; ;main.c: 241: _Hub.PrimaryBuffer.Values[2] = LValue;
-"241
-[e = *U + &U . . __Hub 4 4 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
-[; ;main.c: 242: break;
-"242
-[e $U 393  ]
-[; ;main.c: 243: case 0x4E:
-"243
-[e :U 399 ]
-[; ;main.c: 244: _Hub.PrimaryBuffer.Values[3] = LValue;
-"244
-[e = *U + &U . . __Hub 4 4 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
-[; ;main.c: 245: break;
-"245
-[e $U 393  ]
-"246
-}
-[; ;main.c: 246: }
-[e $U 393  ]
-"229
-[e :U 394 ]
-[e [\ *U + &U . _LMidiData 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux , $ -> -> 7 `i `uc 395
- , $ -> -> 75 `i `uc 396
- , $ -> -> 76 `i `uc 397
- , $ -> -> 77 `i `uc 398
- , $ -> -> 78 `i `uc 399
- 393 ]
-"246
-[e :U 393 ]
-[; ;main.c: 247: break;
-"247
-[e $U 389  ]
-"248
-}
-"249
-}
-[; ;main.c: 248: }
-[; ;main.c: 249: }
-[e $U 389  ]
-"221
-[e :U 390 ]
-[e [\ . _LMidiData 0 , $ -> -> 192 `i `uc 391
- , $ -> -> 176 `i `uc 392
- 389 ]
-"249
-[e :U 389 ]
-[; ;main.c: 250: RunHub();
-"250
-[e ( _RunHub ..  ]
-"251
-}
-[e :U 388 ]
-"257
-[v _LResult `i ~T0 @X0 1 a ]
-[; ;main.c: 251: }
-[; ;main.c: 257: signed int LResult = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values));
-[e = _LResult ( _memcmp (3 , , -> &U . . __Hub 5 4 `*Cv -> &U . . __Hub 6 4 `*Cv * -> # *U &U . . __Hub 5 4 `ui -> -> 8 `i `ui ]
-[; ;main.c: 259: if (!_Modified && (2 > 1) && ((LResult != 0) || (_Hub.SecondaryBuffer.PushedButton != _Hub.BackupBuffer.PushedButton)))
-"259
-[e $ ! && && ! != -> __Modified `i -> -> -> 0 `i `uc `i > -> 2 `i -> 1 `i || != _LResult -> 0 `i != -> . . __Hub 5 1 `i -> . . __Hub 6 1 `i 400  ]
-[; ;main.c: 260: {
-"260
-{
-[; ;main.c: 261: Sequencer_StopTimer();
-"261
 [e ( _Sequencer_StopTimer ..  ]
-[; ;main.c: 262: _Modified = 1;
-"262
-[e = __Modified -> -> 1 `i `uc ]
-[; ;main.c: 263: _Display.PointMask[1] = 0x08;
-"263
-[e = *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux -> -> 8 `i `uc ]
-[; ;main.c: 264: Sequencer_StartTimer(0.3f, 1);
-"264
-[e ( _Sequencer_StartTimer (2 , -> .0.3 `f -> -> 1 `i `uc ]
-"265
+[; ;main.c: 225: PauseHub();
+"225
+[e ( _PauseHub ..  ]
+[; ;main.c: 226: Load(_Hub.PrimaryBuffer.Channel);
+"226
+[e ( _Load (1 . . __Hub 4 2 ]
+[; ;main.c: 227: RunHub();
+"227
+[e ( _RunHub ..  ]
+"228
 }
-[e :U 400 ]
-[; ;main.c: 265: }
-[; ;main.c: 267: Display_ProcessData(_Hub.SecondaryBuffer.PushedButton ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
-"267
-[e ( _Display_ProcessData (4 , , , -> ? != -> . . __Hub 5 1 `i -> -> -> 0 `i `uc `i : -> . . __Hub 5 3 `i -> . . __Hub 5 2 `i `uc &U . . __Hub 5 4 -> -> == -> . __Hub 12 `i -> . . __Hub 5 2 `i `i `uc . . __Hub 5 1 ]
-[; ;main.c: 269: if (_DigiPot.Counter >= _DigiPot.CounterRef)
-"269
-[e $ ! >= -> . __DigiPot 1 `i -> . __DigiPot 0 `i 401  ]
-[; ;main.c: 270: {
-"270
+[e :U 454 ]
+[; ;main.c: 228: }
+[; ;main.c: 229: break;
+"229
+[e $U 448  ]
+"230
+}
+[; ;main.c: 230: }
+[e $U 448  ]
+"198
+[e :U 449 ]
+[e [\ _LChannelSwitch , $ -> -> 0 `i `uc 450
+ , $ -> -> 1 `i `uc 453
+ 448 ]
+"230
+[e :U 448 ]
+"231
+}
+[; ;main.c: 231: }
+[e $U 455  ]
+"232
+[e :U 447 ]
+[; ;main.c: 232: else
+[; ;main.c: 233: {
+"233
 {
-[; ;main.c: 271: WriteData(_Hub.SecondaryBuffer.Values, 8, _DigiPot.IO);
+[; ;main.c: 235: if (LEncSwitchPushed && _Timer.Elapsed && !_Saving)
+"235
+[e $ ! && && != -> _LEncSwitchPushed `i -> -> -> 0 `i `uc `i != -> . __Timer 0 `i -> -> -> 0 `i `uc `i ! != -> __Saving `i -> -> -> 0 `i `uc `i 456  ]
+[; ;main.c: 236: {
+"236
+{
+[; ;main.c: 237: Sequencer_StopTimer();
+"237
+[e ( _Sequencer_StopTimer ..  ]
+[; ;main.c: 238: _Saving = 1;
+"238
+[e = __Saving -> -> 1 `i `uc ]
+[; ;main.c: 239: Sequencer_StartTimer(0.3f, 1);
+"239
+[e ( _Sequencer_StartTimer (2 , -> .0.3 `f -> -> 1 `i `uc ]
+"240
+}
+[e :U 456 ]
+"241
+}
+[e :U 455 ]
+"243
+[v _LMidiData `S332 ~T0 @X0 1 a ]
+[; ;main.c: 240: }
+[; ;main.c: 241: }
+[; ;main.c: 243: MidiData LMidiData;
+[; ;main.c: 244: if (Midi_Read(&LMidiData, &_MidiInput))
+"244
+[e $ ! != -> ( _Midi_Read (2 , &U _LMidiData &U __MidiInput `i -> -> -> 0 `i `uc `i 457  ]
+[; ;main.c: 245: {
+"245
+{
+[; ;main.c: 246: PauseHub();
+"246
+[e ( _PauseHub ..  ]
+[; ;main.c: 247: switch(LMidiData.Code)
+"247
+[e $U 459  ]
+[; ;main.c: 248: {
+"248
+{
+[; ;main.c: 249: case 0xC0:
+"249
+[e :U 460 ]
+[; ;main.c: 250: Load(LMidiData.Data[0]);
+"250
+[e ( _Load (1 *U + &U . _LMidiData 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux ]
+[; ;main.c: 251: break;
+"251
+[e $U 458  ]
+[; ;main.c: 252: case 0xB0:
+"252
+[e :U 461 ]
+[; ;main.c: 253: {
+"253
+{
+"254
+[v _LValue `uc ~T0 @X0 1 a ]
+[; ;main.c: 254: unsigned char LValue = LMidiData.Data[1] / 2;
+[e = _LValue -> / -> *U + &U . _LMidiData 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux `i -> 2 `i `uc ]
+[; ;main.c: 255: switch(LMidiData.Data[0])
+"255
+[e $U 463  ]
+[; ;main.c: 256: {
+"256
+{
+[; ;main.c: 257: case 0x07:
+"257
+[e :U 464 ]
+[; ;main.c: 258: _Hub.PrimaryBuffer.Values[4] = LValue;
+"258
+[e = *U + &U . . __Hub 4 4 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
+[; ;main.c: 259: break;
+"259
+[e $U 462  ]
+[; ;main.c: 260: case 0x4B:
+"260
+[e :U 465 ]
+[; ;main.c: 261: _Hub.PrimaryBuffer.Values[0] = LValue;
+"261
+[e = *U + &U . . __Hub 4 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
+[; ;main.c: 262: break;
+"262
+[e $U 462  ]
+[; ;main.c: 263: case 0x4C:
+"263
+[e :U 466 ]
+[; ;main.c: 264: _Hub.PrimaryBuffer.Values[1] = LValue;
+"264
+[e = *U + &U . . __Hub 4 4 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
+[; ;main.c: 265: break;
+"265
+[e $U 462  ]
+[; ;main.c: 266: case 0x4D:
+"266
+[e :U 467 ]
+[; ;main.c: 267: _Hub.PrimaryBuffer.Values[2] = LValue;
+"267
+[e = *U + &U . . __Hub 4 4 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
+[; ;main.c: 268: break;
+"268
+[e $U 462  ]
+[; ;main.c: 269: case 0x4E:
+"269
+[e :U 468 ]
+[; ;main.c: 270: _Hub.PrimaryBuffer.Values[3] = LValue;
+"270
+[e = *U + &U . . __Hub 4 4 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux _LValue ]
+[; ;main.c: 271: break;
 "271
-[e ( _WriteData (3 , , &U . . __Hub 5 4 -> -> 8 `i `uc . __DigiPot 2 ]
-[; ;main.c: 272: _DigiPot.Counter = 0;
+[e $U 462  ]
 "272
-[e = . __DigiPot 1 -> -> 0 `i `uc ]
+}
+[; ;main.c: 272: }
+[e $U 462  ]
+"255
+[e :U 463 ]
+[e [\ *U + &U . _LMidiData 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _LMidiData 2 `ui `ux , $ -> -> 7 `i `uc 464
+ , $ -> -> 75 `i `uc 465
+ , $ -> -> 76 `i `uc 466
+ , $ -> -> 77 `i `uc 467
+ , $ -> -> 78 `i `uc 468
+ 462 ]
+"272
+[e :U 462 ]
+[; ;main.c: 273: break;
 "273
+[e $U 458  ]
+"274
 }
-[e :U 401 ]
-[; ;main.c: 273: }
-[; ;main.c: 275: LChannelSwitchOld = LChannelSwitch;
 "275
-[e = _LChannelSwitchOld _LChannelSwitch ]
-"276
 }
-[e :U 372 ]
-"163
-[e $U 373  ]
-[e :U 374 ]
-[; ;main.c: 276: }
-[; ;main.c: 277: }
+[; ;main.c: 274: }
+[; ;main.c: 275: }
+[e $U 458  ]
+"247
+[e :U 459 ]
+[e [\ . _LMidiData 0 , $ -> -> 192 `i `uc 460
+ , $ -> -> 176 `i `uc 461
+ 458 ]
+"275
+[e :U 458 ]
+[; ;main.c: 276: RunHub();
+"276
+[e ( _RunHub ..  ]
 "277
-[e :UE 371 ]
+}
+[e :U 457 ]
+"283
+[v _LResult `i ~T0 @X0 1 a ]
+[; ;main.c: 277: }
+[; ;main.c: 283: signed int LResult = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values));
+[e = _LResult ( _memcmp (3 , , -> &U . . __Hub 5 4 `*Cv -> &U . . __Hub 6 4 `*Cv * -> # *U &U . . __Hub 5 4 `ui -> -> 8 `i `ui ]
+[; ;main.c: 285: if (!_Modified && (2 > 1) && ((LResult != 0) || (_Hub.SecondaryBuffer.PushedButton != _Hub.BackupBuffer.PushedButton)))
+"285
+[e $ ! && && ! != -> __Modified `i -> -> -> 0 `i `uc `i > -> 2 `i -> 1 `i || != _LResult -> 0 `i != -> . . __Hub 5 1 `i -> . . __Hub 6 1 `i 469  ]
+[; ;main.c: 286: {
+"286
+{
+[; ;main.c: 287: Sequencer_StopTimer();
+"287
+[e ( _Sequencer_StopTimer ..  ]
+[; ;main.c: 288: _Modified = 1;
+"288
+[e = __Modified -> -> 1 `i `uc ]
+[; ;main.c: 289: _Display.PointMask[1] = 0x08;
+"289
+[e = *U + &U . __Display 11 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __Display 11 `ui `ux -> -> 8 `i `uc ]
+[; ;main.c: 290: Sequencer_StartTimer(0.3f, 1);
+"290
+[e ( _Sequencer_StartTimer (2 , -> .0.3 `f -> -> 1 `i `uc ]
+"291
+}
+[e :U 469 ]
+[; ;main.c: 291: }
+[; ;main.c: 293: Display_ProcessData(_Hub.SecondaryBuffer.PushedButton ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
+"293
+[e ( _Display_ProcessData (4 , , , -> ? != -> . . __Hub 5 1 `i -> -> -> 0 `i `uc `i : -> . . __Hub 5 3 `i -> . . __Hub 5 2 `i `uc &U . . __Hub 5 4 -> -> == -> . __Hub 12 `i -> . . __Hub 5 2 `i `i `uc . . __Hub 5 1 ]
+[; ;main.c: 295: if (_DigiPot.Counter >= _DigiPot.CounterRef)
+"295
+[e $ ! >= -> . __DigiPot 1 `i -> . __DigiPot 0 `i 470  ]
+[; ;main.c: 296: {
+"296
+{
+[; ;main.c: 297: WriteData(_Hub.SecondaryBuffer.Values, 8, _DigiPot.IO);
+"297
+[e ( _WriteData (3 , , &U . . __Hub 5 4 -> -> 8 `i `uc . __DigiPot 2 ]
+[; ;main.c: 298: _DigiPot.Counter = 0;
+"298
+[e = . __DigiPot 1 -> -> 0 `i `uc ]
+"299
+}
+[e :U 470 ]
+[; ;main.c: 299: }
+[; ;main.c: 301: LChannelSwitchOld = LChannelSwitch;
+"301
+[e = _LChannelSwitchOld _LChannelSwitch ]
+"302
+}
+[e :U 438 ]
+"169
+[e $U 439  ]
+[e :U 440 ]
+[; ;main.c: 302: }
+[; ;main.c: 303: }
+"303
+[e :UE 437 ]
 }

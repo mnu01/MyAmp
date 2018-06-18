@@ -1,79 +1,96 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"27 hardware.h
-[s S1 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3 `(uc ~T0 @X0 0 tf ]
+[v F6 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S1 `*F3 1 `*F6 1 ]
+[n S1 . Read Write ]
+"39
 [s S2 `S1 1 `S1 1 `S1 1 ]
 [n S2 . ClockPin DataPin LatchPin ]
 "20 digipot.h
 [s S4 `uc 1 `uc 1 `S2 1 ]
 [n S4 . CounterRef Counter IO ]
-"8778 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8778 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _T0PS0 `Vb ~T0 @X0 0 e@32424 ]
 "8780
 [v _T0PS1 `Vb ~T0 @X0 0 e@32425 ]
 "8782
 [v _T0PS2 `Vb ~T0 @X0 0 e@32426 ]
-"45 C:\Program Files (x86)\Microchip\xc8\v1.44\include\math.h
+"45 C:\Program Files (x86)\Microchip\xc8\v1.45\include\math.h
 [v _pow `(d ~T0 @X0 0 ef2`d`d ]
-"8880 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8880 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _TRISA2 `Vb ~T0 @X0 0 e@31890 ]
 "8882
 [v _TRISA3 `Vb ~T0 @X0 0 e@31891 ]
 "8884
 [v _TRISA4 `Vb ~T0 @X0 0 e@31892 ]
-"2545
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"49 hardware.h
+"27 digipot.h
+[v _DigiPot_ClockWrite `(v ~T0 @X0 0 ef1`uc ]
+"29
+[v _DigiPot_DataWrite `(uc ~T0 @X0 0 ef1`uc ]
+"28
+[v _DigiPot_LatchWrite `(v ~T0 @X0 0 ef1`uc ]
+"55 hardware.h
 [v _InitConnector `(v ~T0 @X0 0 ef1`*S2 ]
+"8390 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[v _LATA4 `Vb ~T0 @X0 0 e@31820 ]
+"8388
+[v _LATA3 `Vb ~T0 @X0 0 e@31819 ]
+"8386
+[v _LATA2 `Vb ~T0 @X0 0 e@31818 ]
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;digipot.h: 19: typedef struct
 [; ;digipot.h: 20: {
 [; ;digipot.h: 21: unsigned char CounterRef;
 [; ;digipot.h: 22: unsigned char Counter;
 [; ;digipot.h: 23: Connector IO;
 [; ;digipot.h: 24: } DigiPot;
-[; ;digipot.h: 26: void InitDigiPot();
-"28 digipot.h
+[; ;digipot.h: 27: void DigiPot_ClockWrite(bool value);
+[; ;digipot.h: 28: void DigiPot_LatchWrite(bool value);
+[; ;digipot.h: 29: bool DigiPot_DataWrite(bool value);
+[; ;digipot.h: 31: void InitDigiPot();
+"33 digipot.h
 [v __DigiPot `S4 ~T0 @X0 1 e ]
-[; ;digipot.h: 28: DigiPot _DigiPot;
+[; ;digipot.h: 33: DigiPot _DigiPot;
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3263,28 +3280,73 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digipot.c: 18: _DigiPot.Counter = 0;
 "18
 [e = . __DigiPot 1 -> -> 0 `i `uc ]
-[; ;digipot.c: 19: _DigiPot.IO.ClockPin.Port = &LATA;
+[; ;digipot.c: 19: _DigiPot.IO.ClockPin.Write = &DigiPot_ClockWrite;
 "19
-[e = . . . __DigiPot 2 0 0 &U _LATA ]
-[; ;digipot.c: 20: _DigiPot.IO.ClockPin.PinNumber = 4;
+[e = . . . __DigiPot 2 0 1 &U _DigiPot_ClockWrite ]
+[; ;digipot.c: 20: _DigiPot.IO.DataPin.Write = &DigiPot_DataWrite;
 "20
-[e = . . . __DigiPot 2 0 1 -> -> 4 `i `uc ]
-[; ;digipot.c: 21: _DigiPot.IO.DataPin.Port = &LATA;
+[e = . . . __DigiPot 2 1 1 -> &U _DigiPot_DataWrite `*F6 ]
+[; ;digipot.c: 21: _DigiPot.IO.LatchPin.Write = &DigiPot_LatchWrite;
 "21
-[e = . . . __DigiPot 2 1 0 &U _LATA ]
-[; ;digipot.c: 22: _DigiPot.IO.DataPin.PinNumber = 2;
+[e = . . . __DigiPot 2 2 1 &U _DigiPot_LatchWrite ]
+[; ;digipot.c: 22: InitConnector(&_DigiPot.IO);
 "22
-[e = . . . __DigiPot 2 1 1 -> -> 2 `i `uc ]
-[; ;digipot.c: 23: _DigiPot.IO.LatchPin.Port = &LATA;
-"23
-[e = . . . __DigiPot 2 2 0 &U _LATA ]
-[; ;digipot.c: 24: _DigiPot.IO.LatchPin.PinNumber = 3;
-"24
-[e = . . . __DigiPot 2 2 1 -> -> 3 `i `uc ]
-[; ;digipot.c: 25: InitConnector(&_DigiPot.IO);
-"25
 [e ( _InitConnector (1 &U . __DigiPot 2 ]
-[; ;digipot.c: 26: }
-"26
+[; ;digipot.c: 23: }
+"23
 [e :UE 326 ]
+}
+"25
+[v _DigiPot_ClockWrite `(v ~T0 @X0 1 ef1`uc ]
+"26
+{
+[; ;digipot.c: 25: void DigiPot_ClockWrite(bool value)
+[; ;digipot.c: 26: {
+[e :U _DigiPot_ClockWrite ]
+"25
+[v _value `uc ~T0 @X0 1 r1 ]
+"26
+[f ]
+[; ;digipot.c: 27: LATA4 = value;
+"27
+[e = _LATA4 -> _value `b ]
+[; ;digipot.c: 28: }
+"28
+[e :UE 327 ]
+}
+"30
+[v _DigiPot_LatchWrite `(v ~T0 @X0 1 ef1`uc ]
+"31
+{
+[; ;digipot.c: 30: void DigiPot_LatchWrite(bool value)
+[; ;digipot.c: 31: {
+[e :U _DigiPot_LatchWrite ]
+"30
+[v _value `uc ~T0 @X0 1 r1 ]
+"31
+[f ]
+[; ;digipot.c: 32: LATA3 = value;
+"32
+[e = _LATA3 -> _value `b ]
+[; ;digipot.c: 33: }
+"33
+[e :UE 328 ]
+}
+"35
+[v _DigiPot_DataWrite `(uc ~T0 @X0 1 ef1`uc ]
+"36
+{
+[; ;digipot.c: 35: bool DigiPot_DataWrite(bool value)
+[; ;digipot.c: 36: {
+[e :U _DigiPot_DataWrite ]
+"35
+[v _value `uc ~T0 @X0 1 r1 ]
+"36
+[f ]
+[; ;digipot.c: 37: LATA2 = value;
+"37
+[e = _LATA2 -> _value `b ]
+[; ;digipot.c: 38: }
+"38
+[e :UE 329 ]
 }

@@ -61,7 +61,7 @@
 #pragma config PWRT = OFF       // Power-up Timer Enable bit (PWRT disabled)
 #pragma config BOR = ON         // Brown-out Reset Enable bits (Brown-out Reset enabled in hardware only (SBOREN is disabled))
 #pragma config BORV = 3         // Brown-out Reset Voltage bits (Minimum setting 2.05V)
-#pragma config VREGEN = OFF     // USB Voltage Regulator Enable bit (USB voltage regulator disabled)
+#pragma config VREGEN = ON     // USB Voltage Regulator Enable bit (USB voltage regulator disabled)
 
 // CONFIG2H
 #pragma config WDT = OFF        // Watchdog Timer Enable bit (WDT disabled (control is placed on the SWDTEN bit))

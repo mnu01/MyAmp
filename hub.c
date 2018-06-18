@@ -27,18 +27,30 @@ void Hub_Init()
     TRISB3 = 0;
     TRISB4 = 0;
 
-    _Hub.IO.ClockPin.Port = &LATB;
-    _Hub.IO.ClockPin.PinNumber = 4;
-    _Hub.IO.DataPin.Port = &PORTB;
-    _Hub.IO.DataPin.PinNumber = 2;
-    _Hub.IO.LatchPin.Port = &LATB;
-    _Hub.IO.LatchPin.PinNumber = 3;
+    _Hub.IO.ClockPin.Write = &Hub_ClockWrite;
+    _Hub.IO.DataPin.Read = &Hub_DataRead;
+    _Hub.IO.LatchPin.Write = &Hub_LatchWrite;
     InitConnector(&_Hub.IO);
 
     // init values (maybe useless)
     for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
         _Hub.PrimaryBuffer.Values[i] = 0;
     Hub_ReadSwitch();
+}
+
+void Hub_ClockWrite(bool value)
+{
+    LATB4 = value;
+}
+
+void Hub_LatchWrite(bool value)
+{
+    LATB3 = value;
+}
+
+bool Hub_DataRead()
+{
+    return PORTBbits.RB2;
 }
 
 void Hub_ReadSwitch()

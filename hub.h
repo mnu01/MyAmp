@@ -52,6 +52,10 @@ extern "C" {
         unsigned char CurrentSound;
         Connector IO;
     } Hub;
+    
+    void Hub_ClockWrite(bool value);
+    void Hub_LatchWrite(bool value);
+    bool Hub_DataRead();
 
     void Hub_Init();
     void Hub_ReadSwitch();

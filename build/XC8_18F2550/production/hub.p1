@@ -2,74 +2,98 @@ Version 3.2 HI-TECH Software Intermediate Code
 "29 hub.h
 [s S4 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 8 `i ]
 [n S4 . ActionButton PushedButton Channel Sound Values ]
-"27 hardware.h
-[s S1 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3 `(uc ~T0 @X0 0 tf ]
+[v F6 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S1 `*F3 1 `*F6 1 ]
+[n S1 . Read Write ]
+"39
 [s S2 `S1 1 `S1 1 `S1 1 ]
 [n S2 . ClockPin DataPin LatchPin ]
 "38 hub.h
 [s S5 `uc * -> 6 `i -> 8 `i `uc * -> 6 `i -> 8 `i `uc 1 `uc 1 `S4 1 `S4 1 `S4 1 `uc 1 `uc 1 `uc 1 `us 1 `uc 1 `uc 1 `uc 1 `S2 1 ]
 [n S5 . Switch SwitchOld ReadComplete iRead PrimaryBuffer SecondaryBuffer BackupBuffer ReadyToWrite ReadyToRead Paused MaxChannel MaxSound CurrentChannel CurrentSound IO ]
-[v F118 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
-[v F121 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
+[v F130 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
+[v F133 `uc ~T0 @X0 + -> 8 `i -> 2 `i t ]
 "66 display.h
-[s S6 `uc 1 `uc 1 `F118 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `F121 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `*uc 1 `*uc 1 `uc -> 2 `i `uc -> 2 `i `uc -> 8 `i `uc 1 `uc 1 `uc -> 2 `i `S2 1 ]
+[s S6 `uc 1 `uc 1 `F130 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `F133 -> -> / - -> << -> 1 `i -> 6 `i `f * -> -> 1 `i `f -> .1.0 `f * -> -> 7 `i `f -> .1.0 `f `uc `ux `*uc 1 `*uc 1 `uc -> 2 `i `uc -> 2 `i `uc -> 8 `i `uc 1 `uc 1 `uc -> 2 `i `S2 1 ]
 [n S6 . ReadyToRead ReadyToWrite Buffer1 Buffer2 PrimaryBuffer SecondaryBuffer DigitalValueRatio DigitalValueData ValueData iDisplay SavingMask PointMask IO ]
-"8894 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8894 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _TRISB2 `Vb ~T0 @X0 0 e@31898 ]
 "8896
 [v _TRISB3 `Vb ~T0 @X0 0 e@31899 ]
 "8898
 [v _TRISB4 `Vb ~T0 @X0 0 e@31900 ]
-"2645
-[v _LATB `Vuc ~T0 @X0 0 e@3978 ]
-"2254
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"49 hardware.h
-[v _InitConnector `(v ~T0 @X0 0 ef1`*S2 ]
-"57 hub.h
-[v _Hub_ReadSwitch `(v ~T0 @X0 0 ef ]
-"55 hardware.h
-[v _ReadBitArray `(v ~T0 @X0 0 ef2`*uc`S2 ]
-"14 C:\Program Files (x86)\Microchip\xc8\v1.44\include\string.h
-[v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
-"56 hardware.h
-[v _LatchOn `(v ~T0 @X0 0 ef1`S2 ]
+"56 hub.h
+[v _Hub_ClockWrite `(v ~T0 @X0 0 ef1`uc ]
+"58
+[v _Hub_DataRead `(uc ~T0 @X0 0 ef ]
 "57
+[v _Hub_LatchWrite `(v ~T0 @X0 0 ef1`uc ]
+"55 hardware.h
+[v _InitConnector `(v ~T0 @X0 0 ef1`*S2 ]
+"61 hub.h
+[v _Hub_ReadSwitch `(v ~T0 @X0 0 ef ]
+"8404 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
+[v _LATB4 `Vb ~T0 @X0 0 e@31828 ]
+"8402
+[v _LATB3 `Vb ~T0 @X0 0 e@31827 ]
+"2260
+[s S98 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S98 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"2270
+[s S99 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S99 . INT0 INT1 INT2 . PGM PGC PGD ]
+"2279
+[s S100 :3 `uc 1 :1 `uc 1 ]
+[n S100 . . CCP2_PA2 ]
+"2259
+[u S97 `S98 1 `S99 1 `S100 1 ]
+[n S97 . . . . ]
+"2284
+[v _PORTBbits `VS97 ~T0 @X0 0 e@3969 ]
+"61 hardware.h
+[v _ReadBitArray `(v ~T0 @X0 0 ef2`*uc`S2 ]
+"14 C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h
+[v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
+"62 hardware.h
+[v _LatchOn `(v ~T0 @X0 0 ef1`S2 ]
+"63
 [v _LatchOff `(v ~T0 @X0 0 ef1`S2 ]
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -124,15 +148,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hub.h: 52: unsigned char CurrentSound;
 [; ;hub.h: 53: Connector IO;
 [; ;hub.h: 54: } Hub;
-[; ;hub.h: 56: void Hub_Init();
-[; ;hub.h: 57: void Hub_ReadSwitch();
-[; ;hub.h: 58: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
-[; ;hub.h: 59: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
-[; ;hub.h: 60: void Hub_UpdateValues();
-[; ;hub.h: 61: void Hub_CopyBuffer();
-"63 hub.h
+[; ;hub.h: 56: void Hub_ClockWrite(bool value);
+[; ;hub.h: 57: void Hub_LatchWrite(bool value);
+[; ;hub.h: 58: bool Hub_DataRead();
+[; ;hub.h: 60: void Hub_Init();
+[; ;hub.h: 61: void Hub_ReadSwitch();
+[; ;hub.h: 62: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
+[; ;hub.h: 63: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
+[; ;hub.h: 64: void Hub_UpdateValues();
+[; ;hub.h: 65: void Hub_CopyBuffer();
+"67 hub.h
 [v __Hub `S5 ~T0 @X0 1 e ]
-[; ;hub.h: 63: Hub _Hub;
+[; ;hub.h: 67: Hub _Hub;
 "46 display.h
 [v __Digits `uc ~T0 @X0 -> 0 `x e ]
 [i __Digits
@@ -188,12 +215,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 80: unsigned char PointMask[2];
 [; ;display.h: 81: Connector IO;
 [; ;display.h: 82: } Display;
-[; ;display.h: 84: void Display_Init();
-[; ;display.h: 85: void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
-[; ;display.h: 86: void Display_SwapBuffer();
-"88
+[; ;display.h: 84: void Display_ClockWrite(bool value);
+[; ;display.h: 85: void Display_LatchWrite(bool value);
+[; ;display.h: 86: bool Display_DataWrite(bool value);
+[; ;display.h: 88: void Display_Init();
+[; ;display.h: 89: void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
+[; ;display.h: 90: void Display_SwapBuffer();
+"92
 [v __Display `S6 ~T0 @X0 1 e ]
-[; ;display.h: 88: Display _Display;
+[; ;display.h: 92: Display _Display;
 [; ;zip.h: 21: typedef struct
 [; ;zip.h: 22: {
 [; ;zip.h: 23: DataBuffer *Buffer;
@@ -205,7 +235,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3412,271 +3442,314 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hub.c: 28: TRISB4 = 0;
 "28
 [e = _TRISB4 -> -> 0 `i `b ]
-[; ;hub.c: 30: _Hub.IO.ClockPin.Port = &LATB;
+[; ;hub.c: 30: _Hub.IO.ClockPin.Write = &Hub_ClockWrite;
 "30
-[e = . . . __Hub 14 0 0 &U _LATB ]
-[; ;hub.c: 31: _Hub.IO.ClockPin.PinNumber = 4;
+[e = . . . __Hub 14 0 1 &U _Hub_ClockWrite ]
+[; ;hub.c: 31: _Hub.IO.DataPin.Read = &Hub_DataRead;
 "31
-[e = . . . __Hub 14 0 1 -> -> 4 `i `uc ]
-[; ;hub.c: 32: _Hub.IO.DataPin.Port = &PORTB;
+[e = . . . __Hub 14 1 0 &U _Hub_DataRead ]
+[; ;hub.c: 32: _Hub.IO.LatchPin.Write = &Hub_LatchWrite;
 "32
-[e = . . . __Hub 14 1 0 &U _PORTB ]
-[; ;hub.c: 33: _Hub.IO.DataPin.PinNumber = 2;
+[e = . . . __Hub 14 2 1 &U _Hub_LatchWrite ]
+[; ;hub.c: 33: InitConnector(&_Hub.IO);
 "33
-[e = . . . __Hub 14 1 1 -> -> 2 `i `uc ]
-[; ;hub.c: 34: _Hub.IO.LatchPin.Port = &LATB;
-"34
-[e = . . . __Hub 14 2 0 &U _LATB ]
-[; ;hub.c: 35: _Hub.IO.LatchPin.PinNumber = 3;
-"35
-[e = . . . __Hub 14 2 1 -> -> 3 `i `uc ]
-[; ;hub.c: 36: InitConnector(&_Hub.IO);
-"36
 [e ( _InitConnector (1 &U . __Hub 14 ]
-[; ;hub.c: 39: for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
-"39
+[; ;hub.c: 36: for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
+"36
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 330  ]
 [e $U 331  ]
-"40
+"37
 [e :U 330 ]
-[; ;hub.c: 40: _Hub.PrimaryBuffer.Values[i] = 0;
+[; ;hub.c: 37: _Hub.PrimaryBuffer.Values[i] = 0;
 [e = *U + &U . . __Hub 4 4 * -> -> _i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux -> -> 0 `i `uc ]
-"39
+"36
 [e ++ _i -> 1 `i ]
 [e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 330  ]
 [e :U 331 ]
-"40
+"37
 }
-[; ;hub.c: 41: Hub_ReadSwitch();
-"41
+[; ;hub.c: 38: Hub_ReadSwitch();
+"38
 [e ( _Hub_ReadSwitch ..  ]
-[; ;hub.c: 42: }
-"42
+[; ;hub.c: 39: }
+"39
 [e :UE 329 ]
 }
-"44
-[v _Hub_ReadSwitch `(v ~T0 @X0 1 ef ]
-"45
+"41
+[v _Hub_ClockWrite `(v ~T0 @X0 1 ef1`uc ]
+"42
 {
-[; ;hub.c: 44: void Hub_ReadSwitch()
-[; ;hub.c: 45: {
-[e :U _Hub_ReadSwitch ]
+[; ;hub.c: 41: void Hub_ClockWrite(bool value)
+[; ;hub.c: 42: {
+[e :U _Hub_ClockWrite ]
+"41
+[v _value `uc ~T0 @X0 1 r1 ]
+"42
 [f ]
-"46
-[v _LBitArray `uc ~T0 @X0 -> 24 `i a ]
-[; ;hub.c: 46: bool LBitArray[24];
-[; ;hub.c: 47: ReadBitArray(LBitArray, _Hub.IO);
-"47
-[e ( _ReadBitArray (2 , &U _LBitArray . __Hub 14 ]
-[; ;hub.c: 48: memcpy(_Hub.Switch + _Hub.iRead, LBitArray, sizeof(LBitArray));
-"48
-[e ( _memcpy (3 , , -> + &U . __Hub 0 * -> . __Hub 3 `ux -> -> # *U &U . __Hub 0 `ui `ux `*v -> &U _LBitArray `*Cv -> # _LBitArray `ui ]
-[; ;hub.c: 49: _Hub.iRead += 24;
-"49
-[e =+ . __Hub 3 -> -> 24 `i `uc ]
-[; ;hub.c: 50: }
-"50
+[; ;hub.c: 43: LATB4 = value;
+"43
+[e = _LATB4 -> _value `b ]
+[; ;hub.c: 44: }
+"44
 [e :UE 333 ]
 }
-"52
-[v _Hub_DecodeSwitch `(c ~T0 @X0 1 ef2`uc`uc ]
-"53
+"46
+[v _Hub_LatchWrite `(v ~T0 @X0 1 ef1`uc ]
+"47
 {
-[; ;hub.c: 52: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2)
-[; ;hub.c: 53: {
-[e :U _Hub_DecodeSwitch ]
-"52
-[v _AIndex1 `uc ~T0 @X0 1 r1 ]
-[v _AIndex2 `uc ~T0 @X0 1 r2 ]
-"53
+[; ;hub.c: 46: void Hub_LatchWrite(bool value)
+[; ;hub.c: 47: {
+[e :U _Hub_LatchWrite ]
+"46
+[v _value `uc ~T0 @X0 1 r1 ]
+"47
 [f ]
-[; ;hub.c: 56: if (_Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex1] && _Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex2] && _Hub.SwitchOld[AIndex2] == !_Hub.Switch[AIndex2] ||
-[; ;hub.c: 57: _Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex2] && _Hub.Switch[AIndex2] == _Hub.Switch[AIndex1] && _Hub.Switch[AIndex2] == !_Hub.SwitchOld[AIndex1])
-"57
-[e $ ! || && && == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> ! != -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i `i && && == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> ! != -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i `i 335  ]
-[; ;hub.c: 58: {
-"58
-{
-[; ;hub.c: 59: return 1;
-"59
-[e ) -> -> 1 `i `c ]
-[e $UE 334  ]
-"60
-}
-[e :U 335 ]
-[; ;hub.c: 60: }
-[; ;hub.c: 64: if (_Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex2] && _Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex1] && _Hub.SwitchOld[AIndex1] == !_Hub.Switch[AIndex1] ||
-[; ;hub.c: 65: _Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex1] && _Hub.Switch[AIndex1] == _Hub.Switch[AIndex2] && _Hub.Switch[AIndex1] == !_Hub.SwitchOld[AIndex2])
-"65
-[e $ ! || && && == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> ! != -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i `i && && == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> ! != -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i `i 336  ]
-[; ;hub.c: 66: {
-"66
-{
-[; ;hub.c: 67: return -1;
-"67
-[e ) -> -U -> 1 `i `c ]
-[e $UE 334  ]
-"68
-}
-[e :U 336 ]
-[; ;hub.c: 68: }
-[; ;hub.c: 70: return 0;
-"70
-[e ) -> -> 0 `i `c ]
-[e $UE 334  ]
-[; ;hub.c: 71: }
-"71
+[; ;hub.c: 48: LATB3 = value;
+"48
+[e = _LATB3 -> _value `b ]
+[; ;hub.c: 49: }
+"49
 [e :UE 334 ]
 }
-"73
-[v _Hub_SetValue `(v ~T0 @X0 1 ef4`*uc`c`i`c ]
-"74
+"51
+[v _Hub_DataRead `(uc ~T0 @X0 1 ef ]
+"52
 {
-[; ;hub.c: 73: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement)
-[; ;hub.c: 74: {
+[; ;hub.c: 51: bool Hub_DataRead()
+[; ;hub.c: 52: {
+[e :U _Hub_DataRead ]
+[f ]
+[; ;hub.c: 53: return PORTBbits.RB2;
+"53
+[e ) . . _PORTBbits 0 2 ]
+[e $UE 335  ]
+[; ;hub.c: 54: }
+"54
+[e :UE 335 ]
+}
+"56
+[v _Hub_ReadSwitch `(v ~T0 @X0 1 ef ]
+"57
+{
+[; ;hub.c: 56: void Hub_ReadSwitch()
+[; ;hub.c: 57: {
+[e :U _Hub_ReadSwitch ]
+[f ]
+"58
+[v _LBitArray `uc ~T0 @X0 -> 24 `i a ]
+[; ;hub.c: 58: bool LBitArray[24];
+[; ;hub.c: 59: ReadBitArray(LBitArray, _Hub.IO);
+"59
+[e ( _ReadBitArray (2 , &U _LBitArray . __Hub 14 ]
+[; ;hub.c: 60: memcpy(_Hub.Switch + _Hub.iRead, LBitArray, sizeof(LBitArray));
+"60
+[e ( _memcpy (3 , , -> + &U . __Hub 0 * -> . __Hub 3 `ux -> -> # *U &U . __Hub 0 `ui `ux `*v -> &U _LBitArray `*Cv -> # _LBitArray `ui ]
+[; ;hub.c: 61: _Hub.iRead += 24;
+"61
+[e =+ . __Hub 3 -> -> 24 `i `uc ]
+[; ;hub.c: 62: }
+"62
+[e :UE 336 ]
+}
+"64
+[v _Hub_DecodeSwitch `(c ~T0 @X0 1 ef2`uc`uc ]
+"65
+{
+[; ;hub.c: 64: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2)
+[; ;hub.c: 65: {
+[e :U _Hub_DecodeSwitch ]
+"64
+[v _AIndex1 `uc ~T0 @X0 1 r1 ]
+[v _AIndex2 `uc ~T0 @X0 1 r2 ]
+"65
+[f ]
+[; ;hub.c: 68: if (_Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex1] && _Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex2] && _Hub.SwitchOld[AIndex2] == !_Hub.Switch[AIndex2] ||
+[; ;hub.c: 69: _Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex2] && _Hub.Switch[AIndex2] == _Hub.Switch[AIndex1] && _Hub.Switch[AIndex2] == !_Hub.SwitchOld[AIndex1])
+"69
+[e $ ! || && && == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> ! != -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i `i && && == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> ! != -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i `i 338  ]
+[; ;hub.c: 70: {
+"70
+{
+[; ;hub.c: 71: return 1;
+"71
+[e ) -> -> 1 `i `c ]
+[e $UE 337  ]
+"72
+}
+[e :U 338 ]
+[; ;hub.c: 72: }
+[; ;hub.c: 76: if (_Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex2] && _Hub.Switch[AIndex2] == _Hub.SwitchOld[AIndex1] && _Hub.SwitchOld[AIndex1] == !_Hub.Switch[AIndex1] ||
+[; ;hub.c: 77: _Hub.Switch[AIndex1] == _Hub.SwitchOld[AIndex1] && _Hub.Switch[AIndex1] == _Hub.Switch[AIndex2] && _Hub.Switch[AIndex1] == !_Hub.SwitchOld[AIndex2])
+"77
+[e $ ! || && && == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> ! != -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i `i && && == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 1 * -> _AIndex1 `ux -> -> # *U &U . __Hub 1 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> *U + &U . __Hub 0 * -> _AIndex2 `ux -> -> # *U &U . __Hub 0 `ui `ux `i == -> *U + &U . __Hub 0 * -> _AIndex1 `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> ! != -> *U + &U . __Hub 1 * -> _AIndex2 `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i `i 339  ]
+[; ;hub.c: 78: {
+"78
+{
+[; ;hub.c: 79: return -1;
+"79
+[e ) -> -U -> 1 `i `c ]
+[e $UE 337  ]
+"80
+}
+[e :U 339 ]
+[; ;hub.c: 80: }
+[; ;hub.c: 82: return 0;
+"82
+[e ) -> -> 0 `i `c ]
+[e $UE 337  ]
+[; ;hub.c: 83: }
+"83
+[e :UE 337 ]
+}
+"85
+[v _Hub_SetValue `(v ~T0 @X0 1 ef4`*uc`c`i`c ]
+"86
+{
+[; ;hub.c: 85: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement)
+[; ;hub.c: 86: {
 [e :U _Hub_SetValue ]
-"73
+"85
 [v _ASourceValue `*uc ~T0 @X0 1 r1 ]
 [v _AMinValue `c ~T0 @X0 1 r2 ]
 [v _AMaxValue `i ~T0 @X0 1 r3 ]
 [v _AIncrement `c ~T0 @X0 1 r4 ]
-"74
+"86
 [f ]
-"75
+"87
 [v _LValue `i ~T0 @X0 1 a ]
-[; ;hub.c: 75: signed int LValue = *ASourceValue;
+[; ;hub.c: 87: signed int LValue = *ASourceValue;
 [e = _LValue -> *U _ASourceValue `i ]
-[; ;hub.c: 76: LValue += AIncrement;
-"76
+[; ;hub.c: 88: LValue += AIncrement;
+"88
 [e =+ _LValue -> _AIncrement `i ]
-[; ;hub.c: 77: if (LValue < AMinValue) LValue = AMinValue;
-"77
-[e $ ! < _LValue -> _AMinValue `i 338  ]
+[; ;hub.c: 89: if (LValue < AMinValue) LValue = AMinValue;
+"89
+[e $ ! < _LValue -> _AMinValue `i 341  ]
 [e = _LValue -> _AMinValue `i ]
-[e :U 338 ]
-[; ;hub.c: 78: if (LValue > AMaxValue) LValue = AMaxValue;
-"78
-[e $ ! > _LValue _AMaxValue 339  ]
+[e :U 341 ]
+[; ;hub.c: 90: if (LValue > AMaxValue) LValue = AMaxValue;
+"90
+[e $ ! > _LValue _AMaxValue 342  ]
 [e = _LValue _AMaxValue ]
-[e :U 339 ]
-[; ;hub.c: 79: *ASourceValue = LValue;
-"79
+[e :U 342 ]
+[; ;hub.c: 91: *ASourceValue = LValue;
+"91
 [e = *U _ASourceValue -> _LValue `uc ]
-[; ;hub.c: 80: }
-"80
-[e :UE 337 ]
+[; ;hub.c: 92: }
+"92
+[e :UE 340 ]
 }
-"82
+"94
 [v _Hub_UpdateValues `(v ~T0 @X0 1 ef ]
-"83
+"95
 {
-[; ;hub.c: 82: void Hub_UpdateValues()
-[; ;hub.c: 83: {
+[; ;hub.c: 94: void Hub_UpdateValues()
+[; ;hub.c: 95: {
 [e :U _Hub_UpdateValues ]
 [f ]
-[; ;hub.c: 84: if (_Hub.iRead == 0)
-"84
-[e $ ! == -> . __Hub 3 `i -> 0 `i 341  ]
-[; ;hub.c: 85: {
-"85
-{
-[; ;hub.c: 86: memcpy(_Hub.SwitchOld, _Hub.Switch, sizeof(_Hub.Switch));
-"86
-[e ( _memcpy (3 , , -> &U . __Hub 1 `*v -> &U . __Hub 0 `*Cv * -> # *U &U . __Hub 0 `ui -> * -> 6 `i -> 8 `i `ui ]
-[; ;hub.c: 89: LatchOn(_Hub.IO);
-"89
-[e ( _LatchOn (1 . __Hub 14 ]
-[; ;hub.c: 90: LatchOff(_Hub.IO);
-"90
-[e ( _LatchOff (1 . __Hub 14 ]
-"91
-}
-[e :U 341 ]
-[; ;hub.c: 91: }
-[; ;hub.c: 93: if (_Hub.iRead < 6 * 8)
-"93
-[e $ ! < -> . __Hub 3 `i * -> 6 `i -> 8 `i 342  ]
-[; ;hub.c: 94: Hub_ReadSwitch();
-"94
-[e ( _Hub_ReadSwitch ..  ]
-[e $U 343  ]
-"95
-[e :U 342 ]
-[; ;hub.c: 95: else
-[; ;hub.c: 96: {
+[; ;hub.c: 96: if (_Hub.iRead == 0)
 "96
-{
-[; ;hub.c: 97: _Hub.ReadComplete = 0;
+[e $ ! == -> . __Hub 3 `i -> 0 `i 344  ]
+[; ;hub.c: 97: {
 "97
-[e = . __Hub 2 -> -> 0 `i `uc ]
-[; ;hub.c: 99: _Hub.PrimaryBuffer.ActionButton = _Hub.Switch[2];
-"99
-[e = . . __Hub 4 0 *U + &U . __Hub 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . __Hub 0 `ui `ux ]
-[; ;hub.c: 100: if (_Hub.Switch[5] && !_Hub.SwitchOld[5])
-"100
-[e $ ! && != -> *U + &U . __Hub 0 * -> -> -> 5 `i `ui `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i ! != -> *U + &U . __Hub 1 * -> -> -> 5 `i `ui `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i 344  ]
-[; ;hub.c: 101: _Hub.PrimaryBuffer.PushedButton != _Hub.PrimaryBuffer.PushedButton;
+{
+[; ;hub.c: 98: memcpy(_Hub.SwitchOld, _Hub.Switch, sizeof(_Hub.Switch));
+"98
+[e ( _memcpy (3 , , -> &U . __Hub 1 `*v -> &U . __Hub 0 `*Cv * -> # *U &U . __Hub 0 `ui -> * -> 6 `i -> 8 `i `ui ]
+[; ;hub.c: 101: LatchOn(_Hub.IO);
 "101
-[e != -> . . __Hub 4 1 `i -> . . __Hub 4 1 `i ]
-[e :U 344 ]
-[; ;hub.c: 103: Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
+[e ( _LatchOn (1 . __Hub 14 ]
+[; ;hub.c: 102: LatchOff(_Hub.IO);
+"102
+[e ( _LatchOff (1 . __Hub 14 ]
 "103
+}
+[e :U 344 ]
+[; ;hub.c: 103: }
+[; ;hub.c: 105: if (_Hub.iRead < 6 * 8)
+"105
+[e $ ! < -> . __Hub 3 `i * -> 6 `i -> 8 `i 345  ]
+[; ;hub.c: 106: Hub_ReadSwitch();
+"106
+[e ( _Hub_ReadSwitch ..  ]
+[e $U 346  ]
+"107
+[e :U 345 ]
+[; ;hub.c: 107: else
+[; ;hub.c: 108: {
+"108
+{
+[; ;hub.c: 109: _Hub.ReadComplete = 0;
+"109
+[e = . __Hub 2 -> -> 0 `i `uc ]
+[; ;hub.c: 111: _Hub.PrimaryBuffer.ActionButton = _Hub.Switch[2];
+"111
+[e = . . __Hub 4 0 *U + &U . __Hub 0 * -> -> -> 2 `i `ui `ux -> -> # *U &U . __Hub 0 `ui `ux ]
+[; ;hub.c: 112: if (_Hub.Switch[5] && !_Hub.SwitchOld[5])
+"112
+[e $ ! && != -> *U + &U . __Hub 0 * -> -> -> 5 `i `ui `ux -> -> # *U &U . __Hub 0 `ui `ux `i -> -> -> 0 `i `uc `i ! != -> *U + &U . __Hub 1 * -> -> -> 5 `i `ui `ux -> -> # *U &U . __Hub 1 `ui `ux `i -> -> -> 0 `i `uc `i 347  ]
+[; ;hub.c: 113: _Hub.PrimaryBuffer.PushedButton != _Hub.PrimaryBuffer.PushedButton;
+"113
+[e != -> . . __Hub 4 1 `i -> . . __Hub 4 1 `i ]
+[e :U 347 ]
+[; ;hub.c: 115: Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
+"115
 [e ( _Hub_SetValue (4 , , , &U . . __Hub 4 2 -> -> 0 `i `c -> . __Hub 10 `i ( _Hub_DecodeSwitch (2 , -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;hub.c: 104: for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
-"104
+[; ;hub.c: 116: for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
+"116
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 345  ]
-[e $U 346  ]
-"105
-[e :U 345 ]
-[; ;hub.c: 105: {
+[e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 348  ]
+[e $U 349  ]
+"117
+[e :U 348 ]
+[; ;hub.c: 117: {
 {
-[; ;hub.c: 106: Hub_SetValue(&_Hub.PrimaryBuffer.Values[i], 0, (0x01 << 6) - 1, Hub_DecodeSwitch(i * 3 + 3, i * 3 + 4));
-"106
+[; ;hub.c: 118: Hub_SetValue(&_Hub.PrimaryBuffer.Values[i], 0, (0x01 << 6) - 1, Hub_DecodeSwitch(i * 3 + 3, i * 3 + 4));
+"118
 [e ( _Hub_SetValue (4 , , , &U *U + &U . . __Hub 4 4 * -> -> _i `ui `ux -> -> # *U &U . . __Hub 4 4 `ui `ux -> -> 0 `i `c - << -> 1 `i -> 6 `i -> 1 `i ( _Hub_DecodeSwitch (2 , -> + * _i -> 3 `i -> 3 `i `uc -> + * _i -> 3 `i -> 4 `i `uc ]
-"107
+"119
 }
-"104
+"116
 [e ++ _i -> 1 `i ]
-[e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 345  ]
-[e :U 346 ]
-"107
+[e $ < -> _i `ui * -> # *U &U . . __Hub 4 4 `ui -> -> 8 `i `ui 348  ]
+[e :U 349 ]
+"119
 }
-[; ;hub.c: 107: }
-[; ;hub.c: 108: _Hub.iRead = 0;
-"108
+[; ;hub.c: 119: }
+[; ;hub.c: 120: _Hub.iRead = 0;
+"120
 [e = . __Hub 3 -> -> 0 `i `uc ]
-[; ;hub.c: 109: _Hub.ReadComplete = 1;
-"109
+[; ;hub.c: 121: _Hub.ReadComplete = 1;
+"121
 [e = . __Hub 2 -> -> 1 `i `uc ]
-"110
+"122
 }
-[e :U 343 ]
-[; ;hub.c: 110: }
-[; ;hub.c: 111: }
-"111
-[e :UE 340 ]
+[e :U 346 ]
+[; ;hub.c: 122: }
+[; ;hub.c: 123: }
+"123
+[e :UE 343 ]
 }
-"113
+"125
 [v _Hub_CopyBuffer `(v ~T0 @X0 1 ef ]
-"114
+"126
 {
-[; ;hub.c: 113: void Hub_CopyBuffer()
-[; ;hub.c: 114: {
+[; ;hub.c: 125: void Hub_CopyBuffer()
+[; ;hub.c: 126: {
 [e :U _Hub_CopyBuffer ]
 [f ]
-[; ;hub.c: 115: memcpy(&_Hub.SecondaryBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
-"115
+[; ;hub.c: 127: memcpy(&_Hub.SecondaryBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
+"127
 [e ( _memcpy (3 , , -> &U . __Hub 5 `*v -> &U . __Hub 4 `*Cv -> # `S4 `ui ]
-[; ;hub.c: 117: _Hub.ReadyToWrite = 0;
-"117
+[; ;hub.c: 129: _Hub.ReadyToWrite = 0;
+"129
 [e = . __Hub 7 -> -> 0 `i `uc ]
-[; ;hub.c: 118: }
-"118
-[e :UE 348 ]
+[; ;hub.c: 130: }
+"130
+[e :UE 351 ]
 }

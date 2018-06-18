@@ -2,10 +2,19 @@
 
 #include "hardware.h"
 
+bool Dummy_Read()
+{
+    return 0x00;
+}
+    
+void Dummy_Write(bool AValue) { }
+
 void InitPin(Pin *APin)
 {
-    APin->NegativeMask = 0x01 << APin->PinNumber;
-    APin->Mask = ~APin->NegativeMask;
+//    if (*APin.Read == 0x00)
+//        APin->Read = &Dummy_Read;
+//    if (APin->Write == 0x00)
+//        APin->Write = &Dummy_Write;
 }
 
 void InitConnector(Connector *AConnector)
@@ -20,7 +29,7 @@ void WriteChar(unsigned char AChar, Connector AIO)
     for (int i = 7; i >= 0; i--)
     {
         ClockUp(AIO);
-        *AIO.DataPin.Port = *AIO.DataPin.Port & AIO.DataPin.Mask | ((AChar >> i) & 0x01) << AIO.DataPin.PinNumber;
+        AIO.DataPin.Write((AChar >> i) & 0x01);
         ClockDown(AIO);
     }
 }
@@ -35,7 +44,7 @@ void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO)
 
 bool ReadBit(Connector AIO)
 {
-    bool LBit = (*AIO.DataPin.Port >> AIO.DataPin.PinNumber) & 0x01;
+    bool LBit = AIO.DataPin.Read();
     ClockUp(AIO);
     ClockDown(AIO);
     return LBit;
@@ -69,20 +78,20 @@ void ReadBitArray(bool *AData, Connector AIO)
 
 void LatchOn(Connector AIO)
 {
-    *AIO.LatchPin.Port &= AIO.LatchPin.Mask;
+    AIO.LatchPin.Write(0x00);
 }
 
 void LatchOff(Connector AIO)
 {
-    *AIO.LatchPin.Port |= AIO.LatchPin.NegativeMask;
+    AIO.LatchPin.Write(0x01);
 }
 
 void ClockUp(Connector AIO)
 {
-    *AIO.ClockPin.Port &= AIO.ClockPin.Mask;
+    AIO.ClockPin.Write(0x00);
 }
 
 void ClockDown(Connector AIO)
 {
-    *AIO.ClockPin.Port |= AIO.ClockPin.NegativeMask;
+    AIO.ClockPin.Write(0x01);
 }

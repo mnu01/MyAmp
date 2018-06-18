@@ -2,10 +2,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "29 hub.h
 [s S4 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 8 `i ]
 [n S4 . ActionButton PushedButton Channel Sound Values ]
-"27 hardware.h
-[s S1 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3 `(uc ~T0 @X0 0 tf ]
+[v F6 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S1 `*F3 1 `*F6 1 ]
+[n S1 . Read Write ]
+"39
 [s S2 `S1 1 `S1 1 `S1 1 ]
 [n S2 . ClockPin DataPin LatchPin ]
 "38 hub.h
@@ -29,7 +31,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _I2C_Read `(uc ~T0 @X0 0 ef ]
 "32
 [v _I2C_Stop `(uc ~T0 @X0 0 ef ]
-"3974 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+[v F3504 `(v ~T0 @X0 1 tf1`ul ]
+"164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
+[v __delay `JF3504 ~T0 @X0 0 e ]
+[p i __delay ]
+"3974 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _EEADR `Vuc ~T0 @X0 0 e@4009 ]
 "3900
 [s S161 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -65,42 +71,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S6 . Buffer Bytes ]
 "27
 [v _Zip `(uc ~T0 @X0 0 ef1`*S6 ]
-"14 C:\Program Files (x86)\Microchip\xc8\v1.44\include\string.h
+"14 C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h
 [v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
 "28 zip.h
 [v _UnZip `(uc ~T0 @X0 0 ef1`*S6 ]
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -155,15 +163,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hub.h: 52: unsigned char CurrentSound;
 [; ;hub.h: 53: Connector IO;
 [; ;hub.h: 54: } Hub;
-[; ;hub.h: 56: void Hub_Init();
-[; ;hub.h: 57: void Hub_ReadSwitch();
-[; ;hub.h: 58: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
-[; ;hub.h: 59: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
-[; ;hub.h: 60: void Hub_UpdateValues();
-[; ;hub.h: 61: void Hub_CopyBuffer();
-"63 hub.h
+[; ;hub.h: 56: void Hub_ClockWrite(bool value);
+[; ;hub.h: 57: void Hub_LatchWrite(bool value);
+[; ;hub.h: 58: bool Hub_DataRead();
+[; ;hub.h: 60: void Hub_Init();
+[; ;hub.h: 61: void Hub_ReadSwitch();
+[; ;hub.h: 62: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
+[; ;hub.h: 63: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
+[; ;hub.h: 64: void Hub_UpdateValues();
+[; ;hub.h: 65: void Hub_CopyBuffer();
+"67 hub.h
 [v __Hub `S5 ~T0 @X0 1 e ]
-[; ;hub.h: 63: Hub _Hub;
+[; ;hub.h: 67: Hub _Hub;
 [; ;zip.h: 21: typedef struct
 [; ;zip.h: 22: {
 [; ;zip.h: 23: DataBuffer *Buffer;
@@ -177,10 +188,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digipot.h: 22: unsigned char Counter;
 [; ;digipot.h: 23: Connector IO;
 [; ;digipot.h: 24: } DigiPot;
-[; ;digipot.h: 26: void InitDigiPot();
-"28 digipot.h
+[; ;digipot.h: 27: void DigiPot_ClockWrite(bool value);
+[; ;digipot.h: 28: void DigiPot_LatchWrite(bool value);
+[; ;digipot.h: 29: bool DigiPot_DataWrite(bool value);
+[; ;digipot.h: 31: void InitDigiPot();
+"33 digipot.h
 [v __DigiPot `S7 ~T0 @X0 1 e ]
-[; ;digipot.h: 28: DigiPot _DigiPot;
+[; ;digipot.h: 33: DigiPot _DigiPot;
 [; ;persistant.h: 22: typedef struct
 [; ;persistant.h: 23: {
 [; ;persistant.h: 24: unsigned char Channel;
@@ -225,7 +239,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3551,240 +3565,243 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;persistant.c: 60: {
 "60
 {
-[; ;persistant.c: 61: return Persistant_ReadExternalMemory(AAddress) == AData;
+[; ;persistant.c: 61: _delay((unsigned long)((5)*(20000000/4000.0)));
 "61
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+[; ;persistant.c: 62: return Persistant_ReadExternalMemory(AAddress) == AData;
+"62
 [e ) -> -> == -> ( _Persistant_ReadExternalMemory (1 _AAddress `i -> _AData `i `i `uc ]
 [e $UE 343  ]
-"62
-}
-[e :U 347 ]
 "63
 }
-[e :U 346 ]
+[e :U 347 ]
 "64
 }
-[e :U 345 ]
+[e :U 346 ]
 "65
 }
+[e :U 345 ]
+"66
+}
 [e :U 344 ]
-[; ;persistant.c: 62: }
 [; ;persistant.c: 63: }
 [; ;persistant.c: 64: }
 [; ;persistant.c: 65: }
-[; ;persistant.c: 66: return 0;
-"66
+[; ;persistant.c: 66: }
+[; ;persistant.c: 67: return 0;
+"67
 [e ) -> -> 0 `i `uc ]
 [e $UE 343  ]
-[; ;persistant.c: 67: }
-"67
+[; ;persistant.c: 68: }
+"68
 [e :UE 343 ]
 }
-"70
+"71
 [v _Persistant_ReadInternalMemory `(uc ~T0 @X0 1 ef1`i ]
-"71
-{
-[; ;persistant.c: 70: unsigned char Persistant_ReadInternalMemory(int AAddress)
-[; ;persistant.c: 71: {
-[e :U _Persistant_ReadInternalMemory ]
-"70
-[v _AAddress `i ~T0 @X0 1 r1 ]
-"71
-[f ]
-[; ;persistant.c: 72: EEADR = AAddress;
 "72
-[e = _EEADR -> _AAddress `uc ]
-[; ;persistant.c: 73: EECON1bits.EEPGD = 0;
+{
+[; ;persistant.c: 71: unsigned char Persistant_ReadInternalMemory(int AAddress)
+[; ;persistant.c: 72: {
+[e :U _Persistant_ReadInternalMemory ]
+"71
+[v _AAddress `i ~T0 @X0 1 r1 ]
+"72
+[f ]
+[; ;persistant.c: 73: EEADR = AAddress;
 "73
-[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
-[; ;persistant.c: 74: EECON1bits.CFGS = 0;
+[e = _EEADR -> _AAddress `uc ]
+[; ;persistant.c: 74: EECON1bits.EEPGD = 0;
 "74
-[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
-[; ;persistant.c: 75: EECON1bits.RD = 1;
+[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
+[; ;persistant.c: 75: EECON1bits.CFGS = 0;
 "75
-[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
-[; ;persistant.c: 76: return EEDATA;
+[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
+[; ;persistant.c: 76: EECON1bits.RD = 1;
 "76
+[e = . . _EECON1bits 0 0 -> -> 1 `i `uc ]
+[; ;persistant.c: 77: return EEDATA;
+"77
 [e ) _EEDATA ]
 [e $UE 348  ]
-[; ;persistant.c: 77: }
-"77
+[; ;persistant.c: 78: }
+"78
 [e :UE 348 ]
 }
-"80
-[v _Persistant_WriteInternalMemory `(uc ~T0 @X0 1 ef2`i`uc ]
 "81
+[v _Persistant_WriteInternalMemory `(uc ~T0 @X0 1 ef2`i`uc ]
+"82
 {
-[; ;persistant.c: 80: bool Persistant_WriteInternalMemory(int AAddress, unsigned char AData)
-[; ;persistant.c: 81: {
+[; ;persistant.c: 81: bool Persistant_WriteInternalMemory(int AAddress, unsigned char AData)
+[; ;persistant.c: 82: {
 [e :U _Persistant_WriteInternalMemory ]
-"80
+"81
 [v _AAddress `i ~T0 @X0 1 r1 ]
 [v _AData `uc ~T0 @X0 1 r2 ]
-"81
-[f ]
-[; ;persistant.c: 82: EECON1bits.WREN = 1;
 "82
-[e = . . _EECON1bits 0 2 -> -> 1 `i `uc ]
-[; ;persistant.c: 83: EEADR = AAddress;
+[f ]
+[; ;persistant.c: 83: EECON1bits.WREN = 1;
 "83
-[e = _EEADR -> _AAddress `uc ]
-[; ;persistant.c: 84: EEDATA = AData;
+[e = . . _EECON1bits 0 2 -> -> 1 `i `uc ]
+[; ;persistant.c: 84: EEADR = AAddress;
 "84
-[e = _EEDATA _AData ]
-[; ;persistant.c: 85: EECON1bits.EEPGD = 0;
+[e = _EEADR -> _AAddress `uc ]
+[; ;persistant.c: 85: EEDATA = AData;
 "85
-[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
-[; ;persistant.c: 86: EECON1bits.CFGS = 0;
+[e = _EEDATA _AData ]
+[; ;persistant.c: 86: EECON1bits.EEPGD = 0;
 "86
-[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
+[e = . . _EECON1bits 0 7 -> -> 0 `i `uc ]
+[; ;persistant.c: 87: EECON1bits.CFGS = 0;
 "87
-[v _LState `uc ~T0 @X0 1 a ]
-[; ;persistant.c: 87: unsigned char LState = INTCONbits.GIE;
-[e = _LState . . _INTCONbits 1 7 ]
-[; ;persistant.c: 88: INTCONbits.GIE = 0;
+[e = . . _EECON1bits 0 6 -> -> 0 `i `uc ]
 "88
+[v _LState `uc ~T0 @X0 1 a ]
+[; ;persistant.c: 88: unsigned char LState = INTCONbits.GIE;
+[e = _LState . . _INTCONbits 1 7 ]
+[; ;persistant.c: 89: INTCONbits.GIE = 0;
+"89
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
-[; ;persistant.c: 90: EECON2 = 0x55;
-"90
-[e = _EECON2 -> -> 85 `i `uc ]
-[; ;persistant.c: 91: EECON2 = 0xAA;
+[; ;persistant.c: 91: EECON2 = 0x55;
 "91
-[e = _EECON2 -> -> 170 `i `uc ]
-[; ;persistant.c: 92: EECON1bits.WR = 1;
+[e = _EECON2 -> -> 85 `i `uc ]
+[; ;persistant.c: 92: EECON2 = 0xAA;
 "92
+[e = _EECON2 -> -> 170 `i `uc ]
+[; ;persistant.c: 93: EECON1bits.WR = 1;
+"93
 [e = . . _EECON1bits 0 1 -> -> 1 `i `uc ]
-[; ;persistant.c: 94: INTCONbits.GIE = LState;
-"94
-[e = . . _INTCONbits 1 7 _LState ]
-[; ;persistant.c: 95: while (EECON1bits.WR == 1);
+[; ;persistant.c: 95: INTCONbits.GIE = LState;
 "95
+[e = . . _INTCONbits 1 7 _LState ]
+[; ;persistant.c: 96: while (EECON1bits.WR == 1);
+"96
 [e $U 350  ]
 [e :U 351 ]
 [e :U 350 ]
 [e $ == -> . . _EECON1bits 0 1 `i -> 1 `i 351  ]
 [e :U 352 ]
-[; ;persistant.c: 96: EECON1bits.WREN = 0;
-"96
+[; ;persistant.c: 97: EECON1bits.WREN = 0;
+"97
 [e = . . _EECON1bits 0 2 -> -> 0 `i `uc ]
-[; ;persistant.c: 99: return (bool)(Persistant_ReadInternalMemory(AAddress) == AData);
-"99
+[; ;persistant.c: 100: return (bool)(Persistant_ReadInternalMemory(AAddress) == AData);
+"100
 [e ) -> -> == -> ( _Persistant_ReadInternalMemory (1 _AAddress `i -> _AData `i `i `uc ]
 [e $UE 349  ]
-[; ;persistant.c: 100: }
-"100
+[; ;persistant.c: 101: }
+"101
 [e :UE 349 ]
 }
-"102
+"103
 [v _Persistant_SaveBuffer `(uc ~T0 @X0 1 ef1`S4 ]
-"103
-{
-[; ;persistant.c: 102: bool Persistant_SaveBuffer(DataBuffer ABuffer)
-[; ;persistant.c: 103: {
-[e :U _Persistant_SaveBuffer ]
-"102
-[v _ABuffer `S4 ~T0 @X0 1 r1 ]
-"103
-[f ]
 "104
-[v _LResult `uc ~T0 @X0 1 a ]
-[; ;persistant.c: 104: bool LResult = 1;
-[e = _LResult -> -> 1 `i `uc ]
+{
+[; ;persistant.c: 103: bool Persistant_SaveBuffer(DataBuffer ABuffer)
+[; ;persistant.c: 104: {
+[e :U _Persistant_SaveBuffer ]
+"103
+[v _ABuffer `S4 ~T0 @X0 1 r1 ]
+"104
+[f ]
 "105
-[v _LZip `S6 ~T0 @X0 1 a ]
-[; ;persistant.c: 105: ZipContainer LZip;
-[; ;persistant.c: 106: LZip.Buffer = &ABuffer;
+[v _LResult `uc ~T0 @X0 1 a ]
+[; ;persistant.c: 105: bool LResult = 1;
+[e = _LResult -> -> 1 `i `uc ]
 "106
-[e = . _LZip 0 &U _ABuffer ]
-[; ;persistant.c: 107: Zip(&LZip);
+[v _LZip `S6 ~T0 @X0 1 a ]
+[; ;persistant.c: 106: ZipContainer LZip;
+[; ;persistant.c: 107: LZip.Buffer = &ABuffer;
 "107
-[e ( _Zip (1 &U _LZip ]
-[; ;persistant.c: 108: for (char i = 0; i < sizeof(LZip.Bytes); i++)
+[e = . _LZip 0 &U _ABuffer ]
+[; ;persistant.c: 108: Zip(&LZip);
 "108
+[e ( _Zip (1 &U _LZip ]
+[; ;persistant.c: 109: for (char i = 0; i < sizeof(LZip.Bytes); i++)
+"109
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui 354  ]
 [e $U 355  ]
-"109
+"110
 [e :U 354 ]
-[; ;persistant.c: 109: LResult &= Persistant_WriteExternalMemory((ABuffer.Channel / 2 ) * sizeof(LZip.Bytes) + i, LZip.Bytes[i]);
-[e =& _LResult ( _Persistant_WriteExternalMemory (2 , -> + * -> / -> . _ABuffer 2 `i -> 2 `i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui -> _i `ui `i *U + &U . _LZip 1 * -> _i `ux -> -> # *U &U . _LZip 1 `ui `ux ]
-"108
+[; ;persistant.c: 110: LResult &= Persistant_WriteInternalMemory((ABuffer.Channel / 2 ) * sizeof(LZip.Bytes) + i, LZip.Bytes[i]);
+[e =& _LResult ( _Persistant_WriteInternalMemory (2 , -> + * -> / -> . _ABuffer 2 `i -> 2 `i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui -> _i `ui `i *U + &U . _LZip 1 * -> _i `ux -> -> # *U &U . _LZip 1 `ui `ux ]
+"109
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui 354  ]
 [e :U 355 ]
-"109
-}
-[; ;persistant.c: 110: memcpy(&_Hub.BackupBuffer, &ABuffer, sizeof(DataBuffer));
 "110
-[e ( _memcpy (3 , , -> &U . __Hub 6 `*v -> &U _ABuffer `*Cv -> # `S4 `ui ]
-[; ;persistant.c: 111: return LResult;
+}
+[; ;persistant.c: 111: memcpy(&_Hub.BackupBuffer, &ABuffer, sizeof(DataBuffer));
 "111
+[e ( _memcpy (3 , , -> &U . __Hub 6 `*v -> &U _ABuffer `*Cv -> # `S4 `ui ]
+[; ;persistant.c: 112: return LResult;
+"112
 [e ) _LResult ]
 [e $UE 353  ]
-[; ;persistant.c: 112: }
-"112
+[; ;persistant.c: 113: }
+"113
 [e :UE 353 ]
 }
-"114
+"115
 [v _Persistant_LoadBuffer `(uc ~T0 @X0 1 ef1`*S4 ]
-"115
-{
-[; ;persistant.c: 114: bool Persistant_LoadBuffer(DataBuffer *ABuffer)
-[; ;persistant.c: 115: {
-[e :U _Persistant_LoadBuffer ]
-"114
-[v _ABuffer `*S4 ~T0 @X0 1 r1 ]
-"115
-[f ]
 "116
-[v _LResult `uc ~T0 @X0 1 a ]
-[; ;persistant.c: 116: bool LResult = 1;
-[e = _LResult -> -> 1 `i `uc ]
+{
+[; ;persistant.c: 115: bool Persistant_LoadBuffer(DataBuffer *ABuffer)
+[; ;persistant.c: 116: {
+[e :U _Persistant_LoadBuffer ]
+"115
+[v _ABuffer `*S4 ~T0 @X0 1 r1 ]
+"116
+[f ]
 "117
-[v _LChannel `uc ~T0 @X0 1 a ]
-[; ;persistant.c: 117: unsigned char LChannel = ABuffer->Channel;
-[e = _LChannel . *U _ABuffer 2 ]
+[v _LResult `uc ~T0 @X0 1 a ]
+[; ;persistant.c: 117: bool LResult = 1;
+[e = _LResult -> -> 1 `i `uc ]
 "118
-[v _LZip `S6 ~T0 @X0 1 a ]
-[; ;persistant.c: 118: ZipContainer LZip;
-[; ;persistant.c: 119: LZip.Buffer = ABuffer;
+[v _LChannel `uc ~T0 @X0 1 a ]
+[; ;persistant.c: 118: unsigned char LChannel = ABuffer->Channel;
+[e = _LChannel . *U _ABuffer 2 ]
 "119
-[e = . _LZip 0 _ABuffer ]
-[; ;persistant.c: 120: for (char i = 0; i < sizeof(LZip.Bytes); i++)
+[v _LZip `S6 ~T0 @X0 1 a ]
+[; ;persistant.c: 119: ZipContainer LZip;
+[; ;persistant.c: 120: LZip.Buffer = ABuffer;
 "120
+[e = . _LZip 0 _ABuffer ]
+[; ;persistant.c: 121: for (char i = 0; i < sizeof(LZip.Bytes); i++)
+"121
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui 358  ]
 [e $U 359  ]
-"121
+"122
 [e :U 358 ]
-[; ;persistant.c: 121: LZip.Bytes[i] = Persistant_ReadExternalMemory((LChannel / 2 ) * sizeof(LZip.Bytes) + i);
-[e = *U + &U . _LZip 1 * -> _i `ux -> -> # *U &U . _LZip 1 `ui `ux ( _Persistant_ReadExternalMemory (1 -> + * -> / -> _LChannel `i -> 2 `i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui -> _i `ui `i ]
-"120
+[; ;persistant.c: 122: LZip.Bytes[i] = Persistant_ReadInternalMemory((LChannel / 2 ) * sizeof(LZip.Bytes) + i);
+[e = *U + &U . _LZip 1 * -> _i `ux -> -> # *U &U . _LZip 1 `ui `ux ( _Persistant_ReadInternalMemory (1 -> + * -> / -> _LChannel `i -> 2 `i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui -> _i `ui `i ]
+"121
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `ui * -> # *U &U . _LZip 1 `ui -> -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux `ui 358  ]
 [e :U 359 ]
-"121
-}
-[; ;persistant.c: 122: UnZip(&LZip);
 "122
+}
+[; ;persistant.c: 123: UnZip(&LZip);
+"123
 [e ( _UnZip (1 &U _LZip ]
-[; ;persistant.c: 124: ABuffer->Channel = LChannel;
-"124
-[e = . *U _ABuffer 2 _LChannel ]
-[; ;persistant.c: 125: _Hub.CurrentChannel = LChannel;
+[; ;persistant.c: 125: ABuffer->Channel = LChannel;
 "125
-[e = . __Hub 12 _LChannel ]
-[; ;persistant.c: 126: memcpy(&_Hub.BackupBuffer, ABuffer, sizeof(DataBuffer));
+[e = . *U _ABuffer 2 _LChannel ]
+[; ;persistant.c: 126: _Hub.CurrentChannel = LChannel;
 "126
-[e ( _memcpy (3 , , -> &U . __Hub 6 `*v -> _ABuffer `*Cv -> # `S4 `ui ]
-[; ;persistant.c: 127: return LResult;
+[e = . __Hub 12 _LChannel ]
+[; ;persistant.c: 127: memcpy(&_Hub.BackupBuffer, ABuffer, sizeof(DataBuffer));
 "127
+[e ( _memcpy (3 , , -> &U . __Hub 6 `*v -> _ABuffer `*Cv -> # `S4 `ui ]
+[; ;persistant.c: 128: return LResult;
+"128
 [e ) _LResult ]
 [e $UE 357  ]
-[; ;persistant.c: 128: }
-"128
+[; ;persistant.c: 129: }
+"129
 [e :UE 357 ]
 }

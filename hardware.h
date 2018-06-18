@@ -22,13 +22,17 @@ extern "C" {
 #define SWITCH_REG      6
 #define BATCH_READ      24
 #define SWITCH_COUNT    SWITCH_REG * 8
-    
+    typedef bool (*FREAD)(void);
+    typedef void (*FWRITE)(bool);
+   
     typedef struct 
     {
-        volatile unsigned char *Port;
-        unsigned char PinNumber;
-        unsigned char Mask;
-        unsigned char NegativeMask;
+        FREAD Read;
+        FWRITE Write;
+//        volatile unsigned char *Port;
+//        unsigned char PinNumber;
+//        unsigned char Mask;
+//        unsigned char NegativeMask;
     }Pin;
 
     typedef struct 
@@ -45,6 +49,8 @@ extern "C" {
         Pin DataOutPin;
     }BiDirectionalConnector;    
         
+    bool Dummy_Read();
+    void Dummy_Write(bool AValue);
     void InitPin(Pin *APin);
     void InitConnector(Connector *AConnector);
     void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);

@@ -25,6 +25,9 @@
 #include "sequencer.h"
 #include "digipot.h"
 #include "midi.h"
+#include "framework/usb/inc/usb.h"
+#include "framework/usb/inc/usb_device.h"
+#include "framework/usb/inc/usb_device_cdc.h"
 #include <math.h>
 #include <string.h>
 
@@ -147,6 +150,8 @@ void RunHub()
     _Hub.ReadyToRead = true;    
 }
 
+static uint8_t _USBBufferIn[1];
+static uint8_t _USBBufferOut[1];
 void main(void)
 {
     /* Configure the oscillator for the device */
@@ -155,13 +160,34 @@ void main(void)
     /* Initialize I/O and Peripherals for application */
     InitApp();
     
-    
+    USBDeviceInit();
+    USBDeviceAttach();
     
     bool LEncSwitchPushed = false;
     bool LChannelSwitch;
     bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
     while(1)
     {
+        #if defined(USB_POLLING)
+            USBDeviceTasks();
+        #endif
+
+        if( USBGetDeviceState() >= CONFIGURED_STATE )
+        {
+            if( USBUSARTIsTxTrfReady() == true)
+            {
+                if (getsUSBUSART(_USBBufferIn, 1) > 0)
+                {
+                    PauseHub();
+                    Midi_Write(_USBBufferIn, &_MidiInput);
+                    Load(_USBBufferIn[0] * 2);
+//                    _USBBufferOut[0] = 31;
+//                    putUSBUSART(_USBBufferOut, 1);
+                    RunHub();
+                }
+           }            
+        }
+
         _Hub.ReadyToWrite = true;
         while(_Hub.ReadyToWrite) { }
         

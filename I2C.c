@@ -23,7 +23,10 @@ bool I2C_Wait()
     bool LResult = LTimeOut > 0;
     _I2CResult |= LResult ? I2CS_OK : I2CE_WAIT;
     if (LResult)
+    {
+        SSPIF = 0;
         _I2CCount++;
+    }
     return LResult;
 }
 
@@ -93,7 +96,6 @@ bool I2C_Write(unsigned char b)
         SSPBUF = b;            /*moves the data to the buffer register */
         _I2CResult |= I2CS_OK;
         _I2CCount++;  
-        __delay_ms(100);
         return true;
     }
     _I2CResult |= I2CE_WRITE;

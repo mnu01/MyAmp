@@ -9,12 +9,9 @@ void Display_Init()
     TRISC2 = 0;
     TRISB4 = 0;
     
-    _Display.IO.ClockPin.Port = &LATB;
-    _Display.IO.ClockPin.PinNumber = 4;
-    _Display.IO.DataPin.Port = &LATA;
-    _Display.IO.DataPin.PinNumber = 5;
-    _Display.IO.LatchPin.Port = &LATC;
-    _Display.IO.LatchPin.PinNumber = 2;
+    _Display.IO.ClockPin.Write = &Display_ClockWrite;
+    _Display.IO.DataPin.Write = &Display_DataWrite;
+    _Display.IO.LatchPin.Write = &Display_LatchWrite;
     InitConnector(&_Display.IO);
     
     _Display.SavingMask = 0xFF;
@@ -35,6 +32,21 @@ void Display_Init()
     for(int i = 0; i < CHANNEL_DIGIT; i++)
         _Display.DigitalValueRatio[i] = 2 * (int)pow(10, CHANNEL_DIGIT - i - 1);
 }    
+
+void Display_ClockWrite(bool value)
+{
+    LATB4 = value;
+}
+
+void Display_LatchWrite(bool value)
+{
+    LATC2 = value;
+}
+
+bool Display_DataWrite(bool value)
+{
+    LATA5 = value;
+}
 
 void Display_ProcessData(unsigned char ADigitalValue, unsigned char *AValues, bool ALoaded, bool APushed)
 {

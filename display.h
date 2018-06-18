@@ -81,6 +81,10 @@ extern "C" {
         Connector IO;
     } Display;
 
+    void Display_ClockWrite(bool value);
+    void Display_LatchWrite(bool value);
+    bool Display_DataWrite(bool value);
+
     void Display_Init();
     void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
     void Display_SwapBuffer();

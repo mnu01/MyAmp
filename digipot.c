@@ -16,11 +16,23 @@ void InitDigiPot()
 
     _DigiPot.CounterRef = DIGIPOT_REFRESH / LPeriod;
     _DigiPot.Counter = 0;
-    _DigiPot.IO.ClockPin.Port = &LATA;
-    _DigiPot.IO.ClockPin.PinNumber = 4;
-    _DigiPot.IO.DataPin.Port = &LATA;
-    _DigiPot.IO.DataPin.PinNumber = 2;
-    _DigiPot.IO.LatchPin.Port = &LATA;
-    _DigiPot.IO.LatchPin.PinNumber = 3;
+    _DigiPot.IO.ClockPin.Write = &DigiPot_ClockWrite;
+    _DigiPot.IO.DataPin.Write = &DigiPot_DataWrite;
+    _DigiPot.IO.LatchPin.Write = &DigiPot_LatchWrite;
     InitConnector(&_DigiPot.IO);
+}
+
+void DigiPot_ClockWrite(bool value)
+{
+    LATA4 = value;
+}
+
+void DigiPot_LatchWrite(bool value)
+{
+    LATA3 = value;
+}
+
+bool DigiPot_DataWrite(bool value)
+{
+    LATA2 = value;
 }

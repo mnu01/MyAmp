@@ -2,10 +2,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "29 hub.h
 [s S4 `uc 1 `uc 1 `uc 1 `uc 1 `uc -> 8 `i ]
 [n S4 . ActionButton PushedButton Channel Sound Values ]
-"27 hardware.h
-[s S1 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S1 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3 `(uc ~T0 @X0 0 tf ]
+[v F6 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S1 `*F3 1 `*F6 1 ]
+[n S1 . Read Write ]
+"39
 [s S2 `S1 1 `S1 1 `S1 1 ]
 [n S2 . ClockPin DataPin LatchPin ]
 "38 hub.h
@@ -18,37 +20,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [s S6 `*S4 1 `uc -> -> / + * -> * -> 8 `i -> 6 `i `f -> .1.0 `f * -> .2.0 `f -> .8.0 `f -> .8.0 `f `uc `ux ]
 [n S6 . Buffer Bytes ]
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -103,15 +107,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;hub.h: 52: unsigned char CurrentSound;
 [; ;hub.h: 53: Connector IO;
 [; ;hub.h: 54: } Hub;
-[; ;hub.h: 56: void Hub_Init();
-[; ;hub.h: 57: void Hub_ReadSwitch();
-[; ;hub.h: 58: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
-[; ;hub.h: 59: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
-[; ;hub.h: 60: void Hub_UpdateValues();
-[; ;hub.h: 61: void Hub_CopyBuffer();
-"63 hub.h
+[; ;hub.h: 56: void Hub_ClockWrite(bool value);
+[; ;hub.h: 57: void Hub_LatchWrite(bool value);
+[; ;hub.h: 58: bool Hub_DataRead();
+[; ;hub.h: 60: void Hub_Init();
+[; ;hub.h: 61: void Hub_ReadSwitch();
+[; ;hub.h: 62: signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
+[; ;hub.h: 63: void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
+[; ;hub.h: 64: void Hub_UpdateValues();
+[; ;hub.h: 65: void Hub_CopyBuffer();
+"67 hub.h
 [v __Hub `S5 ~T0 @X0 1 e ]
-[; ;hub.h: 63: Hub _Hub;
+[; ;hub.h: 67: Hub _Hub;
 [; ;zip.h: 21: typedef struct
 [; ;zip.h: 22: {
 [; ;zip.h: 23: DataBuffer *Buffer;
@@ -125,15 +132,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digipot.h: 22: unsigned char Counter;
 [; ;digipot.h: 23: Connector IO;
 [; ;digipot.h: 24: } DigiPot;
-[; ;digipot.h: 26: void InitDigiPot();
-"28 digipot.h
+[; ;digipot.h: 27: void DigiPot_ClockWrite(bool value);
+[; ;digipot.h: 28: void DigiPot_LatchWrite(bool value);
+[; ;digipot.h: 29: bool DigiPot_DataWrite(bool value);
+[; ;digipot.h: 31: void InitDigiPot();
+"33 digipot.h
 [v __DigiPot `S7 ~T0 @X0 1 e ]
-[; ;digipot.h: 28: DigiPot _DigiPot;
+[; ;digipot.h: 33: DigiPot _DigiPot;
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;

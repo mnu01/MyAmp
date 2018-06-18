@@ -1,16 +1,21 @@
 
 # 1 "digipot.c"
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdbool.h"
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 26 "hardware.h"
+# 25 "hardware.h"
+typedef bool (*FREAD)(void);
+typedef void (*FWRITE)(bool);
+
 typedef struct
 {
-volatile unsigned char *Port;
-unsigned char PinNumber;
-unsigned char Mask;
-unsigned char NegativeMask;
+FREAD Read;
+FWRITE Write;
+
+
+
+
 }Pin;
 
 typedef struct
@@ -27,6 +32,8 @@ Pin DataInPin;
 Pin DataOutPin;
 }BiDirectionalConnector;
 
+bool Dummy_Read();
+void Dummy_Write(bool AValue);
 void InitPin(Pin *APin);
 void InitConnector(Connector *AConnector);
 void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
@@ -48,6 +55,11 @@ unsigned char Counter;
 Connector IO;
 } DigiPot;
 
+
+void DigiPot_ClockWrite(bool value);
+void DigiPot_LatchWrite(bool value);
+bool DigiPot_DataWrite(bool value);
+
 void InitDigiPot();
 
 DigiPot _DigiPot;
@@ -55,17 +67,17 @@ DigiPot _DigiPot;
 # 20 "system.h"
 void ConfigureOscillator(void);
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 50 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h"
+# 50 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h"
 extern volatile unsigned short UFRM @ 0xF66;
 
 asm("UFRM equ 0F66h");
@@ -4293,7 +4305,7 @@ extern volatile __bit nW @ (((unsigned) &SSPSTAT)*8) + 2;
 
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
-# 18 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h"
+# 18 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 
@@ -4320,7 +4332,7 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 30 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\math.h"
+# 30 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\math.h"
 extern double fabs(double);
 extern double floor(double);
 extern double ceil(double);
@@ -4348,7 +4360,7 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdint.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -4451,11 +4463,23 @@ TRISA4 = 0;
 
 _DigiPot.CounterRef = 0.125f / LPeriod;
 _DigiPot.Counter = 0;
-_DigiPot.IO.ClockPin.Port = &LATA;
-_DigiPot.IO.ClockPin.PinNumber = 4;
-_DigiPot.IO.DataPin.Port = &LATA;
-_DigiPot.IO.DataPin.PinNumber = 2;
-_DigiPot.IO.LatchPin.Port = &LATA;
-_DigiPot.IO.LatchPin.PinNumber = 3;
+_DigiPot.IO.ClockPin.Write = &DigiPot_ClockWrite;
+_DigiPot.IO.DataPin.Write = &DigiPot_DataWrite;
+_DigiPot.IO.LatchPin.Write = &DigiPot_LatchWrite;
 InitConnector(&_DigiPot.IO);
+}
+
+void DigiPot_ClockWrite(bool value)
+{
+LATA4 = value;
+}
+
+void DigiPot_LatchWrite(bool value)
+{
+LATA3 = value;
+}
+
+bool DigiPot_DataWrite(bool value)
+{
+LATA2 = value;
 }

@@ -1,20 +1,22 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"27 hardware.h
-[s S322 `*Vuc 1 `uc 1 `uc 1 `uc 1 ]
-[n S322 . Port PinNumber Mask NegativeMask ]
-"35
+[v F3291 `(uc ~T0 @X0 0 tf ]
+[v F3294 `(v ~T0 @X0 0 tf1`uc ]
+"29 hardware.h
+[s S322 `*F3291 1 `*F3294 1 ]
+[n S322 . Read Write ]
+"39
 [s S323 `S322 1 `S322 1 `S322 1 ]
 [n S323 . ClockPin DataPin LatchPin ]
-"58
+"64
 [v _ClockUp `(v ~T0 @X0 0 ef1`S323 ]
-"59
+"65
 [v _ClockDown `(v ~T0 @X0 0 ef1`S323 ]
-"56
+"62
 [v _LatchOn `(v ~T0 @X0 0 ef1`S323 ]
-"57
+"63
 [v _LatchOff `(v ~T0 @X0 0 ef1`S323 ]
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3105,384 +3107,405 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18f2550.h: 9058: extern volatile __bit nW @ (((unsigned) &SSPSTAT)*8) + 2;
 [; ;pic18f2550.h: 9060: extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 [; ;stdbool.h: 12: typedef unsigned char bool;
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 "5 harware.c
-[v _InitPin `(v ~T0 @X0 1 ef1`*S322 ]
+[v _Dummy_Read `(uc ~T0 @X0 1 ef ]
 "6
 {
-[; ;harware.c: 5: void InitPin(Pin *APin)
+[; ;harware.c: 5: bool Dummy_Read()
 [; ;harware.c: 6: {
-[e :U _InitPin ]
-"5
-[v _APin `*S322 ~T0 @X0 1 r1 ]
-"6
+[e :U _Dummy_Read ]
 [f ]
-[; ;harware.c: 7: APin->NegativeMask = 0x01 << APin->PinNumber;
+[; ;harware.c: 7: return 0x00;
 "7
-[e = . *U _APin 3 -> << -> 1 `i . *U _APin 1 `uc ]
-[; ;harware.c: 8: APin->Mask = ~APin->NegativeMask;
+[e ) -> -> 0 `i `uc ]
+[e $UE 325  ]
+[; ;harware.c: 8: }
 "8
-[e = . *U _APin 2 -> ~ -> . *U _APin 3 `i `uc ]
-[; ;harware.c: 9: }
-"9
 [e :UE 325 ]
 }
-"11
-[v _InitConnector `(v ~T0 @X0 1 ef1`*S323 ]
-"12
+"10
+[v _Dummy_Write `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;harware.c: 11: void InitConnector(Connector *AConnector)
-[; ;harware.c: 12: {
-[e :U _InitConnector ]
-"11
-[v _AConnector `*S323 ~T0 @X0 1 r1 ]
-"12
+[; ;harware.c: 10: void Dummy_Write(bool AValue) { }
+[e :U _Dummy_Write ]
+[v _AValue `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;harware.c: 13: InitPin(&AConnector->ClockPin);
-"13
-[e ( _InitPin (1 &U . *U _AConnector 0 ]
-[; ;harware.c: 14: InitPin(&AConnector->DataPin);
-"14
-[e ( _InitPin (1 &U . *U _AConnector 1 ]
-[; ;harware.c: 15: InitPin(&AConnector->LatchPin);
-"15
-[e ( _InitPin (1 &U . *U _AConnector 2 ]
-[; ;harware.c: 16: }
-"16
 [e :UE 326 ]
 }
-"18
-[v _WriteChar `(v ~T0 @X0 1 ef2`uc`S323 ]
-"19
+"12
+[v _InitPin `(v ~T0 @X0 1 ef1`*S322 ]
+"13
 {
-[; ;harware.c: 18: void WriteChar(unsigned char AChar, Connector AIO)
-[; ;harware.c: 19: {
-[e :U _WriteChar ]
+[; ;harware.c: 12: void InitPin(Pin *APin)
+[; ;harware.c: 13: {
+[e :U _InitPin ]
+"12
+[v _APin `*S322 ~T0 @X0 1 r1 ]
+"13
+[f ]
+[; ;harware.c: 18: }
 "18
+[e :UE 327 ]
+}
+"20
+[v _InitConnector `(v ~T0 @X0 1 ef1`*S323 ]
+"21
+{
+[; ;harware.c: 20: void InitConnector(Connector *AConnector)
+[; ;harware.c: 21: {
+[e :U _InitConnector ]
+"20
+[v _AConnector `*S323 ~T0 @X0 1 r1 ]
+"21
+[f ]
+[; ;harware.c: 22: InitPin(&AConnector->ClockPin);
+"22
+[e ( _InitPin (1 &U . *U _AConnector 0 ]
+[; ;harware.c: 23: InitPin(&AConnector->DataPin);
+"23
+[e ( _InitPin (1 &U . *U _AConnector 1 ]
+[; ;harware.c: 24: InitPin(&AConnector->LatchPin);
+"24
+[e ( _InitPin (1 &U . *U _AConnector 2 ]
+[; ;harware.c: 25: }
+"25
+[e :UE 328 ]
+}
+"27
+[v _WriteChar `(v ~T0 @X0 1 ef2`uc`S323 ]
+"28
+{
+[; ;harware.c: 27: void WriteChar(unsigned char AChar, Connector AIO)
+[; ;harware.c: 28: {
+[e :U _WriteChar ]
+"27
 [v _AChar `uc ~T0 @X0 1 r1 ]
 [v _AIO `S323 ~T0 @X0 1 r2 ]
-"19
+"28
 [f ]
-[; ;harware.c: 20: for (int i = 7; i >= 0; i--)
-"20
+[; ;harware.c: 29: for (int i = 7; i >= 0; i--)
+"29
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 7 `i ]
-[e $ >= _i -> 0 `i 328  ]
-[e $U 329  ]
-"21
-[e :U 328 ]
-[; ;harware.c: 21: {
+[e $ >= _i -> 0 `i 330  ]
+[e $U 331  ]
+"30
+[e :U 330 ]
+[; ;harware.c: 30: {
 {
-[; ;harware.c: 22: ClockUp(AIO);
-"22
+[; ;harware.c: 31: ClockUp(AIO);
+"31
 [e ( _ClockUp (1 _AIO ]
-[; ;harware.c: 23: *AIO.DataPin.Port = *AIO.DataPin.Port & AIO.DataPin.Mask | ((AChar >> i) & 0x01) << AIO.DataPin.PinNumber;
-"23
-[e = *U . . _AIO 1 0 -> | & -> *U . . _AIO 1 0 `i -> . . _AIO 1 2 `i << & >> -> _AChar `i _i -> 1 `i . . _AIO 1 1 `uc ]
-[; ;harware.c: 24: ClockDown(AIO);
-"24
+[; ;harware.c: 32: AIO.DataPin.Write((AChar >> i) & 0x01);
+"32
+[e ( *U . . _AIO 1 1 (1 -> & >> -> _AChar `i _i -> 1 `i `uc ]
+[; ;harware.c: 33: ClockDown(AIO);
+"33
 [e ( _ClockDown (1 _AIO ]
-"25
+"34
 }
-"20
-[e -- _i -> 1 `i ]
-[e $ >= _i -> 0 `i 328  ]
-[e :U 329 ]
-"25
-}
-[; ;harware.c: 25: }
-[; ;harware.c: 26: }
-"26
-[e :UE 327 ]
-}
-"28
-[v _WriteData `(v ~T0 @X0 1 ef3`*uc`uc`S323 ]
 "29
+[e -- _i -> 1 `i ]
+[e $ >= _i -> 0 `i 330  ]
+[e :U 331 ]
+"34
+}
+[; ;harware.c: 34: }
+[; ;harware.c: 35: }
+"35
+[e :UE 329 ]
+}
+"37
+[v _WriteData `(v ~T0 @X0 1 ef3`*uc`uc`S323 ]
+"38
 {
-[; ;harware.c: 28: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO)
-[; ;harware.c: 29: {
+[; ;harware.c: 37: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO)
+[; ;harware.c: 38: {
 [e :U _WriteData ]
-"28
+"37
 [v _AData `*uc ~T0 @X0 1 r1 ]
 [v _ASize `uc ~T0 @X0 1 r2 ]
 [v _AIO `S323 ~T0 @X0 1 r3 ]
-"29
+"38
 [f ]
-[; ;harware.c: 30: LatchOn(AIO);
-"30
+[; ;harware.c: 39: LatchOn(AIO);
+"39
 [e ( _LatchOn (1 _AIO ]
-[; ;harware.c: 31: for (int i = ASize - 1; i >= 0; i--)
-"31
+[; ;harware.c: 40: for (int i = ASize - 1; i >= 0; i--)
+"40
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i - -> _ASize `i -> 1 `i ]
-[e $ >= _i -> 0 `i 332  ]
-[e $U 333  ]
-"32
-[e :U 332 ]
-[; ;harware.c: 32: WriteChar(AData[i], AIO);
-[e ( _WriteChar (2 , *U + _AData * -> _i `x -> -> # *U _AData `i `x _AIO ]
-"31
-[e -- _i -> 1 `i ]
-[e $ >= _i -> 0 `i 332  ]
-[e :U 333 ]
-"32
-}
-[; ;harware.c: 33: LatchOff(AIO);
-"33
-[e ( _LatchOff (1 _AIO ]
-[; ;harware.c: 34: }
-"34
-[e :UE 331 ]
-}
-"36
-[v _ReadBit `(uc ~T0 @X0 1 ef1`S323 ]
-"37
-{
-[; ;harware.c: 36: bool ReadBit(Connector AIO)
-[; ;harware.c: 37: {
-[e :U _ReadBit ]
-"36
-[v _AIO `S323 ~T0 @X0 1 r1 ]
-"37
-[f ]
-"38
-[v _LBit `uc ~T0 @X0 1 a ]
-[; ;harware.c: 38: bool LBit = (*AIO.DataPin.Port >> AIO.DataPin.PinNumber) & 0x01;
-[e = _LBit -> & >> -> *U . . _AIO 1 0 `i . . _AIO 1 1 -> 1 `i `uc ]
-[; ;harware.c: 39: ClockUp(AIO);
-"39
-[e ( _ClockUp (1 _AIO ]
-[; ;harware.c: 40: ClockDown(AIO);
-"40
-[e ( _ClockDown (1 _AIO ]
-[; ;harware.c: 41: return LBit;
+[e $ >= _i -> 0 `i 334  ]
+[e $U 335  ]
 "41
-[e ) _LBit ]
-[e $UE 335  ]
-[; ;harware.c: 42: }
-"42
-[e :UE 335 ]
+[e :U 334 ]
+[; ;harware.c: 41: WriteChar(AData[i], AIO);
+[e ( _WriteChar (2 , *U + _AData * -> _i `x -> -> # *U _AData `i `x _AIO ]
+"40
+[e -- _i -> 1 `i ]
+[e $ >= _i -> 0 `i 334  ]
+[e :U 335 ]
+"41
 }
-"44
-[v _ReadChar `(uc ~T0 @X0 1 ef1`S323 ]
+[; ;harware.c: 42: LatchOff(AIO);
+"42
+[e ( _LatchOff (1 _AIO ]
+[; ;harware.c: 43: }
+"43
+[e :UE 333 ]
+}
 "45
-{
-[; ;harware.c: 44: unsigned char ReadChar(Connector AIO)
-[; ;harware.c: 45: {
-[e :U _ReadChar ]
-"44
-[v _AIO `S323 ~T0 @X0 1 r1 ]
-"45
-[f ]
+[v _ReadBit `(uc ~T0 @X0 1 ef1`S323 ]
 "46
-[v _LChar `uc ~T0 @X0 1 a ]
-[; ;harware.c: 46: unsigned char LChar = 0x00;
-[e = _LChar -> -> 0 `i `uc ]
-[; ;harware.c: 47: for (int i = 7; i >= 0; i--)
+{
+[; ;harware.c: 45: bool ReadBit(Connector AIO)
+[; ;harware.c: 46: {
+[e :U _ReadBit ]
+"45
+[v _AIO `S323 ~T0 @X0 1 r1 ]
+"46
+[f ]
 "47
+[v _LBit `uc ~T0 @X0 1 a ]
+[; ;harware.c: 47: bool LBit = AIO.DataPin.Read();
+[e = _LBit ( *U . . _AIO 1 0 ..  ]
+[; ;harware.c: 48: ClockUp(AIO);
+"48
+[e ( _ClockUp (1 _AIO ]
+[; ;harware.c: 49: ClockDown(AIO);
+"49
+[e ( _ClockDown (1 _AIO ]
+[; ;harware.c: 50: return LBit;
+"50
+[e ) _LBit ]
+[e $UE 337  ]
+[; ;harware.c: 51: }
+"51
+[e :UE 337 ]
+}
+"53
+[v _ReadChar `(uc ~T0 @X0 1 ef1`S323 ]
+"54
+{
+[; ;harware.c: 53: unsigned char ReadChar(Connector AIO)
+[; ;harware.c: 54: {
+[e :U _ReadChar ]
+"53
+[v _AIO `S323 ~T0 @X0 1 r1 ]
+"54
+[f ]
+"55
+[v _LChar `uc ~T0 @X0 1 a ]
+[; ;harware.c: 55: unsigned char LChar = 0x00;
+[e = _LChar -> -> 0 `i `uc ]
+[; ;harware.c: 56: for (int i = 7; i >= 0; i--)
+"56
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 7 `i ]
-[e $ >= _i -> 0 `i 337  ]
-[e $U 338  ]
-"48
-[e :U 337 ]
-[; ;harware.c: 48: LChar |= ReadBit(AIO) >> i;
+[e $ >= _i -> 0 `i 339  ]
+[e $U 340  ]
+"57
+[e :U 339 ]
+[; ;harware.c: 57: LChar |= ReadBit(AIO) >> i;
 [e =| _LChar -> >> -> ( _ReadBit (1 _AIO `i _i `uc ]
-"47
+"56
 [e -- _i -> 1 `i ]
-[e $ >= _i -> 0 `i 337  ]
-[e :U 338 ]
-"48
+[e $ >= _i -> 0 `i 339  ]
+[e :U 340 ]
+"57
 }
-[; ;harware.c: 49: return LChar;
-"49
+[; ;harware.c: 58: return LChar;
+"58
 [e ) _LChar ]
-[e $UE 336  ]
-[; ;harware.c: 50: }
-"50
-[e :UE 336 ]
+[e $UE 338  ]
+[; ;harware.c: 59: }
+"59
+[e :UE 338 ]
 }
-"52
+"61
 [v _ReadData `(*uc ~T0 @X0 1 ef2`uc`S323 ]
-"53
+"62
 {
-[; ;harware.c: 52: unsigned char *ReadData(unsigned char ASize, Connector AIO)
-[; ;harware.c: 53: {
+[; ;harware.c: 61: unsigned char *ReadData(unsigned char ASize, Connector AIO)
+[; ;harware.c: 62: {
 [e :U _ReadData ]
-"52
+"61
 [v _ASize `uc ~T0 @X0 1 r1 ]
 [v _AIO `S323 ~T0 @X0 1 r2 ]
-"53
+"62
 [f ]
-"54
+"63
 [v _LData `*uc ~T0 @X0 1 a ]
-[; ;harware.c: 54: unsigned char *LData;
-[; ;harware.c: 55: LatchOn(AIO);
-"55
+[; ;harware.c: 63: unsigned char *LData;
+[; ;harware.c: 64: LatchOn(AIO);
+"64
 [e ( _LatchOn (1 _AIO ]
-[; ;harware.c: 56: for (int i = ASize - 1; i >= 0; i--)
-"56
+[; ;harware.c: 65: for (int i = ASize - 1; i >= 0; i--)
+"65
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i - -> _ASize `i -> 1 `i ]
-[e $ >= _i -> 0 `i 341  ]
-[e $U 342  ]
-"57
-[e :U 341 ]
-[; ;harware.c: 57: LData[i] = ReadChar(AIO);
+[e $ >= _i -> 0 `i 343  ]
+[e $U 344  ]
+"66
+[e :U 343 ]
+[; ;harware.c: 66: LData[i] = ReadChar(AIO);
 [e = *U + _LData * -> _i `x -> -> # *U _LData `i `x ( _ReadChar (1 _AIO ]
-"56
+"65
 [e -- _i -> 1 `i ]
-[e $ >= _i -> 0 `i 341  ]
-[e :U 342 ]
-"57
+[e $ >= _i -> 0 `i 343  ]
+[e :U 344 ]
+"66
 }
-[; ;harware.c: 58: LatchOff(AIO);
-"58
+[; ;harware.c: 67: LatchOff(AIO);
+"67
 [e ( _LatchOff (1 _AIO ]
-[; ;harware.c: 59: return LData;
-"59
+[; ;harware.c: 68: return LData;
+"68
 [e ) _LData ]
-[e $UE 340  ]
-[; ;harware.c: 60: }
-"60
-[e :UE 340 ]
+[e $UE 342  ]
+[; ;harware.c: 69: }
+"69
+[e :UE 342 ]
 }
-"62
+"71
 [v _ReadBitArray `(v ~T0 @X0 1 ef2`*uc`S323 ]
-"63
+"72
 {
-[; ;harware.c: 62: void ReadBitArray(bool *AData, Connector AIO)
-[; ;harware.c: 63: {
+[; ;harware.c: 71: void ReadBitArray(bool *AData, Connector AIO)
+[; ;harware.c: 72: {
 [e :U _ReadBitArray ]
-"62
+"71
 [v _AData `*uc ~T0 @X0 1 r1 ]
 [v _AIO `S323 ~T0 @X0 1 r2 ]
-"63
+"72
 [f ]
-[; ;harware.c: 66: for (int i = 0; i < 24; i++)
-"66
+[; ;harware.c: 75: for (int i = 0; i < 24; i++)
+"75
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 24 `i 345  ]
-[e $U 346  ]
-"67
-[e :U 345 ]
-[; ;harware.c: 67: AData[i] = ReadBit(AIO);
+[e $ < _i -> 24 `i 347  ]
+[e $U 348  ]
+"76
+[e :U 347 ]
+[; ;harware.c: 76: AData[i] = ReadBit(AIO);
 [e = *U + _AData * -> _i `x -> -> # *U _AData `i `x ( _ReadBit (1 _AIO ]
-"66
+"75
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 24 `i 345  ]
-[e :U 346 ]
-"67
-}
-[; ;harware.c: 68: }
-"68
-[e :UE 344 ]
-}
-"70
-[v _LatchOn `(v ~T0 @X0 1 ef1`S323 ]
-"71
-{
-[; ;harware.c: 70: void LatchOn(Connector AIO)
-[; ;harware.c: 71: {
-[e :U _LatchOn ]
-"70
-[v _AIO `S323 ~T0 @X0 1 r1 ]
-"71
-[f ]
-[; ;harware.c: 72: *AIO.LatchPin.Port &= AIO.LatchPin.Mask;
-"72
-[e =& *U . . _AIO 2 0 . . _AIO 2 2 ]
-[; ;harware.c: 73: }
-"73
-[e :UE 348 ]
-}
-"75
-[v _LatchOff `(v ~T0 @X0 1 ef1`S323 ]
+[e $ < _i -> 24 `i 347  ]
+[e :U 348 ]
 "76
-{
-[; ;harware.c: 75: void LatchOff(Connector AIO)
-[; ;harware.c: 76: {
-[e :U _LatchOff ]
-"75
-[v _AIO `S323 ~T0 @X0 1 r1 ]
-"76
-[f ]
-[; ;harware.c: 77: *AIO.LatchPin.Port |= AIO.LatchPin.NegativeMask;
+}
+[; ;harware.c: 77: }
 "77
-[e =| *U . . _AIO 2 0 . . _AIO 2 3 ]
-[; ;harware.c: 78: }
-"78
-[e :UE 349 ]
+[e :UE 346 ]
 }
+"79
+[v _LatchOn `(v ~T0 @X0 1 ef1`S323 ]
 "80
-[v _ClockUp `(v ~T0 @X0 1 ef1`S323 ]
-"81
 {
-[; ;harware.c: 80: void ClockUp(Connector AIO)
-[; ;harware.c: 81: {
-[e :U _ClockUp ]
-"80
+[; ;harware.c: 79: void LatchOn(Connector AIO)
+[; ;harware.c: 80: {
+[e :U _LatchOn ]
+"79
 [v _AIO `S323 ~T0 @X0 1 r1 ]
-"81
+"80
 [f ]
-[; ;harware.c: 82: *AIO.ClockPin.Port &= AIO.ClockPin.Mask;
+[; ;harware.c: 81: AIO.LatchPin.Write(0x00);
+"81
+[e ( *U . . _AIO 2 1 (1 -> -> 0 `i `uc ]
+[; ;harware.c: 82: }
 "82
-[e =& *U . . _AIO 0 0 . . _AIO 0 2 ]
-[; ;harware.c: 83: }
-"83
 [e :UE 350 ]
 }
+"84
+[v _LatchOff `(v ~T0 @X0 1 ef1`S323 ]
 "85
-[v _ClockDown `(v ~T0 @X0 1 ef1`S323 ]
-"86
 {
-[; ;harware.c: 85: void ClockDown(Connector AIO)
-[; ;harware.c: 86: {
-[e :U _ClockDown ]
-"85
+[; ;harware.c: 84: void LatchOff(Connector AIO)
+[; ;harware.c: 85: {
+[e :U _LatchOff ]
+"84
 [v _AIO `S323 ~T0 @X0 1 r1 ]
-"86
+"85
 [f ]
-[; ;harware.c: 87: *AIO.ClockPin.Port |= AIO.ClockPin.NegativeMask;
+[; ;harware.c: 86: AIO.LatchPin.Write(0x01);
+"86
+[e ( *U . . _AIO 2 1 (1 -> -> 1 `i `uc ]
+[; ;harware.c: 87: }
 "87
-[e =| *U . . _AIO 0 0 . . _AIO 0 3 ]
-[; ;harware.c: 88: }
-"88
 [e :UE 351 ]
+}
+"89
+[v _ClockUp `(v ~T0 @X0 1 ef1`S323 ]
+"90
+{
+[; ;harware.c: 89: void ClockUp(Connector AIO)
+[; ;harware.c: 90: {
+[e :U _ClockUp ]
+"89
+[v _AIO `S323 ~T0 @X0 1 r1 ]
+"90
+[f ]
+[; ;harware.c: 91: AIO.ClockPin.Write(0x00);
+"91
+[e ( *U . . _AIO 0 1 (1 -> -> 0 `i `uc ]
+[; ;harware.c: 92: }
+"92
+[e :UE 352 ]
+}
+"94
+[v _ClockDown `(v ~T0 @X0 1 ef1`S323 ]
+"95
+{
+[; ;harware.c: 94: void ClockDown(Connector AIO)
+[; ;harware.c: 95: {
+[e :U _ClockDown ]
+"94
+[v _AIO `S323 ~T0 @X0 1 r1 ]
+"95
+[f ]
+[; ;harware.c: 96: AIO.ClockPin.Write(0x01);
+"96
+[e ( *U . . _AIO 0 1 (1 -> -> 1 `i `uc ]
+[; ;harware.c: 97: }
+"97
+[e :UE 353 ]
 }

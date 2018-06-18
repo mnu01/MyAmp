@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"8890 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8890 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _TRISB0 `Vb ~T0 @X0 0 e@31896 ]
 "8892
 [v _TRISB1 `Vb ~T0 @X0 0 e@31897 ]
@@ -12,11 +12,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "5623
 [v _SSPCON2 `Vuc ~T0 @X0 0 e@4037 ]
 [v F3316 `(v ~T0 @X0 1 tf1`ul ]
-"164 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h
+"164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
 [v __delay `JF3316 ~T0 @X0 0 e ]
 [p i __delay ]
-"8664 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"8664 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [v _RW `Vb ~T0 @X0 0 e@32314 ]
+"8718
+[v _SSPIF `Vb ~T0 @X0 0 e@31987 ]
 "8692
 [v _SEN `Vb ~T0 @X0 0 e@32296 ]
 "8662
@@ -35,7 +37,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f2550.h: 50: extern volatile unsigned short UFRM @ 0xF66;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
 [; ;pic18f2550.h: 52: asm("UFRM equ 0F66h");
 [; <" UFRM equ 0F66h ;# ">
 [; ;pic18f2550.h: 57: extern volatile unsigned char UFRML @ 0xF66;
@@ -3166,37 +3168,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;user.h: 24: void InitApp(void);
-[; ;hardware.h: 26: typedef struct
-[; ;hardware.h: 27: {
-[; ;hardware.h: 28: volatile unsigned char *Port;
-[; ;hardware.h: 29: unsigned char PinNumber;
-[; ;hardware.h: 30: unsigned char Mask;
-[; ;hardware.h: 31: unsigned char NegativeMask;
-[; ;hardware.h: 32: }Pin;
-[; ;hardware.h: 34: typedef struct
-[; ;hardware.h: 35: {
-[; ;hardware.h: 36: Pin ClockPin;
-[; ;hardware.h: 37: Pin DataPin;
-[; ;hardware.h: 38: Pin LatchPin;
-[; ;hardware.h: 39: }Connector;
-[; ;hardware.h: 41: typedef struct
-[; ;hardware.h: 42: {
-[; ;hardware.h: 43: Pin ClockPin;
-[; ;hardware.h: 44: Pin DataInPin;
-[; ;hardware.h: 45: Pin DataOutPin;
-[; ;hardware.h: 46: }BiDirectionalConnector;
-[; ;hardware.h: 48: void InitPin(Pin *APin);
-[; ;hardware.h: 49: void InitConnector(Connector *AConnector);
-[; ;hardware.h: 50: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
-[; ;hardware.h: 51: void WriteChar(unsigned char AData, Connector AIO);
-[; ;hardware.h: 52: unsigned char ReadChar(Connector AIO);
-[; ;hardware.h: 53: unsigned char *ReadData(unsigned char ASize, Connector AIO);
-[; ;hardware.h: 54: bool ReadBit(Connector AIO);
-[; ;hardware.h: 55: void ReadBitArray(bool *AData, Connector AIO);
-[; ;hardware.h: 56: void LatchOn(Connector AIO);
-[; ;hardware.h: 57: void LatchOff(Connector AIO);
-[; ;hardware.h: 58: void ClockUp(Connector AIO);
-[; ;hardware.h: 59: void ClockDown(Connector AIO);
+[; ;hardware.h: 25: typedef bool (*FREAD)(void);
+[; ;hardware.h: 26: typedef void (*FWRITE)(bool);
+[; ;hardware.h: 28: typedef struct
+[; ;hardware.h: 29: {
+[; ;hardware.h: 30: FREAD Read;
+[; ;hardware.h: 31: FWRITE Write;
+[; ;hardware.h: 36: }Pin;
+[; ;hardware.h: 38: typedef struct
+[; ;hardware.h: 39: {
+[; ;hardware.h: 40: Pin ClockPin;
+[; ;hardware.h: 41: Pin DataPin;
+[; ;hardware.h: 42: Pin LatchPin;
+[; ;hardware.h: 43: }Connector;
+[; ;hardware.h: 45: typedef struct
+[; ;hardware.h: 46: {
+[; ;hardware.h: 47: Pin ClockPin;
+[; ;hardware.h: 48: Pin DataInPin;
+[; ;hardware.h: 49: Pin DataOutPin;
+[; ;hardware.h: 50: }BiDirectionalConnector;
+[; ;hardware.h: 52: bool Dummy_Read();
+[; ;hardware.h: 53: void Dummy_Write(bool AValue);
+[; ;hardware.h: 54: void InitPin(Pin *APin);
+[; ;hardware.h: 55: void InitConnector(Connector *AConnector);
+[; ;hardware.h: 56: void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
+[; ;hardware.h: 57: void WriteChar(unsigned char AData, Connector AIO);
+[; ;hardware.h: 58: unsigned char ReadChar(Connector AIO);
+[; ;hardware.h: 59: unsigned char *ReadData(unsigned char ASize, Connector AIO);
+[; ;hardware.h: 60: bool ReadBit(Connector AIO);
+[; ;hardware.h: 61: void ReadBitArray(bool *AData, Connector AIO);
+[; ;hardware.h: 62: void LatchOn(Connector AIO);
+[; ;hardware.h: 63: void LatchOff(Connector AIO);
+[; ;hardware.h: 64: void ClockUp(Connector AIO);
+[; ;hardware.h: 65: void ClockDown(Connector AIO);
 [; ;system.h: 20: void ConfigureOscillator(void);
 [; ;i2c.h: 28: void I2C_Init(long AFrequency);
 [; ;i2c.h: 29: bool I2C_Wait();
@@ -3297,303 +3301,309 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;I2C.c: 25: if (LResult)
 "25
 [e $ ! != -> _LResult `i -> -> -> 0 `i `uc `i 330  ]
-[; ;I2C.c: 26: _I2CCount++;
+[; ;I2C.c: 26: {
 "26
-[e ++ __I2CCount -> 1 `i ]
-[e :U 330 ]
-[; ;I2C.c: 27: return LResult;
+{
+[; ;I2C.c: 27: SSPIF = 0;
 "27
+[e = _SSPIF -> -> 0 `i `b ]
+[; ;I2C.c: 28: _I2CCount++;
+"28
+[e ++ __I2CCount -> 1 `i ]
+"29
+}
+[e :U 330 ]
+[; ;I2C.c: 29: }
+[; ;I2C.c: 30: return LResult;
+"30
 [e ) _LResult ]
 [e $UE 326  ]
-[; ;I2C.c: 28: }
-"28
+[; ;I2C.c: 31: }
+"31
 [e :UE 326 ]
 }
-"30
+"33
 [v _I2C_Start `(uc ~T0 @X0 1 ef ]
-"31
+"34
 {
-[; ;I2C.c: 30: bool I2C_Start()
-[; ;I2C.c: 31: {
+[; ;I2C.c: 33: bool I2C_Start()
+[; ;I2C.c: 34: {
 [e :U _I2C_Start ]
 [f ]
-[; ;I2C.c: 32: if (I2C_Wait())
-"32
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 332  ]
-[; ;I2C.c: 33: {
-"33
-{
-[; ;I2C.c: 34: SEN = 1;
-"34
-[e = _SEN -> -> 1 `i `b ]
-[; ;I2C.c: 35: _I2CResult |= 0;
+[; ;I2C.c: 35: if (I2C_Wait())
 "35
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 36: _I2CCount++;
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 332  ]
+[; ;I2C.c: 36: {
 "36
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 37: return 1;
+{
+[; ;I2C.c: 37: SEN = 1;
 "37
+[e = _SEN -> -> 1 `i `b ]
+[; ;I2C.c: 38: _I2CResult |= 0;
+"38
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 39: _I2CCount++;
+"39
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 40: return 1;
+"40
 [e ) -> -> 1 `i `uc ]
 [e $UE 331  ]
-"38
+"41
 }
 [e :U 332 ]
-[; ;I2C.c: 38: }
-[; ;I2C.c: 39: _I2CResult |= 1;
-"39
+[; ;I2C.c: 41: }
+[; ;I2C.c: 42: _I2CResult |= 1;
+"42
 [e =| __I2CResult -> 1 `i ]
-[; ;I2C.c: 40: return 0;
-"40
+[; ;I2C.c: 43: return 0;
+"43
 [e ) -> -> 0 `i `uc ]
 [e $UE 331  ]
-[; ;I2C.c: 43: }
-"43
+[; ;I2C.c: 46: }
+"46
 [e :UE 331 ]
 }
-"45
+"48
 [v _I2C_Restart `(uc ~T0 @X0 1 ef ]
-"46
+"49
 {
-[; ;I2C.c: 45: bool I2C_Restart()
-[; ;I2C.c: 46: {
+[; ;I2C.c: 48: bool I2C_Restart()
+[; ;I2C.c: 49: {
 [e :U _I2C_Restart ]
 [f ]
-[; ;I2C.c: 47: if (I2C_Wait())
-"47
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 334  ]
-[; ;I2C.c: 48: {
-"48
-{
-[; ;I2C.c: 49: RSEN = 1;
-"49
-[e = _RSEN -> -> 1 `i `b ]
-[; ;I2C.c: 50: _I2CResult |= 0;
+[; ;I2C.c: 50: if (I2C_Wait())
 "50
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 51: _I2CCount++;
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 334  ]
+[; ;I2C.c: 51: {
 "51
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 52: return 1;
+{
+[; ;I2C.c: 52: RSEN = 1;
 "52
+[e = _RSEN -> -> 1 `i `b ]
+[; ;I2C.c: 53: _I2CResult |= 0;
+"53
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 54: _I2CCount++;
+"54
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 55: return 1;
+"55
 [e ) -> -> 1 `i `uc ]
 [e $UE 333  ]
-"53
+"56
 }
 [e :U 334 ]
-[; ;I2C.c: 53: }
-[; ;I2C.c: 54: _I2CResult |= 4;
-"54
+[; ;I2C.c: 56: }
+[; ;I2C.c: 57: _I2CResult |= 4;
+"57
 [e =| __I2CResult -> 4 `i ]
-[; ;I2C.c: 55: return 0;
-"55
+[; ;I2C.c: 58: return 0;
+"58
 [e ) -> -> 0 `i `uc ]
 [e $UE 333  ]
-[; ;I2C.c: 58: }
-"58
+[; ;I2C.c: 61: }
+"61
 [e :UE 333 ]
 }
-"60
+"63
 [v _I2C_Stop `(uc ~T0 @X0 1 ef ]
-"61
+"64
 {
-[; ;I2C.c: 60: bool I2C_Stop()
-[; ;I2C.c: 61: {
+[; ;I2C.c: 63: bool I2C_Stop()
+[; ;I2C.c: 64: {
 [e :U _I2C_Stop ]
 [f ]
-[; ;I2C.c: 62: if (I2C_Wait())
-"62
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 336  ]
-[; ;I2C.c: 63: {
-"63
-{
-[; ;I2C.c: 64: PEN = 1;
-"64
-[e = _PEN -> -> 1 `i `b ]
-[; ;I2C.c: 65: _I2CResult |= 0;
+[; ;I2C.c: 65: if (I2C_Wait())
 "65
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 66: _I2CCount++;
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 336  ]
+[; ;I2C.c: 66: {
 "66
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 67: return 1;
+{
+[; ;I2C.c: 67: PEN = 1;
 "67
+[e = _PEN -> -> 1 `i `b ]
+[; ;I2C.c: 68: _I2CResult |= 0;
+"68
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 69: _I2CCount++;
+"69
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 70: return 1;
+"70
 [e ) -> -> 1 `i `uc ]
 [e $UE 335  ]
-"68
+"71
 }
 [e :U 336 ]
-[; ;I2C.c: 68: }
-[; ;I2C.c: 69: _I2CResult |= 8;
-"69
+[; ;I2C.c: 71: }
+[; ;I2C.c: 72: _I2CResult |= 8;
+"72
 [e =| __I2CResult -> 8 `i ]
-[; ;I2C.c: 70: return 0;
-"70
+[; ;I2C.c: 73: return 0;
+"73
 [e ) -> -> 0 `i `uc ]
 [e $UE 335  ]
-[; ;I2C.c: 73: }
-"73
+[; ;I2C.c: 76: }
+"76
 [e :UE 335 ]
 }
-"75
-[v _I2C_Ack `(uc ~T0 @X0 1 ef1`uc ]
-"76
-{
-[; ;I2C.c: 75: bool I2C_Ack(bool AAck)
-[; ;I2C.c: 76: {
-[e :U _I2C_Ack ]
-"75
-[v _AAck `uc ~T0 @X0 1 r1 ]
-"76
-[f ]
-[; ;I2C.c: 77: if (I2C_Wait())
-"77
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 338  ]
-[; ;I2C.c: 78: {
 "78
-{
-[; ;I2C.c: 79: ACKDT = AAck;
+[v _I2C_Ack `(uc ~T0 @X0 1 ef1`uc ]
 "79
-[e = _ACKDT -> _AAck `b ]
-[; ;I2C.c: 80: ACKEN = 1;
+{
+[; ;I2C.c: 78: bool I2C_Ack(bool AAck)
+[; ;I2C.c: 79: {
+[e :U _I2C_Ack ]
+"78
+[v _AAck `uc ~T0 @X0 1 r1 ]
+"79
+[f ]
+[; ;I2C.c: 80: if (I2C_Wait())
 "80
-[e = _ACKEN -> -> 1 `i `b ]
-[; ;I2C.c: 81: _I2CResult |= 0;
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 338  ]
+[; ;I2C.c: 81: {
 "81
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 82: _I2CCount++;
+{
+[; ;I2C.c: 82: ACKDT = AAck;
 "82
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 83: return 1;
+[e = _ACKDT -> _AAck `b ]
+[; ;I2C.c: 83: ACKEN = 1;
 "83
+[e = _ACKEN -> -> 1 `i `b ]
+[; ;I2C.c: 84: _I2CResult |= 0;
+"84
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 85: _I2CCount++;
+"85
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 86: return 1;
+"86
 [e ) -> -> 1 `i `uc ]
 [e $UE 337  ]
-"84
+"87
 }
 [e :U 338 ]
-[; ;I2C.c: 84: }
-[; ;I2C.c: 85: _I2CResult |= 16;
-"85
+[; ;I2C.c: 87: }
+[; ;I2C.c: 88: _I2CResult |= 16;
+"88
 [e =| __I2CResult -> 16 `i ]
-[; ;I2C.c: 86: return 0;
-"86
+[; ;I2C.c: 89: return 0;
+"89
 [e ) -> -> 0 `i `uc ]
 [e $UE 337  ]
-[; ;I2C.c: 87: }
-"87
+[; ;I2C.c: 90: }
+"90
 [e :UE 337 ]
 }
-"89
-[v _I2C_Write `(uc ~T0 @X0 1 ef1`uc ]
-"90
-{
-[; ;I2C.c: 89: bool I2C_Write(unsigned char b)
-[; ;I2C.c: 90: {
-[e :U _I2C_Write ]
-"89
-[v _b `uc ~T0 @X0 1 r1 ]
-"90
-[f ]
-[; ;I2C.c: 91: if (I2C_Wait())
-"91
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 340  ]
-[; ;I2C.c: 92: {
 "92
-{
-[; ;I2C.c: 93: SSPBUF = b;
+[v _I2C_Write `(uc ~T0 @X0 1 ef1`uc ]
 "93
-[e = _SSPBUF _b ]
-[; ;I2C.c: 94: _I2CResult |= 0;
+{
+[; ;I2C.c: 92: bool I2C_Write(unsigned char b)
+[; ;I2C.c: 93: {
+[e :U _I2C_Write ]
+"92
+[v _b `uc ~T0 @X0 1 r1 ]
+"93
+[f ]
+[; ;I2C.c: 94: if (I2C_Wait())
 "94
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 95: _I2CCount++;
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 340  ]
+[; ;I2C.c: 95: {
 "95
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 96: _delay((unsigned long)((100)*(20000000/4000.0)));
+{
+[; ;I2C.c: 96: SSPBUF = b;
 "96
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-[; ;I2C.c: 97: return 1;
+[e = _SSPBUF _b ]
+[; ;I2C.c: 97: _I2CResult |= 0;
 "97
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 98: _I2CCount++;
+"98
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 99: return 1;
+"99
 [e ) -> -> 1 `i `uc ]
 [e $UE 339  ]
-"98
+"100
 }
 [e :U 340 ]
-[; ;I2C.c: 98: }
-[; ;I2C.c: 99: _I2CResult |= 32;
-"99
+[; ;I2C.c: 100: }
+[; ;I2C.c: 101: _I2CResult |= 32;
+"101
 [e =| __I2CResult -> 32 `i ]
-[; ;I2C.c: 100: return 0;
-"100
+[; ;I2C.c: 102: return 0;
+"102
 [e ) -> -> 0 `i `uc ]
 [e $UE 339  ]
-[; ;I2C.c: 103: }
-"103
+[; ;I2C.c: 105: }
+"105
 [e :UE 339 ]
 }
-"105
-[v _I2C_Read `(uc ~T0 @X0 1 ef ]
-"106
-{
-[; ;I2C.c: 105: unsigned char I2C_Read()
-[; ;I2C.c: 106: {
-[e :U _I2C_Read ]
-[f ]
-[; ;I2C.c: 107: if (I2C_Wait())
 "107
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 342  ]
-[; ;I2C.c: 108: {
+[v _I2C_Read `(uc ~T0 @X0 1 ef ]
 "108
 {
-[; ;I2C.c: 109: RCEN = 1;
+[; ;I2C.c: 107: unsigned char I2C_Read()
+[; ;I2C.c: 108: {
+[e :U _I2C_Read ]
+[f ]
+[; ;I2C.c: 109: if (I2C_Wait())
 "109
-[e = _RCEN -> -> 1 `i `b ]
-[; ;I2C.c: 110: if (I2C_Wait())
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 342  ]
+[; ;I2C.c: 110: {
 "110
-[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 343  ]
-[; ;I2C.c: 111: {
+{
+[; ;I2C.c: 111: RCEN = 1;
 "111
-{
+[e = _RCEN -> -> 1 `i `b ]
+[; ;I2C.c: 112: if (I2C_Wait())
 "112
-[v _LData `uc ~T0 @X0 1 a ]
-[; ;I2C.c: 112: unsigned char LData = SSPBUF;
-[e = _LData _SSPBUF ]
-[; ;I2C.c: 113: if (I2C_Ack(1))
+[e $ ! != -> ( _I2C_Wait ..  `i -> -> -> 0 `i `uc `i 343  ]
+[; ;I2C.c: 113: {
 "113
-[e $ ! != -> ( _I2C_Ack (1 -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 344  ]
-[; ;I2C.c: 114: {
-"114
 {
-[; ;I2C.c: 115: _I2CResult |= 0;
+"114
+[v _LData `uc ~T0 @X0 1 a ]
+[; ;I2C.c: 114: unsigned char LData = SSPBUF;
+[e = _LData _SSPBUF ]
+[; ;I2C.c: 115: if (I2C_Ack(1))
 "115
-[e =| __I2CResult -> 0 `i ]
-[; ;I2C.c: 116: _I2CCount++;
+[e $ ! != -> ( _I2C_Ack (1 -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 344  ]
+[; ;I2C.c: 116: {
 "116
-[e ++ __I2CCount -> 1 `i ]
-[; ;I2C.c: 117: return LData;
+{
+[; ;I2C.c: 117: _I2CResult |= 0;
 "117
+[e =| __I2CResult -> 0 `i ]
+[; ;I2C.c: 118: _I2CCount++;
+"118
+[e ++ __I2CCount -> 1 `i ]
+[; ;I2C.c: 119: return LData;
+"119
 [e ) _LData ]
 [e $UE 341  ]
-"118
-}
-[e :U 344 ]
-"119
-}
-[e :U 343 ]
 "120
 }
-[e :U 342 ]
-[; ;I2C.c: 118: }
-[; ;I2C.c: 119: }
-[; ;I2C.c: 120: }
-[; ;I2C.c: 121: _I2CResult |= 64;
+[e :U 344 ]
 "121
-[e =| __I2CResult -> 64 `i ]
-[; ;I2C.c: 122: return 0x00;
+}
+[e :U 343 ]
 "122
+}
+[e :U 342 ]
+[; ;I2C.c: 120: }
+[; ;I2C.c: 121: }
+[; ;I2C.c: 122: }
+[; ;I2C.c: 123: _I2CResult |= 64;
+"123
+[e =| __I2CResult -> 64 `i ]
+[; ;I2C.c: 124: return 0x00;
+"124
 [e ) -> -> 0 `i `uc ]
 [e $UE 341  ]
-[; ;I2C.c: 126: }
-"126
+[; ;I2C.c: 128: }
+"128
 [e :UE 341 ]
 }

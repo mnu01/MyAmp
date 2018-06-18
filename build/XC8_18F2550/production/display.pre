@@ -1,16 +1,21 @@
 
 # 1 "display.c"
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdbool.h"
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 26 "hardware.h"
+# 25 "hardware.h"
+typedef bool (*FREAD)(void);
+typedef void (*FWRITE)(bool);
+
 typedef struct
 {
-volatile unsigned char *Port;
-unsigned char PinNumber;
-unsigned char Mask;
-unsigned char NegativeMask;
+FREAD Read;
+FWRITE Write;
+
+
+
+
 }Pin;
 
 typedef struct
@@ -27,6 +32,8 @@ Pin DataInPin;
 Pin DataOutPin;
 }BiDirectionalConnector;
 
+bool Dummy_Read();
+void Dummy_Write(bool AValue);
 void InitPin(Pin *APin);
 void InitConnector(Connector *AConnector);
 void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
@@ -40,7 +47,7 @@ void LatchOff(Connector AIO);
 void ClockUp(Connector AIO);
 void ClockDown(Connector AIO);
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdint.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -159,6 +166,10 @@ unsigned char CurrentSound;
 Connector IO;
 } Hub;
 
+void Hub_ClockWrite(bool value);
+void Hub_LatchWrite(bool value);
+bool Hub_DataRead();
+
 void Hub_Init();
 void Hub_ReadSwitch();
 signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
@@ -203,23 +214,27 @@ unsigned char PointMask[2];
 Connector IO;
 } Display;
 
+void Display_ClockWrite(bool value);
+void Display_LatchWrite(bool value);
+bool Display_DataWrite(bool value);
+
 void Display_Init();
 void Display_ProcessData(unsigned char AChannel, unsigned char *AValues, bool ALoaded, bool APushed);
 void Display_SwapBuffer();
 
 Display _Display;
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 50 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f2550.h"
+# 50 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h"
 extern volatile unsigned short UFRM @ 0xF66;
 
 asm("UFRM equ 0F66h");
@@ -4447,7 +4462,7 @@ extern volatile __bit nW @ (((unsigned) &SSPSTAT)*8) + 2;
 
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
-# 18 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h"
+# 18 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 
@@ -4474,7 +4489,7 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 30 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\math.h"
+# 30 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\math.h"
 extern double fabs(double);
 extern double floor(double);
 extern double ceil(double);
@@ -4509,12 +4524,9 @@ TRISA5 = 0;
 TRISC2 = 0;
 TRISB4 = 0;
 
-_Display.IO.ClockPin.Port = &LATB;
-_Display.IO.ClockPin.PinNumber = 4;
-_Display.IO.DataPin.Port = &LATA;
-_Display.IO.DataPin.PinNumber = 5;
-_Display.IO.LatchPin.Port = &LATC;
-_Display.IO.LatchPin.PinNumber = 2;
+_Display.IO.ClockPin.Write = &Display_ClockWrite;
+_Display.IO.DataPin.Write = &Display_DataWrite;
+_Display.IO.LatchPin.Write = &Display_LatchWrite;
 InitConnector(&_Display.IO);
 
 _Display.SavingMask = 0xFF;
@@ -4534,6 +4546,21 @@ for (int i = 0; i < (char)(((0x01 << 6) - 1 * 1.0f) / (7 * 1.0f)) * (2 + 8); i++
 
 for(int i = 0; i < 2; i++)
 _Display.DigitalValueRatio[i] = 2 * (int)pow(10, 2 - i - 1);
+}
+
+void Display_ClockWrite(bool value)
+{
+LATB4 = value;
+}
+
+void Display_LatchWrite(bool value)
+{
+LATC2 = value;
+}
+
+bool Display_DataWrite(bool value)
+{
+LATA5 = value;
 }
 
 void Display_ProcessData(unsigned char ADigitalValue, unsigned char *AValues, bool ALoaded, bool APushed)

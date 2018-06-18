@@ -1,7 +1,10 @@
  build/XC8_18F2550/production/main.d  \
  build/XC8_18F2550/production/main.p1:  \
  main.c  \
+framework/usb/inc/usb_common.h  \
+framework/usb/inc/usb_hal_pic18.h  \
 hub.h  \
+framework/usb/inc/usb_ch9.h  \
 digipot.h  \
 zip.h  \
 sequencer.h  \
@@ -9,5 +12,12 @@ user.h  \
 system.h  \
 hardware.h  \
 midi.h  \
+framework/usb/inc/usb_config.h  \
+framework/usb/inc/usb_device.h  \
+framework/usb/inc/usb_hal.h  \
 persistant.h  \
-display.h 
+framework/usb/inc/usb.h  \
+display.h  \
+framework/usb/inc/usb_hal.h  \
+framework/usb/inc/usb_device_cdc.h  \
+framework/usb/inc/usb_config.h 
