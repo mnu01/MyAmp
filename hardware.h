@@ -19,9 +19,10 @@ extern "C" {
 #define CHANNEL_DIGIT   2
 #define RVAR            8
 #define RVAR_LENGHT     6
-#define SWITCH_REG      6
+#define HUB_REG         6
 #define BATCH_READ      24
-#define SWITCH_COUNT    SWITCH_REG * 8
+#define INPUT_COUNT     HUB_REG * 8
+#define SWITCH_REG      2
     typedef bool (*FREAD)(void);
     typedef void (*FWRITE)(bool);
    

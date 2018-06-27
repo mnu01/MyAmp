@@ -10,9 +10,7 @@ void Persistant_Init()
 
 bool Persistant_ControlByte(int AAddress, bool ARead)
 {
-    if (I2C_Write(0xA0 | 0x06 & (AAddress >> 7) | ARead))
-        return I2C_Ack(true);  
-    return false;
+    return I2C_Write(0xA0 | (0x06 & (AAddress >> 7)) | (ARead ? 0x01 : 0x00));
 }
 
 bool Persistant_Address(int AAddress, bool ARead)
@@ -20,10 +18,7 @@ bool Persistant_Address(int AAddress, bool ARead)
     if (I2C_Start())
     {
         if (Persistant_ControlByte(AAddress, ARead))
-        {
-            if (I2C_Write(AAddress & 0xFF))
-                return I2C_Ack(true);
-        }
+            return I2C_Write(AAddress & 0xFF);
     }
     return false;
 }
@@ -37,11 +32,8 @@ unsigned char Persistant_ReadExternalMemory(int AAddress)
             if (Persistant_ControlByte(AAddress, true))
             {
                 unsigned char LResult = I2C_Read();
-                if (I2C_Ack(false))
-                {
-                    if (I2C_Stop())
-                        return LResult;
-                }
+                if (I2C_Stop())
+                    return LResult;
             }
         }
     }
@@ -54,13 +46,10 @@ bool Persistant_WriteExternalMemory(int AAddress, unsigned char AData)
     {
         if (I2C_Write(AData))
         {
-            if (I2C_Ack(true))
+            if (I2C_Stop())
             {
-                if (I2C_Stop())
-                {
-                    __delay_ms(5);
-                    return Persistant_ReadExternalMemory(AAddress) == AData;
-                }
+                __delay_ms(5);
+                return true;
             }
         }
     }
@@ -107,7 +96,7 @@ bool Persistant_SaveBuffer(DataBuffer ABuffer)
     LZip.Buffer = &ABuffer;
     Zip(&LZip);
     for (char i = 0; i < sizeof(LZip.Bytes); i++)
-        LResult &= Persistant_WriteInternalMemory((ABuffer.Channel / 2 ) * sizeof(LZip.Bytes) + i, LZip.Bytes[i]);
+        LResult &= Persistant_WriteExternalMemory((ABuffer.Channel / 2 ) * sizeof(LZip.Bytes) + i, LZip.Bytes[i]);
     memcpy(&_Hub.BackupBuffer, &ABuffer, sizeof(DataBuffer));
     return LResult;
 }
@@ -119,11 +108,12 @@ bool Persistant_LoadBuffer(DataBuffer *ABuffer)
     ZipContainer LZip;
     LZip.Buffer = ABuffer;
     for (char i = 0; i < sizeof(LZip.Bytes); i++)
-        LZip.Bytes[i] = Persistant_ReadInternalMemory((LChannel / 2 ) * sizeof(LZip.Bytes) + i);
+        LZip.Bytes[i] = Persistant_ReadExternalMemory((LChannel / 2 ) * sizeof(LZip.Bytes) + i);
     UnZip(&LZip);
 //    Zip(&LZip); // for testing
     ABuffer->Channel = LChannel;
     _Hub.CurrentChannel = LChannel;
+    _Hub.CurrentSound = LZip.Buffer->Sound;
     memcpy(&_Hub.BackupBuffer, ABuffer, sizeof(DataBuffer));
     return LResult;
 }

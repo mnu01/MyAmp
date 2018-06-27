@@ -31,8 +31,8 @@ extern "C" {
     bool I2C_Restart();
     bool I2C_Stop();
     bool I2C_Ack(bool AAck);
-    bool I2C_Write(unsigned char b);
-    unsigned char I2C_Read();
+    bool I2C_Write(unsigned b);
+    unsigned short I2C_Read();
     
     int _I2CResult = 0;
     int _I2CCount = 0;

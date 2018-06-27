@@ -9,6 +9,7 @@
 #include "sequencer.h"
 #include "persistant.h"
 #include "digipot.h"
+#include "switch.h"
 #include "midi.h"
 #include "i2c.h"
 #include "system.h"
@@ -37,8 +38,9 @@ void InitApp(void)
     Hub_Init();
     Display_Init();
     
-    bool LResult = Persistant_WriteExternalMemory(0x0001, 0x0F);
-    unsigned char test = Persistant_ReadExternalMemory(0x0001);
+    unsigned char test = 0x00;
+    if (Persistant_WriteExternalMemory(0x0010, 0x0A))
+        test = Persistant_ReadExternalMemory(0x0010);
         
     // Read channel & values from memory
 //    unsigned char LBuffer[sizeof(_Config)];
@@ -56,6 +58,7 @@ void InitApp(void)
     Display_ProcessData(_Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.Values, true, _Hub.PrimaryBuffer.PushedButton);
     Sequencer_Start();
     InitDigiPot();
+    InitSwitch();
     Midi_Init();
 }
 

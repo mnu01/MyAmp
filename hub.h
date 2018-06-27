@@ -36,8 +36,8 @@ extern "C" {
 
     typedef struct
     {
-        bool Switch[SWITCH_REG * 8];
-        bool SwitchOld[SWITCH_REG * 8];
+        bool Switch[HUB_REG * 8];
+        bool SwitchOld[HUB_REG * 8];
         bool ReadComplete;
         unsigned char iRead;
         DataBuffer PrimaryBuffer;

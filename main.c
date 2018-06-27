@@ -24,6 +24,7 @@
 #include "persistant.h"
 #include "sequencer.h"
 #include "digipot.h"
+#include "switch.h"
 #include "midi.h"
 #include "framework/usb/inc/usb.h"
 #include "framework/usb/inc/usb_device.h"
@@ -81,6 +82,7 @@ void interrupt Interrupt(void)
             Hub_CopyBuffer();
         
         _DigiPot.Counter++;
+        _Switch.Counter++;
     }
     else if (TMR1IF)
     {
@@ -133,6 +135,10 @@ void Load(unsigned char AChannel)
     for (int i = 0; i < CHANNEL_DIGIT; i++)
         _Display.PointMask[i] = DIGIT_POINT;
     _Modified = false;
+    
+    // Force immediate update output
+    _DigiPot.Counter = _DigiPot.CounterRef;
+    _Switch.Counter = _Switch.CounterRef;
 }
 
 void PauseHub()
@@ -192,7 +198,7 @@ void main(void)
         while(_Hub.ReadyToWrite) { }
         
         LChannelSwitch = _Hub.SecondaryBuffer.ActionButton;
-
+        
         if (LChannelSwitch != LChannelSwitchOld)
         {
             switch (LChannelSwitch)
@@ -202,7 +208,9 @@ void main(void)
                     if (_Saving)
                     {
                         // If in saving mode, backup data to internal memory
+                        PauseHub();
                         Persistant_SaveBuffer(_Hub.SecondaryBuffer);
+                        RunHub();
                         
                         // Reset timer & out saving mode
                         _Modified = false;
@@ -218,7 +226,7 @@ void main(void)
                     break;
                 case 1:
                     LEncSwitchPushed = false;
-                    if (!_Saving && !_Timer.Elapsed)
+                    if (!_Saving && !_Timer.Elapsed && !_Hub.SecondaryBuffer.PushedButton)
                     {
                         // in loading mode, read data from internal memory & save current channel
                         Sequencer_StopTimer();
@@ -282,14 +290,17 @@ void main(void)
 //        memcpy(LTest2, &_Hub.BackupBuffer, sizeof(DataBuffer));
         signed int LResult = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values));
         
-        if (!_Modified && (CHANNEL_DIGIT > 1) && ((LResult != 0) || (_Hub.SecondaryBuffer.PushedButton != _Hub.BackupBuffer.PushedButton)))
+        if (!_Modified && (CHANNEL_DIGIT > 1) && (LResult != 0))
         {
             Sequencer_StopTimer();
             _Modified = true;
             _Display.PointMask[1] = DIGIT_POINT;
             Sequencer_StartTimer(0.3f, true);
         }
-    
+        
+        if (CHANNEL_DIGIT > 0 && _Hub.SecondaryBuffer.PushedButton)
+            _Display.PointMask[0] = DIGIT_POINT;
+        
         Display_ProcessData(_Hub.SecondaryBuffer.PushedButton ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
         
         if (_DigiPot.Counter >= _DigiPot.CounterRef)
@@ -297,7 +308,13 @@ void main(void)
             WriteData(_Hub.SecondaryBuffer.Values, RVAR, _DigiPot.IO);
             _DigiPot.Counter = 0;
         }
-
+        
+        if (_Switch.Counter >= _Switch.CounterRef)
+        {
+            WriteData(_Switch.Sound[_Hub.SecondaryBuffer.Sound / 2].Config, HUB_REG, _Switch.IO);
+            _Switch.Counter = 0;
+        }
+        
         LChannelSwitchOld = LChannelSwitch;
     }
 }

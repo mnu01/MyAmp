@@ -19,9 +19,10 @@ void Hub_Init()
     _Hub.PrimaryBuffer.Channel = 0x00;
     _Hub.PrimaryBuffer.Sound = 0x00;
     _Hub.CurrentChannel = _Hub.PrimaryBuffer.Channel;
+    _Hub.CurrentSound = _Hub.PrimaryBuffer.Sound;
 //    _Hub.MaxChannel = (pow(10, CHANNEL_DIGIT) - 1) * 2;
     _Hub.MaxChannel = (char)((1024.0f / ZIP_LENGTH) * 2.0f);
-    _Hub.MaxSound = 128;
+    _Hub.MaxSound = 4.0f * 2.0f;
 
     TRISB2 = 1;
     TRISB3 = 0;
@@ -102,7 +103,7 @@ void Hub_UpdateValues()
         LatchOff(_Hub.IO);
     }
     
-    if (_Hub.iRead < SWITCH_COUNT)
+    if (_Hub.iRead < INPUT_COUNT)
         Hub_ReadSwitch();
     else
     {
@@ -110,9 +111,13 @@ void Hub_UpdateValues()
         
         _Hub.PrimaryBuffer.ActionButton = _Hub.Switch[ACTION_INDEX];
         if (_Hub.Switch[PUSHED_INDEX] && !_Hub.SwitchOld[PUSHED_INDEX])
-            _Hub.PrimaryBuffer.PushedButton != _Hub.PrimaryBuffer.PushedButton;
+            _Hub.PrimaryBuffer.PushedButton = !_Hub.PrimaryBuffer.PushedButton;
 
-        Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
+        if (_Hub.PrimaryBuffer.PushedButton)
+            Hub_SetValue(&_Hub.PrimaryBuffer.Sound, 0, _Hub.MaxSound, Hub_DecodeSwitch(0, 1));
+        else
+            Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
+
         for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
         {
            Hub_SetValue(&_Hub.PrimaryBuffer.Values[i], 0, MAX_VALUE, Hub_DecodeSwitch(i * 3 + 3, i * 3 + 4));

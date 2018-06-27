@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=framework/usb/src/usb_device.c framework/usb/src/usb_device_cdc.c configuration_bits.c main.c system.c user.c display.c hub.c persistant.c sequencer.c harware.c digipot.c midi.c zip.c I2C.c usb_events.c usb_descriptors.c
+SOURCEFILES_QUOTED_IF_SPACED=framework/usb/src/usb_device.c framework/usb/src/usb_device_cdc.c configuration_bits.c main.c system.c user.c display.c hub.c persistant.c sequencer.c harware.c digipot.c midi.c zip.c I2C.c usb_events.c usb_descriptors.c switch.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/framework/usb/src/usb_device.p1 ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1 ${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/hub.p1 ${OBJECTDIR}/persistant.p1 ${OBJECTDIR}/sequencer.p1 ${OBJECTDIR}/harware.p1 ${OBJECTDIR}/digipot.p1 ${OBJECTDIR}/midi.p1 ${OBJECTDIR}/zip.p1 ${OBJECTDIR}/I2C.p1 ${OBJECTDIR}/usb_events.p1 ${OBJECTDIR}/usb_descriptors.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/framework/usb/src/usb_device.p1.d ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1.d ${OBJECTDIR}/configuration_bits.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/system.p1.d ${OBJECTDIR}/user.p1.d ${OBJECTDIR}/display.p1.d ${OBJECTDIR}/hub.p1.d ${OBJECTDIR}/persistant.p1.d ${OBJECTDIR}/sequencer.p1.d ${OBJECTDIR}/harware.p1.d ${OBJECTDIR}/digipot.p1.d ${OBJECTDIR}/midi.p1.d ${OBJECTDIR}/zip.p1.d ${OBJECTDIR}/I2C.p1.d ${OBJECTDIR}/usb_events.p1.d ${OBJECTDIR}/usb_descriptors.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/framework/usb/src/usb_device.p1 ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1 ${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/hub.p1 ${OBJECTDIR}/persistant.p1 ${OBJECTDIR}/sequencer.p1 ${OBJECTDIR}/harware.p1 ${OBJECTDIR}/digipot.p1 ${OBJECTDIR}/midi.p1 ${OBJECTDIR}/zip.p1 ${OBJECTDIR}/I2C.p1 ${OBJECTDIR}/usb_events.p1 ${OBJECTDIR}/usb_descriptors.p1 ${OBJECTDIR}/switch.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/framework/usb/src/usb_device.p1.d ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1.d ${OBJECTDIR}/configuration_bits.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/system.p1.d ${OBJECTDIR}/user.p1.d ${OBJECTDIR}/display.p1.d ${OBJECTDIR}/hub.p1.d ${OBJECTDIR}/persistant.p1.d ${OBJECTDIR}/sequencer.p1.d ${OBJECTDIR}/harware.p1.d ${OBJECTDIR}/digipot.p1.d ${OBJECTDIR}/midi.p1.d ${OBJECTDIR}/zip.p1.d ${OBJECTDIR}/I2C.p1.d ${OBJECTDIR}/usb_events.p1.d ${OBJECTDIR}/usb_descriptors.p1.d ${OBJECTDIR}/switch.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/framework/usb/src/usb_device.p1 ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1 ${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/hub.p1 ${OBJECTDIR}/persistant.p1 ${OBJECTDIR}/sequencer.p1 ${OBJECTDIR}/harware.p1 ${OBJECTDIR}/digipot.p1 ${OBJECTDIR}/midi.p1 ${OBJECTDIR}/zip.p1 ${OBJECTDIR}/I2C.p1 ${OBJECTDIR}/usb_events.p1 ${OBJECTDIR}/usb_descriptors.p1
+OBJECTFILES=${OBJECTDIR}/framework/usb/src/usb_device.p1 ${OBJECTDIR}/framework/usb/src/usb_device_cdc.p1 ${OBJECTDIR}/configuration_bits.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/user.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/hub.p1 ${OBJECTDIR}/persistant.p1 ${OBJECTDIR}/sequencer.p1 ${OBJECTDIR}/harware.p1 ${OBJECTDIR}/digipot.p1 ${OBJECTDIR}/midi.p1 ${OBJECTDIR}/zip.p1 ${OBJECTDIR}/I2C.p1 ${OBJECTDIR}/usb_events.p1 ${OBJECTDIR}/usb_descriptors.p1 ${OBJECTDIR}/switch.p1
 
 # Source Files
-SOURCEFILES=framework/usb/src/usb_device.c framework/usb/src/usb_device_cdc.c configuration_bits.c main.c system.c user.c display.c hub.c persistant.c sequencer.c harware.c digipot.c midi.c zip.c I2C.c usb_events.c usb_descriptors.c
+SOURCEFILES=framework/usb/src/usb_device.c framework/usb/src/usb_device_cdc.c configuration_bits.c main.c system.c user.c display.c hub.c persistant.c sequencer.c harware.c digipot.c midi.c zip.c I2C.c usb_events.c usb_descriptors.c switch.c
 
 
 CFLAGS=
@@ -229,6 +229,14 @@ ${OBJECTDIR}/usb_descriptors.p1: usb_descriptors.c  nbproject/Makefile-${CND_CON
 	@-${MV} ${OBJECTDIR}/usb_descriptors.d ${OBJECTDIR}/usb_descriptors.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/usb_descriptors.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/switch.p1: switch.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/switch.p1.d 
+	@${RM} ${OBJECTDIR}/switch.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=none  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,+speed,-space,-debug,-local --addrqual=ignore --mode=pro -P -N255 -I"framework/usb/inc" -I"framework/usb/src" -I"C:/MicrochipProject/Test.X" --warn=-3 --asmlist -DXPRJ_XC8_18F2550=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/switch.p1  switch.c 
+	@-${MV} ${OBJECTDIR}/switch.d ${OBJECTDIR}/switch.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/switch.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/framework/usb/src/usb_device.p1: framework/usb/src/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/framework/usb/src" 
@@ -365,6 +373,14 @@ ${OBJECTDIR}/usb_descriptors.p1: usb_descriptors.c  nbproject/Makefile-${CND_CON
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,+speed,-space,-debug,-local --addrqual=ignore --mode=pro -P -N255 -I"framework/usb/inc" -I"framework/usb/src" -I"C:/MicrochipProject/Test.X" --warn=-3 --asmlist -DXPRJ_XC8_18F2550=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/usb_descriptors.p1  usb_descriptors.c 
 	@-${MV} ${OBJECTDIR}/usb_descriptors.d ${OBJECTDIR}/usb_descriptors.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/usb_descriptors.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/switch.p1: switch.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/switch.p1.d 
+	@${RM} ${OBJECTDIR}/switch.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,+speed,-space,-debug,-local --addrqual=ignore --mode=pro -P -N255 -I"framework/usb/inc" -I"framework/usb/src" -I"C:/MicrochipProject/Test.X" --warn=-3 --asmlist -DXPRJ_XC8_18F2550=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/switch.p1  switch.c 
+	@-${MV} ${OBJECTDIR}/switch.d ${OBJECTDIR}/switch.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/switch.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

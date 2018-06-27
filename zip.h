@@ -16,7 +16,7 @@ extern "C" {
 #include "hardware.h"
 #include <stdbool.h>
     
-#define ZIP_LENGTH      (char)((DIGIPOT * RVAR_LENGHT * 1.0f + 2.0f*8.0f) / 8.0f)
+#define ZIP_LENGTH      (char)((DIGIPOT * RVAR_LENGHT * 1.0f + 1.0f * 8.0f) / 8.0f)
 
     typedef struct
     {

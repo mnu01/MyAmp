@@ -20,6 +20,7 @@ extern "C" {
         bool Loop;
         int Ticks;
         int Counter;
+        float Period;
     } Timer;
     
     void Sequencer_Init();
@@ -27,6 +28,7 @@ extern "C" {
     void Sequencer_StartTimer(float ATime, bool ALoop);
     void Sequencer_StopTimer();
     void Sequencer_TimerEvent();
+    unsigned char Sequencer_GetCounter(int ATime);
     
     Timer _Timer;
 

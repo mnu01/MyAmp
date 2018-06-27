@@ -2,6 +2,7 @@
 #include "system.h"
 
 #include <xc.h>
+#include <math.h>
 
 void Sequencer_Start()
 {
@@ -16,6 +17,15 @@ void Sequencer_Start()
 
     TMR0IE = 1;   //Enable TIMER0 Interrupt
     TMR0ON = 1;   //Now start the timer!
+    
+    unsigned char LPrescaler = T0PS0 | (T0PS1 << 1) | (T0PS2 << 2);
+    long LTickCount = pow(2, LPrescaler) * 4096;
+    _Timer.Period = (1.0f * LTickCount / _XTAL_FREQ);
+}
+
+unsigned char Sequencer_GetCounter(int ATime)
+{
+    return ATime / _Timer.Period;
 }
 
 void Sequencer_StopTimer()

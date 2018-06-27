@@ -3,13 +3,28 @@
 
 void I2C_Init(long AFrequency)
 {
+    TRISB0 = 0;
+    TRISB1 = 0;
+    
+    __delay_ms(100);
+    
+    LATB0 = 0;
+    LATB1 = 0;
+
+    __delay_ms(100);
+
     TRISB0 = 1;      /* SDA and SCL as input pin */
     TRISB1 = 1;      /* these pins can be configured either as i/p or o/p */
     SSPSTAT = 0x00; // 0x80; /* Slew rate disabled */
     SSPCON1 = 0x28;  /* SSPEN = 1, I2C Master mode, clock = FOSC/(4 * (SSPADD + 1)) */
-    float LRatio = (_XTAL_FREQ / (4.0f * AFrequency)) - 1;
+    unsigned char LRatio = (_XTAL_FREQ / (4 * AFrequency + 1));
     SSPADD = LRatio; //Setting Clock Speed
     SSPCON2 = 0x00;
+    
+    CKE = 0;
+    SMP = 1;
+    SSPIF = 0;
+    BCLIF = 0;
 }
 
 bool I2C_Wait()
@@ -41,8 +56,6 @@ bool I2C_Start()
     }
     _I2CResult |= I2CE_START;
     return false;
-//    while(SEN);     /*wait until the bit is cleared in hardware*/
-//    SSPIF = 0;
 }
 
 bool I2C_Restart()
@@ -56,8 +69,6 @@ bool I2C_Restart()
     }
     _I2CResult |= I2CE_RESTART;
     return false;
-//    while(RSEN);     /* wait for condition to finish */
-//    SSPIF=0;
 }
 
 bool I2C_Stop()
@@ -71,8 +82,6 @@ bool I2C_Stop()
     }
     _I2CResult |= I2CE_STOP;
     return false;
-//    while(PEN);   /* wait until stop condition is complete */ 
-//    SSPIF = 0;
 }
 
 bool I2C_Ack(bool AAck)
@@ -89,29 +98,27 @@ bool I2C_Ack(bool AAck)
     return false;
 }
 
-bool I2C_Write(unsigned char b)
+bool I2C_Write(unsigned b)
 {
     if (I2C_Wait())
     {
         SSPBUF = b;            /*moves the data to the buffer register */
         _I2CResult |= I2CS_OK;
         _I2CCount++;  
-        return true;
+        return !ACKSTAT;
     }
     _I2CResult |= I2CE_WRITE;
     return false;
-//    while(!SSPIF);       /*wait until transmission is complete */
-//    SSPIF = 0;
 }
 
-unsigned char I2C_Read()
+unsigned short I2C_Read()
 {
     if (I2C_Wait())
     {
         RCEN = 1;
         if (I2C_Wait())
         {
-            unsigned char LData = SSPBUF;
+            unsigned short LData = SSPBUF;
             if (I2C_Ack(true))
             {
                 _I2CResult |= I2CS_OK;
@@ -122,8 +129,5 @@ unsigned char I2C_Read()
     }
     _I2CResult |= I2CE_READ;
     return 0x00;
-//    while(!SSPIF); /*wait until reception is complete*/ 
-//    I2C_Ack();      /*acknowledge the slave */
-//    return SSPBUF;   /*returns the received data*/
 }
 
