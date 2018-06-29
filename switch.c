@@ -5,8 +5,8 @@
 
 void InitSwitch()
 {
-    TRISA2 = 0;
-    TRISA3 = 0;
+    TRISA0 = 0;
+    TRISA1 = 0;
     TRISA4 = 0;
 
     _Switch.Sound[0].Config[0] = 0x2C;

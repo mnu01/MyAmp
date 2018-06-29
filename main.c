@@ -81,8 +81,11 @@ void interrupt Interrupt(void)
         if (_Hub.ReadyToWrite)
             Hub_CopyBuffer();
         
-        _DigiPot.Counter++;
-        _Switch.Counter++;
+        if (_DigiPot.Counter < _DigiPot.CounterRef)
+            _DigiPot.Counter++;
+        
+        if (_Switch.Counter < _Switch.CounterRef)
+            _Switch.Counter++;
     }
     else if (TMR1IF)
     {
@@ -170,8 +173,10 @@ void main(void)
     USBDeviceAttach();
     
     bool LEncSwitchPushed = false;
-    bool LChannelSwitch;
-    bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
+//    bool LChannelSwitch;
+//    bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
+    DataBuffer LPreviousBuffer;
+    memcpy(&LPreviousBuffer, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
     while(1)
     {
         #if defined(USB_POLLING)
@@ -197,11 +202,9 @@ void main(void)
         _Hub.ReadyToWrite = true;
         while(_Hub.ReadyToWrite) { }
         
-        LChannelSwitch = _Hub.SecondaryBuffer.ActionButton;
-        
-        if (LChannelSwitch != LChannelSwitchOld)
+        if (_Hub.SecondaryBuffer.ActionButton != LPreviousBuffer.ActionButton)
         {
-            switch (LChannelSwitch)
+            switch (_Hub.SecondaryBuffer.ActionButton)
             {
                 case 0:
                     Sequencer_StopTimer();
@@ -288,9 +291,9 @@ void main(void)
 //        char LTest2[sizeof(DataBuffer)];
 //        memcpy(LTest1, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
 //        memcpy(LTest2, &_Hub.BackupBuffer, sizeof(DataBuffer));
-        signed int LResult = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values));
+        bool LHasChanged = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values)) != 0 || _Hub.BackupBuffer.Sound != _Hub.SecondaryBuffer.Sound ;
         
-        if (!_Modified && (CHANNEL_DIGIT > 1) && (LResult != 0))
+        if (!_Modified && (CHANNEL_DIGIT > 1) && LHasChanged)
         {
             Sequencer_StopTimer();
             _Modified = true;
@@ -305,16 +308,22 @@ void main(void)
         
         if (_DigiPot.Counter >= _DigiPot.CounterRef)
         {
-            WriteData(_Hub.SecondaryBuffer.Values, RVAR, _DigiPot.IO);
-            _DigiPot.Counter = 0;
+            if (memcmp(_Hub.SecondaryBuffer.Values, LPreviousBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values)) != 0)
+            {
+                WriteData(_Hub.SecondaryBuffer.Values, RVAR, _DigiPot.IO);
+                _DigiPot.Counter = 0;                
+            }           
         }
         
         if (_Switch.Counter >= _Switch.CounterRef)
         {
-            WriteData(_Switch.Sound[_Hub.SecondaryBuffer.Sound / 2].Config, HUB_REG, _Switch.IO);
-            _Switch.Counter = 0;
+            if (_Hub.SecondaryBuffer.Sound != LPreviousBuffer.Sound)
+            {
+                WriteData(_Switch.Sound[_Hub.SecondaryBuffer.Sound / 2].Config, HUB_REG, _Switch.IO);
+                _Switch.Counter = 0;
+            }
         }
         
-        LChannelSwitchOld = LChannelSwitch;
+        memcpy(&LPreviousBuffer, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
     }
 }
