@@ -196,58 +196,61 @@ void main(void)
 //                    putUSBUSART(_USBBufferOut, 1);
                     RunHub();
                 }
-           }            
+            }            
         }
 
         _Hub.ReadyToWrite = true;
         while(_Hub.ReadyToWrite) { }
         
-        if (_Hub.SecondaryBuffer.ActionButton != LPreviousBuffer.ActionButton)
+        if (!_Hub.SecondaryBuffer.PushedButton) 
         {
-            switch (_Hub.SecondaryBuffer.ActionButton)
+            if (_Hub.SecondaryBuffer.ActionButton != LPreviousBuffer.ActionButton)
             {
-                case 0:
-                    Sequencer_StopTimer();
-                    if (_Saving)
-                    {
-                        // If in saving mode, backup data to internal memory
-                        PauseHub();
-                        Persistant_SaveBuffer(_Hub.SecondaryBuffer);
-                        RunHub();
-                        
-                        // Reset timer & out saving mode
-                        _Modified = false;
-                        _Saving = false;
-                        _Display.SavingMask = 0xFF;
-                    }
-                    else
-                    {
-                        // Start a 2s timer before enterring saving mode
-                        LEncSwitchPushed = true;
-                        Sequencer_StartTimer(2.0f, false);
-                    }
-                    break;
-                case 1:
-                    LEncSwitchPushed = false;
-                    if (!_Saving && !_Timer.Elapsed && !_Hub.SecondaryBuffer.PushedButton)
-                    {
-                        // in loading mode, read data from internal memory & save current channel
+                switch (_Hub.SecondaryBuffer.ActionButton)
+                {
+                    case 0:
                         Sequencer_StopTimer();
-                        PauseHub();
-                        Load(_Hub.PrimaryBuffer.Channel);
-                        RunHub();
-                    }
-                    break;
+                        if (_Saving)
+                        {
+                            // If in saving mode, backup data to internal memory
+                            PauseHub();
+                            Persistant_SaveBuffer(_Hub.SecondaryBuffer);
+                            RunHub();
+
+                            // Reset timer & out saving mode
+                            _Modified = false;
+                            _Saving = false;
+                            _Display.SavingMask = 0xFF;
+                        }
+                        else
+                        {
+                            // Start a 2s timer before enterring saving mode
+                            LEncSwitchPushed = true;
+                            Sequencer_StartTimer(2.0f, false);
+                        }
+                        break;
+                    case 1:
+                        LEncSwitchPushed = false;
+                        if (!_Saving && !_Timer.Elapsed)
+                        {
+                            // in loading mode, read data from internal memory & save current channel
+                            Sequencer_StopTimer();
+                            PauseHub();
+                            Load(_Hub.PrimaryBuffer.Channel);
+                            RunHub();
+                        }
+                        break;
+                }
             }
-        }
-        else
-        {
-            // on channel switch pushed & time elapse, enterring in saving mode
-            if (LEncSwitchPushed && _Timer.Elapsed && !_Saving)
+            else
             {
-                Sequencer_StopTimer();
-                _Saving = true;
-                Sequencer_StartTimer(0.3f, true);
+                // on channel switch pushed & time elapse, enterring in saving mode
+                if (LEncSwitchPushed && _Timer.Elapsed && !_Saving)
+                {
+                    Sequencer_StopTimer();
+                    _Saving = true;
+                    Sequencer_StartTimer(0.3f, true);
+                }
             }
         }
         
@@ -304,7 +307,7 @@ void main(void)
         if (CHANNEL_DIGIT > 0 && _Hub.SecondaryBuffer.PushedButton)
             _Display.PointMask[0] = DIGIT_POINT;
         
-        Display_ProcessData(_Hub.SecondaryBuffer.PushedButton ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
+        Display_ProcessData(_Hub.SecondaryBuffer.PushedButton && !_Saving ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
         
         if (_DigiPot.Counter >= _DigiPot.CounterRef)
         {

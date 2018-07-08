@@ -37,20 +37,13 @@ void InitApp(void)
     Persistant_Init();
     Hub_Init();
     Display_Init();
-    
-    unsigned char test = 0x00;
-    if (Persistant_WriteExternalMemory(0x0010, 0x0A))
-        test = Persistant_ReadExternalMemory(0x0010);
-        
+            
     // Read channel & values from memory
-//    unsigned char LBuffer[sizeof(_Config)];
-//    for(int i = 0; i < sizeof(_Config); i++)
-//        LBuffer[i] = Persistant_ReadInternalMemory(i);
-//    memcpy(&_Config, LBuffer, sizeof(_Config));
-//    _Hub.PrimaryBuffer.Channel = _Config.Channel * 2;
-//    _Hub.PrimaryBuffer.Channel = 0;
-//    if (test == 0x00)
-    _Hub.PrimaryBuffer.Channel = test * 2;
+    unsigned char LBuffer[sizeof(_Config)];
+    for(int i = 0; i < sizeof(_Config); i++)
+        LBuffer[i] = Persistant_ReadInternalMemory(i);
+    memcpy(&_Config, LBuffer, sizeof(_Config));
+    _Hub.PrimaryBuffer.Channel = _Config.Channel * 2;
     
     Persistant_LoadBuffer(&_Hub.PrimaryBuffer);
     Hub_CopyBuffer();

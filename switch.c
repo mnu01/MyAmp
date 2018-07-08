@@ -9,15 +9,15 @@ void InitSwitch()
     TRISA1 = 0;
     TRISA4 = 0;
 
-    _Switch.Sound[0].Config[0] = 0x2C;
+    _Switch.Sound[0].Config[0] = 0x34;
     _Switch.Sound[0].Config[1] = 0x00;
-    _Switch.Sound[1].Config[0] = 0xCC;
+    _Switch.Sound[1].Config[0] = 0x33;
     _Switch.Sound[1].Config[1] = 0x00;
-    _Switch.Sound[2].Config[0] = 0xC0;
+    _Switch.Sound[2].Config[0] = 0x03;
     _Switch.Sound[2].Config[1] = 0x00;
-    _Switch.Sound[3].Config[0] = 0xD0;
+    _Switch.Sound[3].Config[0] = 0x0B;
     _Switch.Sound[3].Config[1] = 0x00;
-    _Switch.Sound[4].Config[0] = 0xC4;
+    _Switch.Sound[4].Config[0] = 0x23;
     _Switch.Sound[4].Config[1] = 0x00;
     _Switch.Counter = 0;
     _Switch.CounterRef = Sequencer_GetCounter(SWITCH_REFRESH);
