@@ -105,7 +105,7 @@ void interrupt Interrupt(void)
     else if (PIR1bits.RCIF)
     {
 //        PIR1bits.RCIF = 0;
-        LATB4 = 0;
+//        LATB4 = 0;
         unsigned char LData = 0x00;
         while (PIR1bits.RCIF)
         {
@@ -261,7 +261,7 @@ void main(void)
             switch(LMidiData.Code)
             {
                 case 0xC0:
-                    Load(LMidiData.Data[0]);
+                    Load(LMidiData.Data[0] * 2);
                     break;
                 case 0xB0:
                 {

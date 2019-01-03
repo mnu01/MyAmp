@@ -1,5 +1,6 @@
 #include "midi.h"
 #include "system.h"
+#include "hub.h"
 #include <xc.h>
 #include <stdbool.h>
 
@@ -55,7 +56,7 @@ void Midi_ResetBuffer(Midi *AMidiBuffer)
 
 void Midi_Write(unsigned char AData, Midi *AMidiBuffer)
 {
-    if (AData & 0x80 == 0x80)
+    if ((AData & 0x80) == 0x80)
     {
         AMidiBuffer->Buffer[AMidiBuffer->iBufferWrite].Code = AData & 0xF0;
         AMidiBuffer->Buffer[AMidiBuffer->iBufferWrite].Channel = AData & 0x0F;
@@ -83,7 +84,7 @@ void Midi_Write(unsigned char AData, Midi *AMidiBuffer)
     
     if (AMidiBuffer->iData == AMidiBuffer->Buffer[AMidiBuffer->iBufferWrite].DataCount && AMidiBuffer->Size <= BUFFER_SIZE)
     {
-        LATB4 = 1;
+//        LATB4 = 1;
         AMidiBuffer->Size++;
         AMidiBuffer->iBufferWrite++;
         if (AMidiBuffer->iBufferWrite >= BUFFER_SIZE)
