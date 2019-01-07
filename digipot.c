@@ -15,7 +15,6 @@ void InitDigiPot()
     _DigiPot.IO.ClockPin.Write = &DigiPot_ClockWrite;
     _DigiPot.IO.DataPin.Write = &DigiPot_DataWrite;
     _DigiPot.IO.LatchPin.Write = &DigiPot_LatchWrite;
-    InitConnector(&_DigiPot.IO);
 }
 
 void DigiPot_ClockWrite(bool value)

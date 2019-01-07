@@ -9,12 +9,11 @@
 #define	MIDI_H
 
 #include <stdbool.h>
+#include "buffer.h"
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
-    
-#define BUFFER_SIZE     64
     
     typedef struct
     {

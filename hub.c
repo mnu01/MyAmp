@@ -1,6 +1,8 @@
 #include "hub.h"
 #include "display.h"
 #include "zip.h"
+#include "buffer.h"
+#include "sequencer.h"
 #include <xc.h>
 #include <math.h>
 #include <string.h>
@@ -8,12 +10,13 @@
 
 void Hub_Init()
 {
-    _Hub.ReadyToWrite = false;
-    _Hub.ReadyToRead = true;
-    _Hub.Paused = false;
+//    _Hub.ReadyToWrite = false;
+//    _Hub.ReadyToRead = true;
+//    _Hub.Paused = false;
     _Hub.iRead = 0;
-    _Hub.ReadComplete = false;
-    
+    _Hub.Counter = 0;
+    _Hub.CounterRef = Sequencer_GetCounter(HUB_REFRESH);
+
     _Hub.PrimaryBuffer.ActionButton = false;
     _Hub.PrimaryBuffer.PushedButton = false;
     _Hub.PrimaryBuffer.Channel = 0x00;
@@ -31,7 +34,6 @@ void Hub_Init()
     _Hub.IO.ClockPin.Write = &Hub_ClockWrite;
     _Hub.IO.DataPin.Read = &Hub_DataRead;
     _Hub.IO.LatchPin.Write = &Hub_LatchWrite;
-    InitConnector(&_Hub.IO);
 
     // init values (maybe useless)
     for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
@@ -56,10 +58,22 @@ bool Hub_DataRead()
 
 void Hub_ReadSwitch()
 {    
-    bool LBitArray[BATCH_READ];
-    ReadBitArray(LBitArray, _Hub.IO);
-    memcpy(_Hub.Switch + _Hub.iRead, LBitArray, sizeof(LBitArray));
-    _Hub.iRead += BATCH_READ;
+    if (_Hub.iRead == 0)
+    {
+        LatchOn(_Hub.IO);
+        LatchOff(_Hub.IO);
+    }
+
+    if ((_Hub.iRead < INPUT_COUNT) && (_HubBuffer.Size < BUFFER_SIZE))
+    {
+        bool LBitArray[BATCH_READ];
+        ReadBitArray(LBitArray, _Hub.IO);
+        Buffer_Write(LBitArray, &_HubBuffer);
+        _Hub.iRead += BATCH_READ; 
+    }
+    
+    if (_Hub.iRead >= INPUT_COUNT)
+        _Hub.iRead = 0;
 }
 
 signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2)
@@ -94,43 +108,37 @@ void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int
 
 void Hub_UpdateValues()
 {
-    if (_Hub.iRead == 0)
-    {
-        memcpy(_Hub.SwitchOld, _Hub.Switch, sizeof(_Hub.Switch));
-//        ClockUp(_Hub.IO);
-//        ClockDown(_Hub.IO);
-        LatchOn(_Hub.IO);
-        LatchOff(_Hub.IO);
-    }
+    if ((_HubBuffer.Size * BATCH_READ) < INPUT_COUNT)
+        return;
     
-    if (_Hub.iRead < INPUT_COUNT)
-        Hub_ReadSwitch();
+    memcpy(_Hub.SwitchOld, _Hub.Switch, sizeof(_Hub.Switch));
+    
+    bool LBitArray[BATCH_READ];
+    for(char i = 0; i < INPUT_COUNT; i += BATCH_READ)
+    {
+        if (Buffer_Read(LBitArray, &_HubBuffer))
+            memcpy(_Hub.Switch + i, LBitArray, BATCH_READ);
+    }
+
+    _Hub.PrimaryBuffer.ActionButton = _Hub.Switch[ACTION_INDEX];
+    if (_Hub.Switch[PUSHED_INDEX] && !_Hub.SwitchOld[PUSHED_INDEX])
+        _Hub.PrimaryBuffer.PushedButton = !_Hub.PrimaryBuffer.PushedButton;
+
+    if (_Hub.PrimaryBuffer.PushedButton)
+        Hub_SetValue(&_Hub.PrimaryBuffer.Sound, 0, _Hub.MaxSound, Hub_DecodeSwitch(0, 1));
     else
+        Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
+
+    for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
     {
-        _Hub.ReadComplete = false;
-        
-        _Hub.PrimaryBuffer.ActionButton = _Hub.Switch[ACTION_INDEX];
-        if (_Hub.Switch[PUSHED_INDEX] && !_Hub.SwitchOld[PUSHED_INDEX])
-            _Hub.PrimaryBuffer.PushedButton = !_Hub.PrimaryBuffer.PushedButton;
-
-        if (_Hub.PrimaryBuffer.PushedButton)
-            Hub_SetValue(&_Hub.PrimaryBuffer.Sound, 0, _Hub.MaxSound, Hub_DecodeSwitch(0, 1));
-        else
-            Hub_SetValue(&_Hub.PrimaryBuffer.Channel, 0, _Hub.MaxChannel, Hub_DecodeSwitch(0, 1));
-
-        for (int i = 0; i < sizeof(_Hub.PrimaryBuffer.Values); i++)
-        {
-           Hub_SetValue(&_Hub.PrimaryBuffer.Values[i], 0, MAX_VALUE, Hub_DecodeSwitch(i * 3 + 3, i * 3 + 4));
-        }
-        _Hub.iRead = 0;
-        _Hub.ReadComplete = true;
+       Hub_SetValue(&_Hub.PrimaryBuffer.Values[i], 0, MAX_VALUE, Hub_DecodeSwitch(i * 3 + 3, i * 3 + 4));
     }
 }
-
-void Hub_CopyBuffer()
-{
-    memcpy(&_Hub.SecondaryBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
-    
-    _Hub.ReadyToWrite = false;
-}
+//
+//void Hub_CopyBuffer()
+//{
+//    memcpy(&_Hub.SecondaryBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
+//    
+//    _Hub.ReadyToWrite = false;
+//}
 

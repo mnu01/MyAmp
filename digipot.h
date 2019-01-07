@@ -14,12 +14,12 @@
 extern "C" {
 #endif
     
-#define DIGIPOT_REFRESH    0.125f // seconds
+#define DIGIPOT_REFRESH    0.25f // seconds
 
     typedef struct
     {
-        unsigned char CounterRef;
-        unsigned char Counter;
+        unsigned int CounterRef;
+        unsigned int Counter;
         Connector IO;
     } DigiPot;
     

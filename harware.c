@@ -2,28 +2,6 @@
 
 #include "hardware.h"
 
-bool Dummy_Read()
-{
-    return 0x00;
-}
-    
-void Dummy_Write(bool AValue) { }
-
-void InitPin(Pin *APin)
-{
-//    if (*APin.Read == 0x00)
-//        APin->Read = &Dummy_Read;
-//    if (APin->Write == 0x00)
-//        APin->Write = &Dummy_Write;
-}
-
-void InitConnector(Connector *AConnector)
-{
-    InitPin(&AConnector->ClockPin);
-    InitPin(&AConnector->DataPin);
-    InitPin(&AConnector->LatchPin);
-}
-
 void WriteChar(unsigned char AChar, Connector AIO)
 {
     for (int i = 7; i >= 0; i--)

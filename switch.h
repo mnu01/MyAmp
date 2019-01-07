@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#define SWITCH_REFRESH    0.25f // seconds
+#define SWITCH_REFRESH    0.5f // seconds
     
     typedef struct
     {
@@ -24,8 +24,8 @@ extern "C" {
     typedef struct
     {
         SoundConfig Sound[5];
-        unsigned char CounterRef;
-        unsigned char Counter;
+        unsigned int CounterRef;
+        unsigned int Counter;
         Connector IO;
     } Switch;
 

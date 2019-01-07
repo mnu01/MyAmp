@@ -69,23 +69,16 @@ void interrupt Interrupt(void)
                 Display_SwapBuffer();
             _Display.iDisplay = 0;
         }
-            
-        if (_Hub.ReadyToRead)
+         
+        if (_Hub.Counter >= _Hub.CounterRef)
         {
-            Hub_UpdateValues();
-            _Hub.Paused = false;
+            Hub_ReadSwitch();
+            _Hub.Counter = 0;
         }
-        else
-            _Hub.Paused = true;
         
-        if (_Hub.ReadyToWrite)
-            Hub_CopyBuffer();
-        
-        if (_DigiPot.Counter < _DigiPot.CounterRef)
-            _DigiPot.Counter++;
-        
-        if (_Switch.Counter < _Switch.CounterRef)
-            _Switch.Counter++;
+        _DigiPot.Counter++;
+        _Switch.Counter++;
+        _Hub.Counter++;
     }
     else if (TMR1IF)
     {
@@ -128,7 +121,6 @@ void Load(unsigned char AChannel)
 
     // Load data from memory to hub primary buffer
     Persistant_LoadBuffer(&_Hub.PrimaryBuffer);
-    Hub_CopyBuffer();
     _Config.Channel = AChannel / 2;
     unsigned char LBuffer[sizeof(_Config)];
     memcpy(LBuffer, &_Config, sizeof(_Config));
@@ -142,21 +134,6 @@ void Load(unsigned char AChannel)
     // Force immediate update output
     _DigiPot.Counter = _DigiPot.CounterRef;
     _Switch.Counter = _Switch.CounterRef;
-}
-
-void PauseHub()
-{
-    // Stop reading data
-    _Hub.ReadyToRead = false;
-    while(!_Hub.Paused) { }    
-}
-
-void RunHub()
-{
-    // Ask for buffer commit
-    _Hub.ReadyToWrite = true;
-    while(_Hub.ReadyToWrite) { }
-    _Hub.ReadyToRead = true;    
 }
 
 static uint8_t _USBBufferIn[1];
@@ -173,10 +150,8 @@ void main(void)
     USBDeviceAttach();
     
     bool LEncSwitchPushed = false;
-//    bool LChannelSwitch;
-//    bool LChannelSwitchOld = _Hub.SecondaryBuffer.ActionButton;
     DataBuffer LPreviousBuffer;
-    memcpy(&LPreviousBuffer, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
+    memcpy(&LPreviousBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
     while(1)
     {
         #if defined(USB_POLLING)
@@ -189,33 +164,28 @@ void main(void)
             {
                 if (getsUSBUSART(_USBBufferIn, 1) > 0)
                 {
-                    PauseHub();
                     Midi_Write(_USBBufferIn, &_MidiInput);
                     Load(_USBBufferIn[0] * 2);
 //                    _USBBufferOut[0] = 31;
 //                    putUSBUSART(_USBBufferOut, 1);
-                    RunHub();
                 }
             }            
         }
 
-        _Hub.ReadyToWrite = true;
-        while(_Hub.ReadyToWrite) { }
+        Hub_UpdateValues();
         
-        if (!_Hub.SecondaryBuffer.PushedButton) 
+        if (!_Hub.PrimaryBuffer.PushedButton) 
         {
-            if (_Hub.SecondaryBuffer.ActionButton != LPreviousBuffer.ActionButton)
+            if (_Hub.PrimaryBuffer.ActionButton != LPreviousBuffer.ActionButton)
             {
-                switch (_Hub.SecondaryBuffer.ActionButton)
+                switch (_Hub.PrimaryBuffer.ActionButton)
                 {
                     case 0:
                         Sequencer_StopTimer();
                         if (_Saving)
                         {
                             // If in saving mode, backup data to internal memory
-                            PauseHub();
-                            Persistant_SaveBuffer(_Hub.SecondaryBuffer);
-                            RunHub();
+                            Persistant_SaveBuffer(_Hub.PrimaryBuffer);
 
                             // Reset timer & out saving mode
                             _Modified = false;
@@ -235,9 +205,7 @@ void main(void)
                         {
                             // in loading mode, read data from internal memory & save current channel
                             Sequencer_StopTimer();
-                            PauseHub();
                             Load(_Hub.PrimaryBuffer.Channel);
-                            RunHub();
                         }
                         break;
                 }
@@ -257,7 +225,6 @@ void main(void)
         MidiData LMidiData;
         if (Midi_Read(&LMidiData, &_MidiInput))
         {
-            PauseHub();
             switch(LMidiData.Code)
             {
                 case 0xC0:
@@ -287,14 +254,13 @@ void main(void)
                     break;
                 }
             }
-            RunHub();
         }
 
 //        char LTest1[sizeof(DataBuffer)];
 //        char LTest2[sizeof(DataBuffer)];
 //        memcpy(LTest1, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
 //        memcpy(LTest2, &_Hub.BackupBuffer, sizeof(DataBuffer));
-        bool LHasChanged = memcmp(_Hub.SecondaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values)) != 0 || _Hub.BackupBuffer.Sound != _Hub.SecondaryBuffer.Sound ;
+        bool LHasChanged = memcmp(_Hub.PrimaryBuffer.Values, _Hub.BackupBuffer.Values, sizeof(_Hub.PrimaryBuffer.Values)) != 0 || _Hub.BackupBuffer.Sound != _Hub.PrimaryBuffer.Sound;
         
         if (!_Modified && (CHANNEL_DIGIT > 1) && LHasChanged)
         {
@@ -304,29 +270,29 @@ void main(void)
             Sequencer_StartTimer(0.3f, true);
         }
         
-        if (CHANNEL_DIGIT > 0 && _Hub.SecondaryBuffer.PushedButton)
+        if (CHANNEL_DIGIT > 0 && _Hub.PrimaryBuffer.PushedButton)
             _Display.PointMask[0] = DIGIT_POINT;
         
-        Display_ProcessData(_Hub.SecondaryBuffer.PushedButton && !_Saving ? _Hub.SecondaryBuffer.Sound : _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.Values, _Hub.CurrentChannel == _Hub.SecondaryBuffer.Channel, _Hub.SecondaryBuffer.PushedButton);
+        Display_ProcessData(_Hub.PrimaryBuffer.PushedButton && !_Saving ? _Hub.PrimaryBuffer.Sound : _Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.Values, _Hub.CurrentChannel == _Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.PushedButton);
         
         if (_DigiPot.Counter >= _DigiPot.CounterRef)
         {
-            if (memcmp(_Hub.SecondaryBuffer.Values, LPreviousBuffer.Values, sizeof(_Hub.SecondaryBuffer.Values)) != 0)
+            if (memcmp(_Hub.PrimaryBuffer.Values, LPreviousBuffer.Values, sizeof(_Hub.PrimaryBuffer.Values)) != 0)
             {
-                WriteData(_Hub.SecondaryBuffer.Values, RVAR, _DigiPot.IO);
+                WriteData(_Hub.PrimaryBuffer.Values, RVAR, _DigiPot.IO);
                 _DigiPot.Counter = 0;                
             }           
         }
         
         if (_Switch.Counter >= _Switch.CounterRef)
         {
-            if (_Hub.SecondaryBuffer.Sound != LPreviousBuffer.Sound)
+            if (_Hub.PrimaryBuffer.Sound != LPreviousBuffer.Sound)
             {
-                WriteData(_Switch.Sound[_Hub.SecondaryBuffer.Sound / 2].Config, HUB_REG, _Switch.IO);
+                WriteData(_Switch.Sound[_Hub.PrimaryBuffer.Sound / 2].Config, HUB_REG, _Switch.IO);
                 _Switch.Counter = 0;
             }
         }
         
-        memcpy(&LPreviousBuffer, &_Hub.SecondaryBuffer, sizeof(DataBuffer));
+        memcpy(&LPreviousBuffer, &_Hub.PrimaryBuffer, sizeof(DataBuffer));
     }
 }

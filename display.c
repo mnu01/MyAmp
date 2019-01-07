@@ -12,7 +12,6 @@ void Display_Init()
     _Display.IO.ClockPin.Write = &Display_ClockWrite;
     _Display.IO.DataPin.Write = &Display_DataWrite;
     _Display.IO.LatchPin.Write = &Display_LatchWrite;
-    InitConnector(&_Display.IO);
     
     _Display.SavingMask = 0xFF;
     _Display.iDisplay = 0;

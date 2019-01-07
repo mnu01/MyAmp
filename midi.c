@@ -84,7 +84,6 @@ void Midi_Write(unsigned char AData, Midi *AMidiBuffer)
     
     if (AMidiBuffer->iData == AMidiBuffer->Buffer[AMidiBuffer->iBufferWrite].DataCount && AMidiBuffer->Size <= BUFFER_SIZE)
     {
-//        LATB4 = 1;
         AMidiBuffer->Size++;
         AMidiBuffer->iBufferWrite++;
         if (AMidiBuffer->iBufferWrite >= BUFFER_SIZE)

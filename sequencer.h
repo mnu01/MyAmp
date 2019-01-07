@@ -28,7 +28,7 @@ extern "C" {
     void Sequencer_StartTimer(float ATime, bool ALoop);
     void Sequencer_StopTimer();
     void Sequencer_TimerEvent();
-    unsigned char Sequencer_GetCounter(int ATime);
+    unsigned char Sequencer_GetCounter(float ATime);
     
     Timer _Timer;
 

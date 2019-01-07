@@ -16,6 +16,7 @@
 extern "C" {
 #endif
     
+#define HUB_REFRESH     0.06f
 #define MAX_VALUE       (0x01 << RVAR_LENGHT) - 1
 #define ACTION_INDEX    2
 #define PUSHED_INDEX    5
@@ -38,14 +39,11 @@ extern "C" {
     {
         bool Switch[HUB_REG * 8];
         bool SwitchOld[HUB_REG * 8];
-        bool ReadComplete;
         unsigned char iRead;
+        unsigned int CounterRef;
+        unsigned int Counter;
         DataBuffer PrimaryBuffer;
-        DataBuffer SecondaryBuffer;
         DataBuffer BackupBuffer;
-        bool ReadyToWrite;
-        bool ReadyToRead;
-        bool Paused;
         unsigned short MaxChannel;
         unsigned char MaxSound;
         unsigned char CurrentChannel;
@@ -62,7 +60,7 @@ extern "C" {
     signed char Hub_DecodeSwitch(unsigned char AIndex1, unsigned char AIndex2);
     void Hub_SetValue(unsigned char *ASourceValue, signed char AMinValue, signed int AMaxValue, signed char AIncrement);
     void Hub_UpdateValues();
-    void Hub_CopyBuffer();
+//    void Hub_CopyBuffer();
     
     Hub _Hub;
 

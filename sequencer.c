@@ -23,7 +23,7 @@ void Sequencer_Start()
     _Timer.Period = (1.0f * LTickCount / _XTAL_FREQ);
 }
 
-unsigned char Sequencer_GetCounter(int ATime)
+unsigned char Sequencer_GetCounter(float ATime)
 {
     return ATime / _Timer.Period;
 }

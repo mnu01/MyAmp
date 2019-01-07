@@ -24,7 +24,6 @@ void InitSwitch()
     _Switch.IO.ClockPin.Write = &Switch_ClockWrite;
     _Switch.IO.DataPin.Write = &Switch_DataWrite;
     _Switch.IO.LatchPin.Write = &Switch_LatchWrite;
-    InitConnector(&_Switch.IO);
 }
 
 void Switch_ClockWrite(bool value)

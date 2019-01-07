@@ -50,10 +50,6 @@ extern "C" {
         Pin DataOutPin;
     }BiDirectionalConnector;    
         
-    bool Dummy_Read();
-    void Dummy_Write(bool AValue);
-    void InitPin(Pin *APin);
-    void InitConnector(Connector *AConnector);
     void WriteData(unsigned char *AData, unsigned char ASize, Connector AIO);
     void WriteChar(unsigned char AData, Connector AIO);
     unsigned char ReadChar(Connector AIO);

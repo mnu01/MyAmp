@@ -46,7 +46,7 @@ void InitApp(void)
     _Hub.PrimaryBuffer.Channel = _Config.Channel * 2;
     
     Persistant_LoadBuffer(&_Hub.PrimaryBuffer);
-    Hub_CopyBuffer();
+//    Hub_CopyBuffer();
     
     Display_ProcessData(_Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.Values, true, _Hub.PrimaryBuffer.PushedButton);
     Sequencer_Start();
