@@ -55,19 +55,20 @@ void interrupt Interrupt(void)
 {
     if (TMR0IF)
     {
-        TMR0IF = 0;
-                
-        WriteData(_Display.PrimaryBuffer + _Display.iDisplay * (CHANNEL_DIGIT + DIGIPOT), CHANNEL_DIGIT + DIGIPOT, _Display.IO);
-        
-        _Display.iDisplay++;
-        if (_Display.iDisplay >= DIVISION) //sizeof(_Convert))
+        if (_Display.Counter >= _Display.CounterRef)
         {
-//            for (int i = 0; i < DIVISION; i++)
-//                DisplayData(_Display.PrimaryBuffer + (_Display.iDisplay - 1) * (CHANNEL_DIGIT + DIGIPOT), CHANNEL_DIGIT + DIGIPOT);
-                
-            if (_Display.ReadyToRead)
-                Display_SwapBuffer();
-            _Display.iDisplay = 0;
+            WriteData(_Display.PrimaryBuffer + _Display.iDisplay * (CHANNEL_DIGIT + DIGIPOT), CHANNEL_DIGIT + DIGIPOT, _Display.IO);
+            _Display.iDisplay++;
+            if (_Display.iDisplay >= DIVISION) //sizeof(_Convert))
+            {
+    //            for (int i = 0; i < DIVISION; i++)
+    //                DisplayData(_Display.PrimaryBuffer + (_Display.iDisplay - 1) * (CHANNEL_DIGIT + DIGIPOT), CHANNEL_DIGIT + DIGIPOT);
+
+                if (_Display.ReadyToRead)
+                    Display_SwapBuffer();
+                _Display.iDisplay = 0;
+            }
+            _Display.Counter = 0;
         }
          
         if (_Hub.Counter >= _Hub.CounterRef)
@@ -79,6 +80,9 @@ void interrupt Interrupt(void)
         _DigiPot.Counter++;
         _Switch.Counter++;
         _Hub.Counter++;
+        _Display.Counter++;
+        
+        TMR0IF = 0;               
     }
     else if (TMR1IF)
     {
@@ -171,6 +175,8 @@ void main(void)
                 }
             }            
         }
+            
+        bool LIsBufferFull = (_HubBuffer.Size == BUFFER_SIZE);
 
         Hub_UpdateValues();
         
@@ -270,7 +276,7 @@ void main(void)
             Sequencer_StartTimer(0.3f, true);
         }
         
-        if (CHANNEL_DIGIT > 0 && _Hub.PrimaryBuffer.PushedButton)
+        if (CHANNEL_DIGIT > 0 && (_Hub.PrimaryBuffer.PushedButton || LIsBufferFull))
             _Display.PointMask[0] = DIGIT_POINT;
         
         Display_ProcessData(_Hub.PrimaryBuffer.PushedButton && !_Saving ? _Hub.PrimaryBuffer.Sound : _Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.Values, _Hub.CurrentChannel == _Hub.PrimaryBuffer.Channel, _Hub.PrimaryBuffer.PushedButton);

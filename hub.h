@@ -16,7 +16,7 @@
 extern "C" {
 #endif
     
-#define HUB_REFRESH     0.06f
+#define HUB_REFRESH     0.01f
 #define MAX_VALUE       (0x01 << RVAR_LENGHT) - 1
 #define ACTION_INDEX    2
 #define PUSHED_INDEX    5

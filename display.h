@@ -66,6 +66,8 @@ extern "C" {
     {
         bool ReadyToRead;
         bool ReadyToWrite;
+        int Counter;
+        int CounterRef;
         unsigned char Buffer1[DIVISION][DIGIPOT + CHANNEL_DIGIT];
         unsigned char Buffer2[DIVISION][DIGIPOT + CHANNEL_DIGIT];
         unsigned char *PrimaryBuffer;

@@ -4,23 +4,27 @@
 #include <xc.h>
 #include <math.h>
 
-void Sequencer_Start()
+void Sequencer_Init()
 {
     // Prescaler div by 256 (111) = 76Hz / 9; 32(100) = 690Hz / 9
-    T0PS0 = 0;
-    T0PS1 = 1;
+    T0PS0 = 1;
+    T0PS1 = 0;
     T0PS2 = 1;
+//    TMR0 = 190;             // preset for timer register
 
     PSA = 0;      //Timer Clock Source is from Prescaler
     T0CS = 0;     //Prescaler gets clock from FCPU (5MHz)
     T08BIT = 1;   //8 BIT MODE
-
-    TMR0IE = 1;   //Enable TIMER0 Interrupt
-    TMR0ON = 1;   //Now start the timer!
     
     unsigned char LPrescaler = T0PS0 | (T0PS1 << 1) | (T0PS2 << 2);
     long LTickCount = pow(2, LPrescaler) * 4096;
     _Timer.Period = (1.0f * LTickCount / _XTAL_FREQ);
+}
+
+void Sequencer_Start()
+{
+    TMR0IE = 1;   //Enable TIMER0 Interrupt
+    TMR0ON = 1;   //Now start the timer!
 }
 
 unsigned char Sequencer_GetCounter(float ATime)

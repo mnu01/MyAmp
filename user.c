@@ -34,6 +34,7 @@ void InitApp(void)
     PEIE = 1;     //Enable Peripheral Interrupt
     GIE = 1;      //Enable INTs globally
     
+    Sequencer_Init();
     Persistant_Init();
     Hub_Init();
     Display_Init();

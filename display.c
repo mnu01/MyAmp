@@ -1,5 +1,6 @@
 #include "display.h"
 #include "hub.h"
+#include "sequencer.h"
 #include <xc.h> 
 #include <math.h>
 
@@ -30,6 +31,9 @@ void Display_Init()
 
     for(int i = 0; i < CHANNEL_DIGIT; i++)
         _Display.DigitalValueRatio[i] = 2 * (int)pow(10, CHANNEL_DIGIT - i - 1);
+    
+    _Display.Counter = 0;
+    _Display.CounterRef = Sequencer_GetCounter(0.015f);
 }    
 
 void Display_ClockWrite(bool value)
